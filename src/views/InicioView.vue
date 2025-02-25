@@ -1,4 +1,5 @@
 <template>
+    <NavbarComponent/>
         <section class="servicios">
             <h3>Nuestros Servicios</h3>
             <ul>
@@ -11,7 +12,11 @@
 </template>
 
 <script>
+import NavbarComponent from "../components/Navbar.vue";
 export default {
+    components: {
+        NavbarComponent
+    },
     data() {
         return {
             servicios: [
