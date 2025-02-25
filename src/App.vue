@@ -1,8 +1,19 @@
 <template>
-  <nav>
-  </nav>
-  <router-view/>
+  <div>
+      <Headerlogo />
+      <router-view></router-view>
+  </div>
 </template>
+
+<script>
+  import Headerlogo from "./components/Headerlogo.vue";
+
+  export default {
+    components: {
+        Headerlogo
+    }
+  };
+</script>
 
 <style>
 #app {
@@ -13,16 +24,21 @@
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
+nav ul {
+    list-style: none;
+    padding: 0;
 }
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+nav li {
+    display: inline;
+    margin: 0 10px;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
 }
 </style>
