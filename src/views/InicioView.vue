@@ -1,5 +1,6 @@
 <template>
     <NavbarComponent/>
+    <div class="container">
         <section class="servicios">
             <h3>Nuestros Servicios</h3>
             <ul>
@@ -9,6 +10,7 @@
                 </li>
             </ul>
         </section>
+    </div>
 </template>
 
 <script>

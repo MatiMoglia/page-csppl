@@ -1,80 +1,205 @@
 <template>
-<header class="header">
-    <nav class="navbar">
-        <div class="container">
-        <img class="site-logo" src="https://www.coopspportena.com.ar/sites/default/files/logo-copservicios.png" alt="Coop de Servicios Públicos de Porteña">
-            <ul class="nav-links">
-                <li><router-link to="/">Inicio</router-link></li>
-                <li><router-link to="/about">Historia</router-link></li>
-                <li><router-link to="/services">Servicios</router-link></li>
-                <li><router-link to="/contact">Contacto</router-link></li>
-            </ul>
+    <header class="header">
+      <nav class="nav container">
+        <div class="nav__data">
+          <router-link to="/" class="nav__logo">
+            <img src="https://www.coopspportena.com.ar/sites/default/files/logo-copservicios.png" 
+                 alt="Coop de Servicios Públicos de Porteña" 
+                 class="nav__logo-img" />
+          </router-link>
+  
+          <div class="nav__toggle" @click="toggleMenu">
+            <i :class="menuOpen ? 'ri-close-line nav__close' : 'ri-menu-line nav__burger'"></i>
+          </div>
         </div>
-    </nav>
-</header>
-</template>
-<script>
+  
+        <div :class="['nav__menu', { 'show-menu': menuOpen }]">
+          <ul class="nav__list">
+            <li><router-link to="/" class="nav__link" @click="closeMenu">Inicio</router-link></li>
+            <li><router-link to="/about" class="nav__link" @click="closeMenu">Historia</router-link></li>
+  
+            <li class="dropdown__item">
+              <div class="nav__link" @click="toggleDropdown">
+                Servicios <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+              </div>
+              <ul v-if="dropdownOpen" class="dropdown__menu">
+                <li><router-link to="/energia" class="dropdown__link" @click="closeMenu"><i class="ri-flashlight-line"></i>Energía</router-link></li>
+                <li><router-link to="/agua" class="dropdown__link" @click="closeMenu"><i class="ri-water-flash-line"></i>Agua Potable</router-link></li>
+                <li><router-link to="/internet" class="dropdown__link" @click="closeMenu"><i class="ri-wifi-line"></i>Internet y TV</router-link></li>
+                <li><router-link to="/telefonia" class="dropdown__link" @click="closeMenu"><i class="ri-phone-line"></i>Telefonía</router-link></li>
+              </ul>
+            </li>
+            <li><router-link to="/contact" class="nav__link" @click="closeMenu">Contacto</router-link></li>
+            
+            <li class="dropdown__item user__menu">
+              <div class="nav__link" @click="toggleUserMenu">
+                <i class="ri-user-line"></i> Mi Cuenta <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+              </div>
+              <ul v-if="userMenuOpen" class="dropdown__menu">
+                <li><router-link to="/login" class="dropdown__link" @click="closeMenu">Iniciar Sesión</router-link></li>
+                <li><router-link to="/register" class="dropdown__link" @click="closeMenu">Registrarse</router-link></li>
+                <li><router-link to="/profile" class="dropdown__link" @click="closeMenu">Mi Perfil</router-link></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+  </template>
+  
+  <script>
   export default {
-    name: "NavbarComponent",
+    data() {
+      return {
+        menuOpen: false,
+        dropdownOpen: false,
+        userMenuOpen: false,
+      };
+    },
+    methods: {
+      toggleMenu() {
+        this.menuOpen = !this.menuOpen;
+        if (!this.menuOpen) {
+          this.dropdownOpen = false;
+          this.userMenuOpen = false;
+        }
+      },
+      toggleDropdown() {
+        this.dropdownOpen = !this.dropdownOpen;
+      },
+      toggleUserMenu() {
+        this.userMenuOpen = !this.userMenuOpen;
+      },
+      closeMenu() {
+        this.menuOpen = false;
+        this.dropdownOpen = false;
+        this.userMenuOpen = false;
+      },
+    },
   };
-</script>
+  </script>
   
-<style>
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap");
-  @import url("https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.css");
-
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
   
-body {
-    font-family: var(--body-font);
-    font-size: var(--normal-font-size);
-    background-color: var(--body-color);
-}
-  
-.navbar {
-    width: 100%;
-    height: var(--header-height);
-    background-color: var(--dark-color);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 1.5rem;
-}
-  
-.container {
+  <style scoped>
+  .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 20px;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: #0d1b2a;
+    color: #fff;
     width: 100%;
-}
+  }
   
-.site-logo {
-    width: 250px;
-    height: auto;
-    margin-right: 15px;
-}
-  
-.nav-links {
+  .nav__logo {
+    font-size: 1.5rem;
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+  }
+  
+  .nav__logo-img {
+    height: 65px;
+  }
+  
+  .nav__toggle {
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: none;
+  }
+  
+  .nav__menu {
+    display: flex;
+  }
+  
+  .nav__list {
+    display: flex;
+    gap: 1.5rem;
     list-style: none;
-}
+  }
   
-.nav-links a {
-    color: var(--white-color);
-    font-size: var(--normal-font-size);
-    font-weight: var(--font-medium);
+  .nav__link {
     text-decoration: none;
-    transition: color 0.3s;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .nav__link:hover {
+    color: #184e94;
+  }
+  
+  .dropdown__item {
+    position: relative;
+  }
+  
+  .dropdown__menu {
+  position: absolute;
+  background: hsl(221, 53%, 12%);
+  padding: 0.5rem 0;
+  list-style: none;
+  top: 2.5rem;
+  left: 0;
+  border-radius: 5px;
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
 }
   
-.nav-links a:hover {
-    color: var(--first-color);
-}
+  .dropdown__link {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.9rem;
+  }
+  
+  .dropdown__link:hover {
+    background: #135c97;
+    border-radius: 3px;
+  }
+  
+  @media (max-width: 768px) {
+    .nav__toggle {
+      display: block;
+    }
+  
+    .nav__menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #0d1b2a;
+      width: 100%;
+      padding: 1rem;
+    }
+  
+    .show-menu {
+      display: flex;
+    }
+  
+    .nav__list {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .dropdown__menu {
+    width: 100%;
+    left: 10;
+    top: 10; 
+  }
 
-</style>
+  .dropdown__item .nav__link {
+    display: flex;
+    justify-content: space-between;
+  }
+  }
+  </style>
   
