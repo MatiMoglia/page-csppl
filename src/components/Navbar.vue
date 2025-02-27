@@ -89,7 +89,7 @@
     top: 0;
     left: 0;
     z-index: 1000;
-    background: #0d1b2a;
+    background: #0e1850;
     color: #fff;
     width: 100%;
   }
