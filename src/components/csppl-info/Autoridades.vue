@@ -1,54 +1,49 @@
 <template>
-    <div class="container">
-      <div class="section-title">
-        <h2>¿Quiénes conforman el consejo de Administración?</h2>
-      </div>
-      <div class="consejo">
-        <h3>Consejo de Administración</h3>
-        <div class="consejo-cards">
-          <div v-for="(autoridad, index) in autoridades" :key="index" class="card">
-            <img v-if="autoridad.profile && autoridad.profile.length > 0" 
-                 :src="getImageUrl(autoridad.profile[0])" 
-                 alt="Imagen de autoridad" 
-                 class="profile-img" />
-            <h4>{{ autoridad.name }}</h4>
-            <p>{{ autoridad.position }}</p>
-          </div>
+  <div class="container">
+    <div class="section-title">
+      <h2>¿Quiénes conforman el consejo de Administración?</h2>
+    </div>
+    <div class="consejo">
+      <h3>Consejo de Administración</h3>
+      <div class="consejo-cards">
+        <div v-for="(autoridad, index) in autoridades" :key="index" class="card">
+          <img v-if="autoridad.profile" 
+               :src="autoridad.profile" 
+               alt="Imagen de autoridad" 
+               class="profile-img" />
+          <h4>{{ autoridad.name }}</h4>
+          <p>{{ autoridad.position }}</p>
         </div>
       </div>
     </div>
-  </template>
-  
-  <script>
-  import apiAuthorities from "@/services/apiAuthorities";  
-  
-  export default {
-    data() {
-      return {
-        autoridades: []  
-      };
-    },
-    mounted() {
-      this.fetchAutoridades();
-    },
-    methods: {
-      async fetchAutoridades() {
-        try {
-          const response = await apiAuthorities.getAuthorities();
-          this.autoridades = response.data;  
-        } catch (error) {
-          console.error("Error al obtener las autoridades:", error);
-        }
-      },
-      getImageUrl(imageId) {
-        return apiAuthorities.getImage(imageId);
+  </div>
+</template>
+<script>
+import apiAuthorities from "@/services/apiAuthorities";  
+
+export default {
+  data() {
+    return {
+      autoridades: []  
+    };
+  },
+  mounted() {
+    this.fetchAutoridades();
+  },
+  methods: {
+    async fetchAutoridades() {
+      try {
+        const response = await apiAuthorities.getAuthorities();
+        this.autoridades = response.data;  
+      } catch (error) {
+        console.error("Error al obtener las autoridades:", error);
       }
-    }
-  };
-  </script>
+    },
+  }
+};
+</script>
   
-  <style scoped>
-  /* Estilos que ya tienes */
+<style scoped>
   .container {
     padding: 30px;
     background-color: #f9f9f9;
@@ -100,13 +95,12 @@
     font-size: 1rem;
     margin: 10px 0;
   }
-  
-  .profile-photo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-    object-fit: cover;
-  }
-  </style>
+
+  .profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+</style>
   

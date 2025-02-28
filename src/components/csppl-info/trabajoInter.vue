@@ -1,11 +1,8 @@
 <template>
     <div class="container">
-      <!-- Título de la sección -->
       <div class="section-title">
         <h2>Trabajo Interinstitucional</h2>
       </div>
-  
-      <!-- Introducción sobre el trabajo interinstitucional -->
       <div class="intro">
         <p>
           La Cooperativa trabaja junto con las Cooperativas Escolares de Porteña. El Colibrí, del Centro Educativo 9 de Julio, La Porteñita, del Centro Educativo Nuestra Señora de Lourdes y La Juvenil, del Instituto de Enseñanza Media Bernardino Rivadavia. 
@@ -14,24 +11,17 @@
           El trabajo con estos jóvenes enriquece a nuestra Institución y nos permite cultivar los valores del Cooperativismo, realizar acciones en conjunto que nos potencian y adquirir nuevos conocimientos.
         </p>
       </div>
-  
-      <!-- Cooperativas (tarjetas o bloques) -->
       <div class="cooperativas">
-        <!-- Cooperativa El Colibrí -->
         <div class="cooperativa-card">
           <img src="path/to/logo-elcolibri.jpg" alt="El Colibrí" class="cooperativa-logo" />
           <h3>El Colibrí</h3>
           <p>Cooperativa Escolar del Centro Educativo 9 de Julio. Juntos cultivamos los valores del cooperativismo.</p>
         </div>
-  
-        <!-- Cooperativa La Porteñita -->
         <div class="cooperativa-card">
           <img src="path/to/logo-laporteniita.jpg" alt="La Porteñita" class="cooperativa-logo" />
           <h3>La Porteñita</h3>
           <p>Cooperativa Escolar del Centro Educativo Nuestra Señora de Lourdes. Trabajamos en conjunto para fortalecer nuestra comunidad.</p>
         </div>
-  
-        <!-- Cooperativa La Juvenil -->
         <div class="cooperativa-card">
           <img src="path/to/logo-lajuvenil.jpg" alt="La Juvenil" class="cooperativa-logo" />
           <h3>La Juvenil</h3>

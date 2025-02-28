@@ -2,15 +2,12 @@ import axios from "axios";
 
 const apiClient = axios.create({
   baseURL: "https://csspl-63d5.restdb.io/rest/", 
-  headers: { 'x-apikey': "67c0dac1c181a4151df68bf7" },
+  headers: { 'x-apikey': "67c1f29f27500f548f0a4a9f" },
 });
 
 export default {
   getAuthorities() {
     return apiClient.get("autoridades");  
-  },
-  getImage(imageId) {
-    return `https://csspl-63d5.restdb.io/media/${imageId}`;
   }
 };
 
