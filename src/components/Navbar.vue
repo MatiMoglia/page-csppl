@@ -16,7 +16,17 @@
         <div :class="['nav__menu', { 'show-menu': menuOpen }]">
           <ul class="nav__list">
             <li><router-link to="/" class="nav__link" @click="closeMenu">Inicio</router-link></li>
-            <li><router-link to="/about" class="nav__link" @click="closeMenu">Historia</router-link></li>
+            <li class="dropdown__item">
+            <div class="nav__link" @click="toggleUsMenu">
+              Quienes Somos <i class="ri-arrow-down-s-line dropdown-arrow"></i>
+            </div>
+            <ul v-if="usMenuOpen" class="dropdown__menu">
+              <li><router-link to="/Historia" class="dropdown__link" @click="closeMenu">Historia</router-link></li>
+              <li><router-link to="/mvv-objetivos" class="dropdown__link" @click="closeMenu">Misión, Valores y Objetivos</router-link></li>
+              <li><router-link to="/Autoridades" class="dropdown__link" @click="closeMenu">Autoridades</router-link></li>
+              <li><router-link to="/trabajo-inter" class="dropdown__link" @click="closeMenu">Trabajo Institucional</router-link></li>
+            </ul>
+          </li>
   
             <li class="dropdown__item">
               <div class="nav__link" @click="toggleDropdown">
@@ -54,6 +64,7 @@
         menuOpen: false,
         dropdownOpen: false,
         userMenuOpen: false,
+        usMenuOpen: false,
       };
     },
     methods: {
@@ -62,6 +73,7 @@
         if (!this.menuOpen) {
           this.dropdownOpen = false;
           this.userMenuOpen = false;
+          this.usMenuOpen = false;
         }
       },
       toggleDropdown() {
@@ -70,10 +82,14 @@
       toggleUserMenu() {
         this.userMenuOpen = !this.userMenuOpen;
       },
+      toggleUsMenu() {
+        this.usMenuOpen = !this.usMenuOpen;
+      },
       closeMenu() {
         this.menuOpen = false;
         this.dropdownOpen = false;
         this.userMenuOpen = false;
+        this.usMenuOpen = false;
       },
     },
   };
