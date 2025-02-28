@@ -21,9 +21,9 @@
               Quienes Somos <i class="ri-arrow-down-s-line dropdown-arrow"></i>
             </div>
             <ul v-if="usMenuOpen" class="dropdown__menu">
-              <li><router-link to="/Historia" class="dropdown__link" @click="closeMenu">Historia</router-link></li>
+              <li><router-link to="/historia" class="dropdown__link" @click="closeMenu">Historia</router-link></li>
               <li><router-link to="/mvv-objetivos" class="dropdown__link" @click="closeMenu">Misión, Valores y Objetivos</router-link></li>
-              <li><router-link to="/Autoridades" class="dropdown__link" @click="closeMenu">Autoridades</router-link></li>
+              <li><router-link to="/autoridades" class="dropdown__link" @click="closeMenu">Autoridades</router-link></li>
               <li><router-link to="/trabajo-inter" class="dropdown__link" @click="closeMenu">Trabajo Institucional</router-link></li>
             </ul>
           </li>
@@ -35,8 +35,12 @@
               <ul v-if="dropdownOpen" class="dropdown__menu">
                 <li><router-link to="/energia" class="dropdown__link" @click="closeMenu"><i class="ri-flashlight-line"></i>Energía</router-link></li>
                 <li><router-link to="/agua" class="dropdown__link" @click="closeMenu"><i class="ri-water-flash-line"></i>Agua Potable</router-link></li>
-                <li><router-link to="/internet" class="dropdown__link" @click="closeMenu"><i class="ri-wifi-line"></i>Internet y TV</router-link></li>
-                <li><router-link to="/telefonia" class="dropdown__link" @click="closeMenu"><i class="ri-phone-line"></i>Telefonía</router-link></li>
+                <li><router-link to="/internet" class="dropdown__link" @click="closeMenu"><i class="ri-wifi-line"></i>Internet y Telefonía</router-link></li>
+                <li>
+                  <router-link to="/cooplus" class="dropdown__link cooplus" @click="closeMenu">
+                    <i class="ri-tv-line"></i> COOPLUS+
+                  </router-link>
+                </li>
               </ul>
             </li>
             <li><router-link to="/contact" class="nav__link" @click="closeMenu">Contacto</router-link></li>
@@ -181,6 +185,14 @@
     background: #135c97;
     border-radius: 3px;
   }
+  .dropdown__link.cooplus:hover {
+    background: white !important;
+    color: #eb01ef !important; 
+  }
+
+  .dropdown__link.cooplus:hover i {
+    color: #eb01ef !important;
+  }
   
   @media (max-width: 768px) {
     .nav__toggle {
@@ -217,5 +229,5 @@
     justify-content: space-between;
   }
   }
-  </style>
+</style>
   

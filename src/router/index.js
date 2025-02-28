@@ -4,6 +4,7 @@ import Historia from '@/components/csppl-info/Historia.vue';
 import MVVObjetivos from '@/components/csppl-info/MVVObjetivos.vue';
 import trabajoInter from '@/components/csppl-info/trabajoInter.vue';
 import Autoridades from '@/components/csppl-info/Autoridades.vue';
+import CooplusView from '@/views/CooplusView.vue';
 const routes = [
   {
     path: '/',
@@ -29,6 +30,11 @@ const routes = [
     path: '/trabajo-inter',
     name: 'TrabajoInter',
     component: trabajoInter,
+  },
+  {
+    path: '/cooplus',
+    name: 'CooplusView',
+    component: CooplusView,
   }
 ]
 
