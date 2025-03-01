@@ -29,7 +29,7 @@
             <option value="Pack CooPlus">Pack CooPlus</option>
           </select>
   
-          <label for="decodificadores">Cantidad de Decodificadores *</label>
+          <label for="decodificadores">Cantidad de Decodificadores (Corresponde 1 para cada televisor) *</label>
           <select v-model="form.decodificadores" :class="{'input-error': !form.decodificadores && formSubmitted}" required>
             <option value="">Selecciona la cantidad de decodificadores</option>
             <option value="1">1</option>
@@ -113,7 +113,8 @@
     background-color: #f4f4f4;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    border: 1px solid #c92986;
   }
   
   h2, h3 {
@@ -148,7 +149,7 @@
   button {
     width: 100%;
     padding: 15px;
-    background-color: #007bff;
+    background-color: #0e1850;
     color: white;
     border: none;
     border-radius: 5px;
@@ -157,14 +158,13 @@
   }
   
   button:hover {
-    background-color: #0e1850;
+    background-color: #282075;
   }
   
   .video-section {
     padding: 30px;
     background-color: #f4f4f4;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   
   textarea {

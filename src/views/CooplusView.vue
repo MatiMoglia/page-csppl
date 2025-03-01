@@ -1,5 +1,9 @@
 <template>
     <div>
+      <div class="banner-container">
+        <img src="https://www.coopspportena.com.ar/sites/default/files/BANNER%20PACKS_BANNER%20PACKS.jpg" 
+             alt="Banner Cooplus">
+      </div>
       <h1>COOPLUS+</h1>
       
       <div class="container-cooplus">
@@ -19,7 +23,7 @@
                 @mouseleave="highlightPack(false, 'hogar-pack')" 
                 @click="selectPack('Pack Hogar')">
                 <h2>PACK HOGAR</h2>
-                <p><strong>$23.999</strong></p>
+                <p><strong><span class="highlight-price">$23.999</span></strong></p>
                 <ul>
                 <li><span class="highlight">Internet 100Mb Fibra Óptica</span></li>
                 <li>TV HD</li>
@@ -42,7 +46,7 @@
                 @mouseleave="highlightPack(false, 'cooplus-pack')" 
                 @click="selectPack('Pack CooPlus')">
                 <h2>PACK COOPLUS</h2>
-                <p><strong>$34.999</strong></p>
+                <p><strong><span class="highlight-price">$34.999</span></strong></p>
                 <ul>
                 <li><span class="highlight">Internet 200Mb Fibra Óptica</span></li>
                 <li>TV HD</li>
@@ -58,7 +62,10 @@
                 <button>PEDILO ACÁ</button>
             </div>
         </div>
-        <h1>Formulario de Adhesión:</h1>
+        <div class="container-adhesion">
+          <h1>¡Adherite ahora mismo!</h1>
+        <p>Completa el siguiente formulario para poder elegir el pack que desees y disfrutar del servicio.</p>
+        </div>
       <div class="container-form" id="formulario">
         <formCooplus :pack="selectedPack"/>
       </div>
@@ -100,7 +107,9 @@ import formCooplus from "@/components/FormCooplus";
     text-align: center;
     font-size: 2.8rem;
     color: #ca43ca;
-    margin-top: 20px
+    margin-top: 20px;
+    
+    
   }
   
   .container-cooplus, .container-packs {
@@ -109,7 +118,7 @@ import formCooplus from "@/components/FormCooplus";
     border-radius: 8px;
     background-color: #f9f9f9;
   }
-  
+
   .container-packs {
   display: flex;
   justify-content: space-between;
@@ -131,7 +140,15 @@ import formCooplus from "@/components/FormCooplus";
 
 .pack:hover {
   transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(207, 65, 226, 0.849);
+  box-shadow: 0 4px 15px rgba(65, 89, 226, 0.849);
+}
+.pack h2 {
+    background: #053e74; 
+    color: rgb(255, 255, 255);
+    padding: 15px;
+    margin: -20px -20px 20px -20px; 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 h2 {
@@ -161,8 +178,13 @@ ul li {
 }
 
 .highlight {
-  font-weight: bold;
+  font-weight: normal;
   color: #d821c0; 
+}
+.highlight-price {
+  font-weight: bold;
+  color: #000000; 
+  font-size: 1.5em;
 }
 
 button {
@@ -180,6 +202,16 @@ button {
 button:hover {
   background-color: #ca43ca;
 }
+.banner-container {
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+}
 
+.banner-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 </style>
   

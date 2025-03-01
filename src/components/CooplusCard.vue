@@ -8,7 +8,7 @@
   export default {
     methods: {
         irCooplus() {
-        this.$router.push({ name: "" });
+        this.$router.push({ name: "CooplusView" });
       },
     },
   };
