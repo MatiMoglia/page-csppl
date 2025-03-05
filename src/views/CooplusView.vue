@@ -108,8 +108,6 @@ import formCooplus from "@/components/FormCooplus";
     font-size: 2.8rem;
     color: #ca43ca;
     margin-top: 20px;
-    
-    
   }
   
   .container-cooplus, .container-packs {
@@ -117,6 +115,8 @@ import formCooplus from "@/components/FormCooplus";
     padding: 15px;
     border-radius: 8px;
     background-color: #f9f9f9;
+    padding-left: 120px;
+    padding-right: 120px;
   }
 
   .container-packs {
@@ -143,7 +143,7 @@ import formCooplus from "@/components/FormCooplus";
   box-shadow: 0 4px 15px rgba(65, 89, 226, 0.849);
 }
 .pack h2 {
-    background: #053e74; 
+    background: #0e1850; 
     color: rgb(255, 255, 255);
     padding: 15px;
     margin: -20px -20px 20px -20px; 
@@ -154,14 +154,15 @@ import formCooplus from "@/components/FormCooplus";
 h2 {
   text-align: center;
   color: #333;
-  font-size: 2.2em;
+  font-size: 2em;
 }
 
 p {
-  font-size: 1.2em;
-  color: #555;
+  font-size: 1em;
+  color: #000000;
   text-align: center;
   margin-top: 10px;
+  
 }
 
 ul {
@@ -179,7 +180,8 @@ ul li {
 
 .highlight {
   font-weight: normal;
-  color: #d821c0; 
+  color: #000000; 
+  
 }
 .highlight-price {
   font-weight: bold;
@@ -190,17 +192,19 @@ ul li {
 button {
   width: 100%;
   padding: 12px;
-  background-color: #dd52e2;
+  background-color: #0e1850;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
   font-size: 1.2em;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #ca43ca;
+  background-color: #053e74;
+  
 }
 .banner-container {
   width: 100%;
