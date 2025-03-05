@@ -36,6 +36,7 @@
                 <li><router-link to="/energia" class="dropdown__link" @click="closeMenu"><i class="ri-flashlight-line"></i>Energía</router-link></li>
                 <li><router-link to="/agua" class="dropdown__link" @click="closeMenu"><i class="ri-water-flash-line"></i>Agua Potable</router-link></li>
                 <li><router-link to="/internet" class="dropdown__link" @click="closeMenu"><i class="ri-wifi-line"></i>Internet y Telefonía</router-link></li>
+                <li><router-link to="/servsociales" class="dropdown__link" @click="closeMenu"><i class="ri-first-aid-kit-line"></i>Servicios Sociales</router-link></li>
                 <li>
                   <router-link to="/cooplus" class="dropdown__link cooplus" @click="closeMenu">
                     <i class="ri-tv-line"></i> COOPLUS+
@@ -59,9 +60,9 @@
         </div>
       </nav>
     </header>
-  </template>
+</template>
   
-  <script>
+<script>
   export default {
     data() {
       return {
@@ -97,22 +98,22 @@
       },
     },
   };
-  </script>
+</script>
   
   
-  <style scoped>
-  .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    background: #0e1850;
-    color: #fff;
-    width: 100%;
-  }
+<style scoped>
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #0e1850;
+  color: #fff;
+  width: 100%;
+}
   
   .nav__logo {
     font-size: 1.5rem;
@@ -194,31 +195,31 @@
     color: #eb01ef !important;
   }
   
-  @media (max-width: 768px) {
-    .nav__toggle {
-      display: block;
-    }
+@media (max-width: 768px) {
+  .nav__toggle {
+    display: block;
+  }
   
-    .nav__menu {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: #0d1b2a;
-      width: 100%;
-      padding: 1rem;
-    }
+  .nav__menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #0d1b2a;
+    width: 100%;
+    padding: 1rem;
+  }
   
-    .show-menu {
-      display: flex;
-    }
+  .show-menu {
+    display: flex;
+  }
   
-    .nav__list {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .dropdown__menu {
+  .nav__list {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .dropdown__menu {
     width: 100%;
     left: 10;
     top: 10; 
@@ -228,6 +229,6 @@
     display: flex;
     justify-content: space-between;
   }
-  }
+}
 </style>
   

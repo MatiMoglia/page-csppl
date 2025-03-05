@@ -1,0 +1,199 @@
+<template>
+    <div class="form-container">
+      <div class="form-section">
+        <h2>Formulario ALTA/BAJA de Energía Eléctrica</h2>
+        <form @submit.prevent="enviarFormulario">
+  
+          <label for="nombre">Nombre y Apellido *</label>
+          <input type="text" id="nombre" v-model="formSolicitud.nombre" :class="{'input-error': !formSolicitud.nombre && formSubmitted}" required />
+  
+          <label for="telefono">Teléfono *</label>
+          <input type="tel" id="telefono" v-model="formSolicitud.telefono" :class="{'input-error': !formSolicitud.telefono && formSubmitted}" required />
+  
+          <label for="dni">DNI *</label>
+          <input type="number" id="dni" v-model="formSolicitud.dni" :class="{'input-error': !formSolicitud.dni && formSubmitted}" required />
+  
+          <label>Acción *</label>
+          <div class="acciones">
+            <button type="button" :class="{'active': formSolicitud.accion === 'Alta'}" @click="formSolicitud.accion = 'Alta'">Dar de Alta</button>
+            <button type="button" :class="{'active': formSolicitud.accion === 'Baja'}" @click="formSolicitud.accion = 'Baja'">Dar de Baja</button>
+          </div>
+  
+          <label for="domicilio">Domicilio *</label>
+          <input type="text" id="domicilio" v-model="formSolicitud.domicilio" :class="{'input-error': !formSolicitud.domicilio && formSubmitted}" required />
+  
+          <label for="descripcion">Descripción</label>
+          <textarea id="descripcion" v-model="formSolicitud.descripcion" :class="{'input-error': !formSolicitud.descripcion && formSubmitted}" required placeholder="Ingrese una descripción del inmueble"></textarea>
+  
+          <label for="documentos">Adjuntar Documentos</label>
+          <input type="file" id="documentos" @change="handleFileUpload" multiple />
+  
+          <div v-if="formSolicitud.files.length > 0">
+            <p>Archivos adjuntos:</p>
+            <ul>
+              <li v-for="(file, index) in formSolicitud.files" :key="index">{{ file.name }}</li>
+            </ul>
+          </div>
+          <div class="archivo-info">
+          <p><strong>Sugerencia:</strong> Adjuntar el permiso municipal y la certificación de un electricista si es necesaria. Consultar en administración al <strong>3564331499</strong>.</p>
+        </div>
+          <button type="submit">Enviar Solicitud</button>
+        </form>
+      </div>
+    </div>
+</template>
+  
+<script>
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+export default {
+    data() {
+      return {
+        formSolicitud: {
+          nombre: '',
+          telefono: '',
+          dni: '',
+          accion: '',
+          domicilio: '',
+          descripcion: '',
+          files: [] 
+        },
+        formSubmitted: false
+      };
+    },
+    methods: {
+      enviarFormulario() {
+        this.formSubmitted = true;
+        const requiredFields = ['nombre', 'telefono', 'dni', 'accion', 'domicilio'];
+        const isFormValid = requiredFields.every(field => this.formSolicitud[field]);
+  
+        if (!isFormValid) {
+          toast.error('Por favor, complete todos los campos obligatorios.');
+          return;
+        }
+  
+        if (this.formSolicitud.files.length === 0) {
+          toast.error('Por favor, adjunte los documentos necesarios.');
+          return;
+        }
+  
+        toast.success('Formulario enviado correctamente.');
+        this.resetForm();
+      },
+      handleFileUpload(event) {
+        const files = event.target.files;
+        this.formSolicitud.files = Array.from(files); 
+      },
+      resetForm() {
+        this.formSolicitud = {
+          nombre: '',
+          telefono: '',
+          dni: '',
+          accion: '',
+          domicilio: '',
+          descripcion: '',
+          files: []
+        };
+        this.formSubmitted = false;
+      }
+    }
+  };
+</script>
+  
+<style scoped>
+.form-container {
+    display: grid;
+    padding: 20px;
+    margin-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+  
+.form-section {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    background-color: rgba(244, 244, 244, 0.9);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+  
+h2 {
+    text-align: left;
+    color: #0e1850;
+}
+  
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+  
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: "Montserrat", sans-serif;
+}
+  
+input:focus, select:focus, textarea:focus {
+    border-color: #0e1850;
+}
+  
+.input-error {
+    border-color: red;
+}
+  
+button {
+    width: 100%;
+    padding: 20px;
+    background-color: #0e1850;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "Montserrat", sans-serif;
+}
+  
+button:hover {
+    background-color: #053e74;
+}
+  
+.acciones {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+  
+.acciones button {
+    flex: 1;
+    padding: 15px;
+    font-size: 1em;
+    background-color: #1961a5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+  
+.acciones button.active {
+    background-color: #053e74;
+    color: white;
+}
+
+.archivo-info {
+    margin: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+  
+@media (max-width: 768px) {
+    .form-container {
+      grid-template-columns: 1fr;
+    }
+}
+</style>
+  

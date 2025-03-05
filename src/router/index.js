@@ -5,6 +5,7 @@ import MVVObjetivos from '@/components/csppl-info/MVVObjetivos.vue';
 import trabajoInter from '@/components/csppl-info/trabajoInter.vue';
 import Autoridades from '@/components/csppl-info/Autoridades.vue';
 import CooplusView from '@/views/CooplusView.vue';
+import EnergiaView from '@/views/EnergiaView.vue';
 const routes = [
   {
     path: '/',
@@ -35,6 +36,11 @@ const routes = [
     path: '/cooplus',
     name: 'CooplusView',
     component: CooplusView,
+  },
+  {
+    path: '/energia',
+    name: 'EnergiaView',
+    component: EnergiaView,
   }
 ]
 
