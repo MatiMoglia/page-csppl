@@ -3,27 +3,16 @@
   <div>
       <router-view></router-view>
   </div>
-  <footer>
-    <p>prueba</p>
-  </footer>
+  <Footer></Footer>
 </template>
 
 <script>
   import Navbar from './components/Navbar.vue';
+  import Footer from './components/Footer.vue';
   export default {
     components: {
-      Navbar
+      Navbar,
+      Footer
     }
   };
 </script>
-
-<style>
-
-footer {
-    background: #0e1850;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: 20px;
-}
-</style>

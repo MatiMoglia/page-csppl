@@ -3,9 +3,9 @@
       <nav class="nav container">
         <div class="nav__data">
           <router-link to="/" class="nav__logo">
-            <img src="https://www.coopspportena.com.ar/sites/default/files/logo-copservicios.png" 
-                 alt="Coop de Servicios Públicos de Porteña" 
-                 class="nav__logo-img" />
+            <img src="@/assets/css/img/logo nuevo-Photoroom-Photoroom.png" 
+              alt="Coop de Servicios Públicos de Porteña" 
+              class="nav__logo-img" />
           </router-link>
   
           <div class="nav__toggle" @click="toggleMenu">
@@ -123,7 +123,7 @@
   }
   
   .nav__logo-img {
-    height: 65px;
+    height: 80px;
   }
   
   .nav__toggle {
@@ -150,7 +150,7 @@
   }
   
   .nav__link:hover {
-    color: #184e94;
+    color: #7fb6ff;
   }
   
   .dropdown__item {
