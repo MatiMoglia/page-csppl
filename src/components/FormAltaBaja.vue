@@ -1,7 +1,7 @@
 <template>
     <div class="form-container">
       <div class="form-section">
-        <h2>Formulario ALTA/BAJA de Energía Eléctrica</h2>
+        <h2>Formulario ALTA/BAJA de {{ servicio }}</h2>
         <form @submit.prevent="enviarFormulario">
   
           <label for="nombre">Nombre y Apellido *</label>
@@ -15,8 +15,13 @@
   
           <label>Acción *</label>
           <div class="acciones">
-            <button type="button" :class="{'active': formSolicitud.accion === 'Alta'}" @click="formSolicitud.accion = 'Alta'">Dar de Alta</button>
-            <button type="button" :class="{'active': formSolicitud.accion === 'Baja'}" @click="formSolicitud.accion = 'Baja'">Dar de Baja</button>
+            <button class="btn-alta" type="button" :class="{'active-alta': formSolicitud.accion === 'Alta'}" 
+              @click="toggleAccion('Alta')">Dar de Alta
+            </button>
+            <button class="btn-baja" type="button" :class="{'active-baja': formSolicitud.accion === 'Baja'}" 
+              @click="toggleAccion('Baja')">
+              Dar de Baja
+            </button>
           </div>
   
           <label for="domicilio">Domicilio *</label>
@@ -34,19 +39,32 @@
               <li v-for="(file, index) in formSolicitud.files" :key="index">{{ file.name }}</li>
             </ul>
           </div>
-          <div class="archivo-info">
-          <p><strong>Sugerencia:</strong> Adjuntar el permiso municipal y la certificación de un electricista si es necesaria. Consultar en administración al <strong>3564331499</strong>.</p>
-        </div>
+  
+          <div class="archivo-info" v-if="sugerencia === 'si'">
+            <p><strong>Sugerencia:</strong> Adjuntar permiso municipal y certificación si es necesario. Consultar en administración al <strong style="color: green;">3564331499</strong>.</p>
+          </div>
+  
           <button type="submit">Enviar Solicitud</button>
         </form>
       </div>
     </div>
-</template>
+  </template>
   
 <script>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+
 export default {
+    props: {
+        servicio: {
+        type: String,
+        required: true
+        },
+        sugerencia: {
+        type: String,
+        required: true
+        }
+    },
     data() {
       return {
         formSolicitud: {
@@ -95,11 +113,14 @@ export default {
           files: []
         };
         this.formSubmitted = false;
+      },
+      toggleAccion(accion) {
+        this.formSolicitud.accion = this.formSolicitud.accion === accion ? '' : accion;
       }
     }
-  };
+};
 </script>
-  
+
 <style scoped>
 .form-container {
     display: grid;
@@ -139,14 +160,10 @@ input, select, textarea {
     font-family: "Montserrat", sans-serif;
 }
   
-input:focus, select:focus, textarea:focus {
-    border-color: #0e1850;
-}
-  
 .input-error {
     border-color: red;
 }
-  
+
 button {
     width: 100%;
     padding: 20px;
@@ -159,28 +176,34 @@ button {
     transition: background-color 0.3s ease;
     font-family: "Montserrat", sans-serif;
 }
-  
+
 button:hover {
     background-color: #053e74;
 }
-  
+
 .acciones {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
 }
-  
+
 .acciones button {
     flex: 1;
     padding: 15px;
     font-size: 1em;
-    background-color: #1961a5;
+    background-color: #053e74;
     border: 1px solid #ddd;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
-  
-.acciones button.active {
-    background-color: #053e74;
+
+.acciones .active-alta {
+    background-color: #19ac67;
+    color: white;
+}
+
+.acciones .active-baja {
+    background-color: #ff503b;
     color: white;
 }
 
@@ -189,11 +212,10 @@ button:hover {
     font-size: 0.9em;
     color: #555;
 }
-  
+
 @media (max-width: 768px) {
     .form-container {
       grid-template-columns: 1fr;
     }
 }
 </style>
-  

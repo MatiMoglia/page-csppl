@@ -3,6 +3,13 @@
         <br>
         <div class="energia-container">
             <h1 class="title">Energía Eléctrica</h1>
+            <button class="guardia-btn" @click="mostrarGuardia = !mostrarGuardia">
+                <i class="ri-flashlight-line"></i>
+            </button>
+
+            <div v-if="mostrarGuardia" class="guardia-popup">
+                <p>Número de Guardia: <strong>3564-593558</strong></p>
+            </div>
             <p>
                 Desde <strong>1935</strong> ofrecemos el servicio de <strong>energía eléctrica</strong> tanto en la zona
                 urbana como rural de Porteña, en sus modalidades <strong>monofásica y trifásica</strong>, con líneas
@@ -16,6 +23,17 @@
                 mantenimiento preventivo de las líneas a través de estudios de <strong>termografía</strong> y
                 tareas de relevamiento, con la mirada puesta en la <strong>mejora continua del servicio</strong>.
             </p>
+            <br>
+            <h3>Recomendaciones del servicio:</h3>
+            <ul>
+                <li><i class="ri-checkbox-circle-line icono-li"></i> Mantener los dispositivos eléctricos en buen estado.</li>
+                <li><i class="ri-checkbox-circle-line icono-li"></i> No sobrecargar enchufes con múltiples conexiones.</li>
+                <li><i class="ri-checkbox-circle-line icono-li"></i> Realizar mantenimiento periódico en instalaciones eléctricas.</li>
+                <li><i class="ri-checkbox-circle-line icono-li"></i> Evitar el contacto con cables de alta tensión.</li>
+            </ul>
+            <button @click="openFileConexion" class="pilar-btn">
+                Ver Pilar de Conexión de Energía
+            </button>
         </div>
         <div class="dropdown-containers">
             <div class="dropdown" @mouseenter="mostrarMonofasica = true" @mouseleave="mostrarMonofasica = false">
@@ -68,17 +86,8 @@
                 Plano de alumbrado público de Porteña
             </button>
         </div>
-        <div class="recomendaciones-container">
-            <h2>Recomendaciones:</h2>
-            <ul>
-                <li>Mantener los dispositivos eléctricos en buen estado.</li>
-                <li>No sobrecargar enchufes con múltiples conexiones.</li>
-                <li>Realizar mantenimiento periódico en instalaciones eléctricas.</li>
-                <li>Evitar el contacto con cables de alta tensión.</li>
-            </ul>
-        </div>
         <br>
-        <formSolicitud />
+        <formSolicitud servicio="Energía Eléctrica" sugerencia="si"/>
     </div>
 </template>
 
@@ -90,7 +99,9 @@ export default {
         mostrarMonofasica: false,
         mostrarTrifasica: false,
         mostrarConvencional: false,
-        mostrarPrepago: false
+        mostrarPrepago: false, 
+        mostrarRecomendaciones: false,
+        mostrarGuardia: false,
     }
     },
     components: {
@@ -99,6 +110,9 @@ export default {
     methods: {
     openFile() {
         window.open('https://drive.google.com/file/d/1Z_CNblHOwevuUTgvbDg5x_uEqPU5kcXs/view?usp=sharing','_blank')
+    },
+    openFileConexion() {
+        window.open("https://drive.google.com/file/d/1bIjgvIGfppayBMaIj2m5VDutKkJGqcqE/view?usp=sharing", "_blank");
     }
   }
 };
@@ -149,9 +163,11 @@ ul {
 }
 
 li {
-    font-size: 16px;
-    color: #444;
-    padding: 5px 0;
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+    gap: 10px;
+    margin: 12px;
 }
 .dropdown-containers {
     display: flex;
@@ -227,10 +243,69 @@ li {
 .open-btn:hover {
     background-color: #3974ac;
 }
+.pilar-btn {
+    margin-top: 15px;
+    background-color: #0e1850;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.pilar-btn:hover {
+    background-color: #3974ac;
+}
 .recomendaciones-container {
     margin-top: 20px;
     padding: 15px;
     background-color: rgba(244, 244, 244, 0.9); 
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
 }
+.guardia-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2848ff;
+    color: white;
+    padding: 12px 18px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+.guardia-btn:hover {
+    background-color: #0e1850;
+}
+
+.guardia-popup {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    color: #0e1850;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 </style>
