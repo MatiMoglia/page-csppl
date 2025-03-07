@@ -14,6 +14,26 @@
             <p class="description">
                 A nivel mundial se han producido avances en las comunicaciones, lo que ha provocado un aumento exponencial en la demanda de servicio de Internet. Esta situación también se ha dado en nuestra región, por lo que desde hace años ponemos a disposición de nuestros asociados planes de conexión adecuados a sus necesidades y requerimientos.
             </p>
+
+            <h2 class="section-title">Conoce nuestros planes de Internet:</h2>
+            <div class="plans-container">
+                <div class="plan-card highlighted">
+                    <span class="most-popular">El más pedido</span>
+                    <h4>Plan 100MB</h4>
+                    <p class="price">$19.999</p>
+                    <button class="btn-lo-quiero" @click="scrollToFormulario">Lo quiero</button>
+                </div>
+                <div class="plan-card highlighted">
+                    <h4>Plan 200MB</h4>
+                    <p class="price">$29.999</p>
+                    <button class="btn-lo-quiero" @click="scrollToFormulario">Lo quiero</button>
+                </div>
+                <div class="plan-card highlighted">
+                    <h4>Plan 300MB</h4>
+                    <p class="price">$49.999</p>
+                    <button class="btn-lo-quiero" @click="scrollToFormulario">Lo quiero</button>
+                </div>
+            </div>
             <h3 class="section-title">Ventajas de contratar Fibra Óptica</h3>
             <div class="advantages-container">
                 <div class="advantage-card">
@@ -32,26 +52,6 @@
                     <p>La instalación es sin costo para el usuario que desee conectarse al servicio. </p>
                 </div>
             </div>
-
-            <h3 class="section-title">Conoce nuestros planes de Internet:</h3>
-            <div class="plans-container">
-                <div class="plan-card highlighted">
-                    <span class="most-popular">El más pedido</span>
-                    <h4>Plan 100MB</h4>
-                    <p class="price">$19.999</p>
-                    <button class="btn-lo-quiero">Lo quiero</button>
-                </div>
-                <div class="plan-card highlighted">
-                    <h4>Plan 200MB</h4>
-                    <p class="price">$29.999</p>
-                    <button class="btn-lo-quiero">Lo quiero</button>
-                </div>
-                <div class="plan-card highlighted">
-                    <h4>Plan 300MB</h4>
-                    <p class="price">$49.999</p>
-                    <button class="btn-lo-quiero">Lo quiero</button>
-                </div>
-            </div>
             <div class="plans-container-secondary">
                 <div class="plan-card secondary">
                     <h4>Plan ADSL</h4>
@@ -62,20 +62,56 @@
                     <p class="price">$23.599</p>
                 </div>
             </div>
-            <h3 class="section-title">Requisitos para la instalación de Fibra Óptica</h3>
-            <p class="description">La fibra óptica es la última tecnología de banda ancha que ofrece multitud de ventajas sobre las conexiones tradicionales de cobre. Sin embargo, su despliegue demanda una serie de requerimientos con los que debe contar el edificio donde se vaya a instalar.</p>
-            <ul class="requirements-list">
-                <li>Registro con el servicio de alimentación eléctrica de 220 Vca.</li>
-                <li>Opción de registro con entrada de pipeta en techo para cable de fibra óptica.</li>
-                <li>Opción de registro con entrada de pipeta en muro lateral para cable de fibra óptica.</li>
-            </ul>
-            <h4 class="section-subtitle">Condiciones:</h4>
-            <ul class="conditions-list">
-                <li>En todas las opciones el caño corrugado debe tener como mínimo 1 pulgada.</li>
-                <li>Evitar curvas en el caño.</li>
-                <li>No se puede compartir el caño con el servicio de electricidad.</li>
-            </ul>
-            <p class="description">Todo el equipamiento que instalamos en tu hogar se entrega en comodato. Esto significa que en caso de solicitar la baja del servicio, deberás devolverlo a la Cooperativa.</p>
+            <h3 class="section-title" style="text-align: left; margin-bottom: 5px;">Requisitos y Condiciones:</h3>
+            <p class="description">La fibra óptica es la última tecnología de banda ancha que ofrece multitud de ventajas sobre las conexiones tradicionales de cobre.
+                 Sin embargo, su despliegue demanda una serie de requerimientos con los que debe contar el edificio donde se vaya a instalar.</p>
+                 <div class="dropdown-containers">
+                <div class="dropdown" @mouseenter="mostrarRequisitos = true" @mouseleave="mostrarRequisitos = false">
+                    <button class="dropdown-btn">
+                        Requisitos para la instalación de Fibra Óptica
+                        <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarRequisitos}"></i>
+                    </button>
+                    <div class="dropdown-content" v-show="mostrarRequisitos">
+                        <ul class="requirements-list">
+                            <li>
+                                <i class="ri-checkbox-circle-line"></i>
+                                Registro con el servicio de alimentación eléctrica de 220 Vca.
+                            </li>
+                            <li>
+                                <i class="ri-checkbox-circle-line"></i>
+                                Opción de registro con entrada de pipeta en techo para cable de fibra óptica.
+                            </li>
+                            <li>
+                                <i class="ri-checkbox-circle-line"></i>
+                                Opción de registro con entrada de pipeta en muro lateral para cable de fibra óptica.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="dropdown" @mouseenter="mostrarCondiciones = true" @mouseleave="mostrarCondiciones = false">
+                    <button class="dropdown-btn">
+                        Condiciones del caño
+                        <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarCondiciones}"></i>
+                    </button>
+                    <div class="dropdown-content" v-show="mostrarCondiciones">
+                        <ul class="conditions-list">
+                            <li>
+                                <i class="ri-arrow-right-s-line"></i>
+                                En todas las opciones el caño corrugado debe tener como mínimo 1 pulgada.
+                            </li>
+                            <li>
+                                <i class="ri-arrow-right-s-line"></i>
+                                Evitar curvas en el caño.
+                            </li>
+                            <li>
+                                <i class="ri-arrow-right-s-line"></i>
+                                No se puede compartir el caño con el servicio de electricidad.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p class="description"><strong style="color:red">Importante: </strong>Todo el equipamiento que instalamos en tu hogar se entrega en <strong>comodato</strong>. Esto significa que en caso de solicitar la baja del servicio, deberás devolverlo a la Cooperativa.</p>
 
             <button class="guardia-btn" @click="mostrarGuardia = !mostrarGuardia">
                 <i class="ri-wifi-line"></i>
@@ -84,7 +120,7 @@
                 <p>Número de Guardia: <strong>3564-630995</strong></p>
             </div>
         </div>
-        <formSolicitud servicio="Internet o Telefonía" sugerencia="No"/>
+        <formSolicitud servicio="Internet o Telefonía" sugerencia="No" id="formulario"></formSolicitud>
     </div>
 </template>
 
@@ -94,17 +130,28 @@ import SliderTelecom from "@/components/SliderTelecom.vue";
 export default {
     data() {
         return {
-            mostrarGuardia: false
+            mostrarGuardia: false,
+            mostrarRequisitos: false,
+            mostrarCondiciones: false
         };
     },
     components: {
         formSolicitud,
         SliderTelecom
+    },
+    methods: {
+        scrollToFormulario() {
+            const formulario = document.getElementById("formulario");
+            formulario.scrollIntoView({ behavior: "smooth" });
+        }
     }
 };
 </script>
 
 <style scoped>
+html {
+  scroll-behavior: smooth;
+}
 .fibra-optica-banner {
     background-image: url('https://www.programadesconecta.com/wp-content/uploads/2021/07/Post-Family-Watch.jpg');
     background-size: cover;
@@ -154,6 +201,11 @@ h1, h2 {
     text-align: center;
     
 }
+h4 {
+    color: #2848ff;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
 p {
     font-size: 18px;
     line-height: 1.6;
@@ -179,15 +231,24 @@ li {
     margin-bottom: 20px;
 }
 .section-title {
-    color: #2848ff;
-    font-size: 1.5rem;
-    margin-top: 20px;
     text-align: center;
+    color: #0e1850;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    margin-top: 20px;
 }
 .service-list, .requirements-list, .conditions-list {
     list-style: none;
     padding: 0;
+    text-align: left;
+    margin-bottom: 10px;
 }
+.requirements-list i, .conditions-list i {
+    margin-right: 5px;
+    color: #4CAF50; 
+
+}
+
 .plans-container {
     display: flex;
     flex-wrap: wrap;
@@ -212,7 +273,7 @@ li {
     font-weight: bold;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 300px;
-    height: 160px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -221,7 +282,7 @@ li {
 }
 
 .plan-card.highlighted {
-    border-color: #2848ff;
+    border-color: #0e1850;
     font-size: 22px;
     font-weight: bold;
     color: #2848ff;
@@ -284,7 +345,7 @@ li {
     animation: fadeIn 0.3s ease-in-out;
 }
 .btn-lo-quiero {
-    background-color: #2848ff;
+    background-color: #0e1850;
     color: white;
     padding: 10px;
     font-size: 16px;
@@ -292,9 +353,10 @@ li {
     border-radius: 8px;
     cursor: pointer;
     margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 .btn-lo-quiero:hover {
-    background-color: #1a36d1;
+    background-color: #2848ff;
 }
 .advantages-container {
     display: flex;
@@ -321,11 +383,47 @@ li {
 .advantage-card p {
     color: #333;
 }
-
-.section-title {
+.dropdown-containers {
+    display: flex;
+    gap: 15px;
+}
+.dropdown {
+    margin: 20px auto;
+    width: 50%;
     text-align: center;
-    color: #2848ff;
-    font-size: 1.8rem;
-    margin-bottom: 30px;
+}
+
+.dropdown-btn {
+    background-color: #0e1850;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+.dropdown-btn:hover {
+    background-color: #3974ac;
+}
+
+.dropdown-content {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+.dropdown-arrow {
+    transition: transform 0.3s;
+}
+
+.rotate-arrow {
+    transform: rotate(180deg);
 }
 </style>
