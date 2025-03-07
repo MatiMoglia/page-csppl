@@ -7,6 +7,7 @@ import Autoridades from '@/components/csppl-info/Autoridades.vue';
 import CooplusView from '@/views/CooplusView.vue';
 import EnergiaView from '@/views/EnergiaView.vue';
 import AguaView from '@/views/AguaView.vue';
+import TelecomunicacionesView from '@/views/TelecomunicacionesView.vue';
 const routes = [
   {
     path: '/',
@@ -47,6 +48,11 @@ const routes = [
     path: '/agua',
     name: 'AguaView',
     component: AguaView,
+  },
+  {
+    path: '/telecomunicaciones',
+    name: 'TelecomunicacionesView',
+    component: TelecomunicacionesView,
   }
 ]
 
