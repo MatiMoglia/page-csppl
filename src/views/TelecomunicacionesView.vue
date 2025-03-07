@@ -15,7 +15,7 @@
                 A nivel mundial se han producido avances en las comunicaciones, lo que ha provocado un aumento exponencial en la demanda de servicio de Internet. Esta situación también se ha dado en nuestra región, por lo que desde hace años ponemos a disposición de nuestros asociados planes de conexión adecuados a sus necesidades y requerimientos.
             </p>
 
-            <h2 class="section-title">Conoce nuestros planes de Internet:</h2>
+            <h2 class="section-title">¡Conoce nuestros planes!</h2>
             <div class="plans-container">
                 <div class="plan-card highlighted">
                     <span class="most-popular">El más pedido</span>
@@ -50,16 +50,6 @@
                     <i class="ri-tools-line" style="font-size: 40px; color: #1f2c79;"></i>
                     <h4>Instalación sin cargo</h4>
                     <p>La instalación es sin costo para el usuario que desee conectarse al servicio. </p>
-                </div>
-            </div>
-            <div class="plans-container-secondary">
-                <div class="plan-card secondary">
-                    <h4>Plan ADSL</h4>
-                    <p class="price">$12.499</p>
-                </div>
-                <div class="plan-card secondary">
-                    <h4>Plan Rural 5MB</h4>
-                    <p class="price">$23.599</p>
                 </div>
             </div>
             <h3 class="section-title" style="text-align: left; margin-bottom: 5px;">Requisitos y Condiciones:</h3>
@@ -112,7 +102,36 @@
                 </div>
             </div>
             <p class="description"><strong style="color:red">Importante: </strong>Todo el equipamiento que instalamos en tu hogar se entrega en <strong>comodato</strong>. Esto significa que en caso de solicitar la baja del servicio, deberás devolverlo a la Cooperativa.</p>
-
+            <h3 class="section-title">Servicio de Cobre y Rural</h3>
+            <p class="description">Las conexiones de Cobre y Rurales siguen estando vigentes, prestando el servicio a cientos de ususarios.
+                Ademas, todavia seguimos realizando conexiones de Internet en las localidades de Seeber y Vignaud, ademas en la zona rural unicamente de Porteña. <br> 
+                Si deseas que tu hogar sea conectado a Internet, puedes contactarte con nosotros para que te pasemos los requisitos de la instalación y en caso de ser en zona rural, la disponibilidad para realizar la nueva conexión.
+                <br>
+                <a href="mailto:admcsppl@gmail.com" class="contact-link">Contáctanos ahora</a>
+            </p>
+            <p class="description">Tambien puede contactarse con Administración al siguiente número: <strong>3564331499</strong></p>
+            <div class="plans-container-secondary">
+            <div class="plan-card secondary">
+                <div class="plan-banner">Solo Seeber y Vignaud</div>
+                    <h4>Plan ADSL</h4>
+                    <h3>4 MB de Internet</h3>
+                    <p class="price">$12.499</p>
+                    <button class="btn-solicitar">Solicitar</button>
+                    <button class="btn-consultar">
+                        <i class="ri-phone-line"></i> Consultar
+                    </button>
+                </div>
+                <div class="plan-card secondary">
+                    <div class="plan-banner">Solo Zona Rural Porteña</div>
+                    <h4>Plan Rural</h4>
+                    <h3>5 MB de Internet</h3>
+                    <p class="price">$23.599</p>
+                    <button class="btn-solicitar">Solicitar</button>
+                    <button class="btn-consultar">
+                        <i class="ri-phone-line"></i> Consultar
+                    </button>
+                </div>
+            </div>
             <button class="guardia-btn" @click="mostrarGuardia = !mostrarGuardia">
                 <i class="ri-wifi-line"></i>
             </button>
@@ -258,13 +277,86 @@ li {
 }
 .plans-container-secondary {
     display: flex;
-    flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    padding: 20px 0;
+    margin-top: 20px;
+}
+.plan-card.secondary {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.plan-card.secondary:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.plan-banner {
+    background-color: #224ab9;
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
+}
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.btn-solicitar {
+    background-color: #0e1850;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btn-solicitar:hover {
+    background-color: #2848ff;
+}
+.btn-consultar {
+    background-color: #3eac34;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.btn-consultar:hover {
+    background-color: #2a8a21;
+}
+.btn-consultar i {
+    font-size: 15px; 
 }
 .plan-card {
-    background: white;
+    background: rgb(255, 255, 255);
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -273,7 +365,7 @@ li {
     font-weight: bold;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 300px;
-    height: 200px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -288,12 +380,6 @@ li {
     color: #2848ff;
     box-shadow: 0 8px 20px rgba(40, 72, 255, 0.2);
     background-color: #f0f5ff;
-}
-
-.plan-card.secondary {
-    border-color: #ddd;
-    color: #333;
-    font-size: 18px;
 }
 .most-popular {
     background-color: #ff9800;
@@ -371,7 +457,8 @@ li {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    width: 400px;
+    width: 300px;
+    height: 225px;
 }
 
 .advantage-card h4 {
