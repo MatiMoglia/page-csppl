@@ -35,7 +35,7 @@
               <ul v-if="dropdownOpen" class="dropdown__menu">
                 <li><router-link to="/energia" class="dropdown__link" @click="closeMenu"><i class="ri-flashlight-line"></i>Energía</router-link></li>
                 <li><router-link to="/agua" class="dropdown__link" @click="closeMenu"><i class="ri-water-flash-line"></i>Agua Potable</router-link></li>
-                <li><router-link to="/internet" class="dropdown__link" @click="closeMenu"><i class="ri-wifi-line"></i>Internet y Telefonía</router-link></li>
+                <li><router-link to="/telecomunicaciones" class="dropdown__link" @click="closeMenu"><i class="ri-wifi-line"></i>Internet y Telefonía</router-link></li>
                 <li><router-link to="/servsociales" class="dropdown__link" @click="closeMenu"><i class="ri-first-aid-kit-line"></i>Servicios Sociales</router-link></li>
                 <li>
                   <router-link to="/cooplus" class="dropdown__link cooplus" @click="closeMenu">

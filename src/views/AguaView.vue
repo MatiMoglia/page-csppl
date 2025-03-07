@@ -34,6 +34,7 @@
           </button>
         </div>
       </div>
+  
       <div class="dropdown-containers">
         <div class="dropdown" @mouseenter="mostrarRecomendaciones = true" @mouseleave="mostrarRecomendaciones = false">
           <button class="dropdown-btn">
@@ -45,18 +46,19 @@
             <button @click="abrirModal" class="btn-agrandar">Ver</button>
           </div>
         </div>
-
-        <div v-if="mostrarModal" class="modal" @click="cerrarModal">
-          <div class="modal-content">
+  
+        <div v-if="mostrarModal" class="modal" @click="cerrarModalClick">
+          <div class="modal-content" @click.stop>
             <img src="https://www.coopspportena.com.ar/sites/default/files/LIMPIEZA%20DE%20TANQUE%20DE%20AGUA.jpg" alt="Imagen grande">
             <button class="close-modal" @click="cerrarModal">
               <i class="ri-close-line"></i>
             </button>
           </div>
         </div>
+  
         <div class="dropdown" @mouseenter="mostrarCuidados = true" @mouseleave="mostrarCuidados = false">
           <button class="dropdown-btn">
-            Cuidado del Agua del Potable
+            Cuidado del Agua Potable
             <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarCuidados}"></i>
           </button>
           <div class="dropdown-content" v-show="mostrarCuidados">
@@ -64,8 +66,9 @@
             <button @click="abrirModal" class="btn-agrandar">Ver</button>
           </div>
         </div>
-        <div v-if="mostrarModal" class="modal" @click="cerrarModal">
-          <div class="modal-content">
+  
+        <div v-if="mostrarModal" class="modal" @click="cerrarModalClick">
+          <div class="modal-content" @click.stop>
             <img src="https://www.coopspportena.com.ar/sites/default/files/Recomendaciones%20agua%20potable-02.jpg" alt="Imagen grande">
             <button class="close-modal" @click="cerrarModal">
               <i class="ri-close-line"></i>
@@ -73,6 +76,7 @@
           </div>
         </div>
       </div>
+  
       <formSolicitud servicio="Agua Potable" sugerencia="no" />
     </div>
 </template>
@@ -101,14 +105,25 @@
       },
       abrirModal() {
         this.mostrarModal = true;
+        document.addEventListener("keydown", this.handleEscape);
       },
       cerrarModal() {
         this.mostrarModal = false;
+        document.removeEventListener("keydown", this.handleEscape);
       },
+      cerrarModalClick(event) {
+        if (event.target.classList.contains("modal")) {
+          this.cerrarModal();
+        }
+      },
+      handleEscape(event) {
+        if (event.key === "Escape") {
+          this.cerrarModal();
+        }
+      }
     }
   }
 </script>
-  
 <style scoped>
 .aguapotable {
     justify-content: center;
@@ -121,6 +136,7 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
 }
 .aguapotable button {
     font-family:"Montserrat", sans-serif;
@@ -134,7 +150,9 @@
 .agua-container {
     padding: 15px;
     background-color: rgba(244, 244, 244, 0.9); 
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-left: 5px solid #0e1850;
+     
 }
   
 h1, h2 {
@@ -249,23 +267,25 @@ li {
     cursor: pointer;
     border-radius: 8px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    z-index: 1000;
 }
-  
 .guardia-btn:hover {
-    background-color: #2c6ede;
+    background-color: #0e1850;
 }
+
 .guardia-popup {
-    background-color: #fafafa;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    position: absolute;
+    position: fixed;
     bottom: 70px;
     right: 20px;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    color: #333;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    color: #0e1850;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
 }
 .modal {
     position: fixed;
