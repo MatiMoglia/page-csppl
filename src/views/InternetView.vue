@@ -34,24 +34,9 @@
                     <button class="btn-lo-quiero" @click="scrollToFormulario">Lo quiero</button>
                 </div>
             </div>
+            
             <h3 class="section-title">Ventajas de contratar Fibra Óptica</h3>
-            <div class="advantages-container">
-                <div class="advantage-card">
-                    <i class="ri-speed-line" style="font-size: 40px; color: #1f2c79;"></i>
-                    <h4>Alta Velocidad</h4>
-                    <p>Fibra óptica proporciona velocidades mucho más altas que las conexiones antiguas de cobre.</p>
-                </div>
-                <div class="advantage-card">
-                    <i class="ri-bar-chart-line" style="font-size: 40px; color: #1f2c79;"></i>
-                    <h4>Mayor Estabilidad</h4>
-                    <p>Una conexión de fibra óptica es más estable, con menos interferencias y caídas de señal.</p>
-                </div>
-                <div class="advantage-card">
-                    <i class="ri-tools-line" style="font-size: 40px; color: #1f2c79;"></i>
-                    <h4>Instalación sin cargo</h4>
-                    <p>La instalación es sin costo para el usuario que desee conectarse al servicio. </p>
-                </div>
-            </div>
+            <CardCarousel/>
             <h3 class="section-title" style="text-align: left; margin-bottom: 5px;">Requisitos y Condiciones:</h3>
             <p class="description">La fibra óptica es la última tecnología de banda ancha que ofrece multitud de ventajas sobre las conexiones tradicionales de cobre.
                  Sin embargo, su despliegue demanda una serie de requerimientos con los que debe contar el edificio donde se vaya a instalar.</p>
@@ -65,17 +50,22 @@
                         <ul class="requirements-list">
                             <li>
                                 <i class="ri-checkbox-circle-line"></i>
-                                Registro con el servicio de alimentación eléctrica de 220 Vca.
+                                <strong>1. </strong>Registro con el servicio de alimentación eléctrica de 220 Vca.
                             </li>
                             <li>
                                 <i class="ri-checkbox-circle-line"></i>
-                                Opción de registro con entrada de pipeta en techo para cable de fibra óptica.
+                                <strong>2. </strong>Opción de registro con entrada de pipeta en techo para cable de fibra óptica.
                             </li>
                             <li>
                                 <i class="ri-checkbox-circle-line"></i>
-                                Opción de registro con entrada de pipeta en muro lateral para cable de fibra óptica.
+                                <strong>3. </strong>Opción de registro con entrada de pipeta en muro lateral para cable de fibra óptica.
                             </li>
                         </ul>
+                        <div class="image-container">
+                            <img src="https://www.coopspportena.com.ar/sites/default/files/Imagen%20nota%20Requisitos%20para%20instalacion%20de%20fibra%20optica.png" 
+                                alt="Requisitos para instalación de fibra óptica"
+                                class="installation-image">
+                        </div>
                     </div>
                 </div>
                 <div class="dropdown" @mouseenter="mostrarCondiciones = true" @mouseleave="mostrarCondiciones = false">
@@ -139,13 +129,14 @@
                 <p>Número de Guardia: <strong>3564-630995</strong></p>
             </div>
         </div>
-        <formSolicitud servicio="Internet o Telefonía" sugerencia="No" id="formulario"></formSolicitud>
+        <formSolicitud servicio="Internet" sugerencia="No" mostrarOpcionesInternet="si"  id="formulario" adjuntar="no"></formSolicitud>
     </div>
 </template>
 
 <script>
 import formSolicitud from "@/components/FormAltaBaja.vue";
 import SliderTelecom from "@/components/SliderTelecom.vue";
+import CardCarousel from "@/components/VentajasFibra.vue";
 export default {
     data() {
         return {
@@ -156,7 +147,8 @@ export default {
     },
     components: {
         formSolicitud,
-        SliderTelecom
+        SliderTelecom,
+        CardCarousel
     },
     methods: {
         scrollToFormulario() {
@@ -444,32 +436,6 @@ li {
 .btn-lo-quiero:hover {
     background-color: #2848ff;
 }
-.advantages-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-.advantage-card {
-    background-color: #fff;
-    border: 2px solid #0e1850;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 300px;
-    height: 225px;
-}
-
-.advantage-card h4 {
-    color: #1a36d1;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.advantage-card p {
-    color: #333;
-}
 .dropdown-containers {
     display: flex;
     gap: 15px;
@@ -512,5 +478,16 @@ li {
 
 .rotate-arrow {
     transform: rotate(180deg);
+}
+.image-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.installation-image {
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 </style>
