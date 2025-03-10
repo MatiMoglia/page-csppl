@@ -69,23 +69,23 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 export default {
-    props: {
-        servicio: {
+  props: {
+      servicio: {
+      type: String,
+      required: true
+      },
+      sugerencia: {
+      type: String,
+      required: true
+      },
+      mostrarOpcionesInternet: {
         type: String,
-        required: true
-        },
-        sugerencia: {
+        default: false
+      },
+      adjuntar: {
         type: String,
-        required: true
-        },
-        mostrarOpcionesInternet: {
-          type: String,
-          default: false
-        },
-        adjuntar: {
-          type: String,
-          default: false
-        }
+        default: false
+      }
     },
     data() {
       return {
@@ -116,44 +116,44 @@ export default {
       }
     },
     methods: {
-      enviarFormulario() {
-        this.formSubmitted = true;
-        const requiredFields = ['nombre', 'telefono', 'dni', 'accion', 'domicilio'];
-        const isFormValid = requiredFields.every(field => this.formSolicitud[field]);
+    enviarFormulario() {
+      this.formSubmitted = true;
+      const requiredFields = ['nombre', 'telefono', 'dni', 'accion', 'domicilio'];
+      const isFormValid = requiredFields.every(field => this.formSolicitud[field]);
   
-        if (!isFormValid) {
-          toast.error('Por favor, complete todos los campos obligatorios.');
-          return;
-        }
-  
-        if (this.formSolicitud.files.length === 0) {
-          toast.error('Por favor, adjunte los documentos necesarios.');
-          return;
-        }
-  
-        toast.success('Formulario enviado correctamente.');
-        this.resetForm();
-      },
-      handleFileUpload(event) {
-        const files = event.target.files;
-        this.formSolicitud.files = Array.from(files); 
-      },
-      resetForm() {
-        this.formSolicitud = {
-          nombre: '',
-          telefono: '',
-          dni: '',
-          accion: '',
-          domicilio: '',
-          descripcion: '',
-          files: []
-        };
-        this.formSubmitted = false;
-      },
-      toggleAccion(accion) {
-        this.formSolicitud.accion = this.formSolicitud.accion === accion ? '' : accion;
+      if (!isFormValid) {
+        toast.error('Por favor, complete todos los campos obligatorios.');
+        return;
       }
+  
+      if (this.formSolicitud.files.length === 0) {
+        toast.error('Por favor, adjunte los documentos necesarios.');
+        return;
+      }
+  
+      toast.success('Formulario enviado correctamente.');
+      this.resetForm();
+    },
+    handleFileUpload(event) {
+      const files = event.target.files;
+      this.formSolicitud.files = Array.from(files); 
+    },
+    resetForm() {
+      this.formSolicitud = {
+        nombre: '',
+        telefono: '',
+        dni: '',
+        accion: '',
+        domicilio: '',
+        descripcion: '',
+        files: []
+      };
+      this.formSubmitted = false;
+    },
+    toggleAccion(accion) {
+      this.formSolicitud.accion = this.formSolicitud.accion === accion ? '' : accion;
     }
+  } 
 };
 </script>
 

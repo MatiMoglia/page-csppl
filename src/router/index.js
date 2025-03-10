@@ -9,6 +9,7 @@ import EnergiaView from '@/views/EnergiaView.vue';
 import AguaView from '@/views/AguaView.vue';
 import InternetView from '@/views/InternetView.vue';
 import Telefonia from '@/views/Telefonia.vue';
+import ServiciosSocialesView from '@/views/ServiciosSocialesView.vue';
 const routes = [
   {
     path: '/',
@@ -59,6 +60,11 @@ const routes = [
     path: '/telefono',
     name: 'Telefonia',
     component: Telefonia,
+  },
+  {
+    path: '/servicios-sociales',
+    name: 'ServiciosSocialesView',
+    component: ServiciosSocialesView,
   }
 ]
 
