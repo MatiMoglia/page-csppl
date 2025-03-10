@@ -87,7 +87,7 @@
             </button>
         </div>
         <br>
-        <formSolicitud servicio="Energía Eléctrica" sugerencia="si"/>
+        <formSolicitud servicio="Energía Eléctrica" sugerencia="si" adjuntar="si"/>
     </div>
 </template>
 

@@ -77,7 +77,7 @@
         </div>
       </div>
   
-      <formSolicitud servicio="Agua Potable" sugerencia="no" />
+      <formSolicitud servicio="Agua Potable" sugerencia="no" adjuntar="si"/>
     </div>
 </template>
   

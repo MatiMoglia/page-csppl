@@ -12,7 +12,24 @@
   
           <label for="dni">DNI *</label>
           <input type="number" id="dni" v-model="formSolicitud.dni" :class="{'input-error': !formSolicitud.dni && formSubmitted}" required />
-  
+          
+          <label for="domicilio">Domicilio *</label>
+          <input type="text" id="domicilio" v-model="formSolicitud.domicilio" :class="{'input-error': !formSolicitud.domicilio && formSubmitted}" required />
+          <div v-if="mostrarOpcionesInternet == 'si'">
+            <label for="tipoInternet">Tipo de Internet *</label>
+            <select id="tipoInternet" v-model="formSolicitud.tipoInternet">
+              <option value="">Seleccione una opción</option>
+              <option value="fibra">Fibra Óptica</option>
+              <option value="cobre">Internet de Cobre</option>
+              <option value="rural">Internet Rural</option>
+            </select>
+
+            <label for="megasInternet">Velocidad (Mbps) *</label>
+            <select id="megasInternet" v-model="formSolicitud.megasInternet" :disabled="!formSolicitud.tipoInternet">
+              <option v-for="mega in opcionesMegas" :key="mega" :value="mega">{{ mega }} Mbps</option>
+            </select>
+          </div>
+
           <label>Acción *</label>
           <div class="acciones">
             <button class="btn-alta" type="button" :class="{'active-alta': formSolicitud.accion === 'Alta'}" 
@@ -24,15 +41,12 @@
             </button>
           </div>
   
-          <label for="domicilio">Domicilio *</label>
-          <input type="text" id="domicilio" v-model="formSolicitud.domicilio" :class="{'input-error': !formSolicitud.domicilio && formSubmitted}" required />
-  
           <label for="descripcion">Descripción</label>
           <textarea id="descripcion" v-model="formSolicitud.descripcion" :class="{'input-error': !formSolicitud.descripcion && formSubmitted}" required placeholder="Ingrese una descripción del inmueble"></textarea>
-  
-          <label for="documentos">Adjuntar Documentos</label>
-          <input type="file" id="documentos" @change="handleFileUpload" multiple />
-  
+          <div v-if="adjuntar === 'si'">
+            <label for="documentos">Adjuntar Documentos</label>
+            <input type="file" id="documentos" @change="handleFileUpload" multiple />
+          </div>
           <div v-if="formSolicitud.files.length > 0">
             <p>Archivos adjuntos:</p>
             <ul>
@@ -63,6 +77,14 @@ export default {
         sugerencia: {
         type: String,
         required: true
+        },
+        mostrarOpcionesInternet: {
+          type: String,
+          default: false
+        },
+        adjuntar: {
+          type: String,
+          default: false
         }
     },
     data() {
@@ -74,10 +96,24 @@ export default {
           accion: '',
           domicilio: '',
           descripcion: '',
-          files: [] 
+          files: [],
+          tipoInternet: '',
+          megasInternet: '' 
         },
         formSubmitted: false
       };
+    },
+    computed: {	
+      opcionesMegas() {
+        if (this.formSolicitud.tipoInternet === 'fibra') {
+          return [100, 200, 300];
+        } else if (this.formSolicitud.tipoInternet === 'cobre') {
+          return [4];
+        } else if (this.formSolicitud.tipoInternet === 'rural') {
+          return [5];
+        }
+        return [];
+      }
     },
     methods: {
       enviarFormulario() {
