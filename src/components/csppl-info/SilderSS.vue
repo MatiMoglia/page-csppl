@@ -147,6 +147,7 @@ button {
     cursor: pointer;
     margin-top: 10px;
     transition: 0.3s;
+    font-family: "Montserrat", sans-serif;
 }
 
 button:hover {

@@ -33,6 +33,14 @@
                 es un paso crucial. Asegúrate de que esta información esté al día para evitar inconvenientes en el futuro.
             </p>
         </div>
+        <button class="guardia-btn" @click="mostrarGuardia = !mostrarGuardia">
+                <i class="ri-first-aid-kit-line"></i>
+            </button>
+            <div v-if="mostrarGuardia" class="guardia-popup">
+                <p>Guardia Traslado Social: <strong>3564-593560</strong></p>
+                <p>Guardia Sepelio: <strong>3564-330362</strong></p>
+                <p>Banco de Sangre: <strong>3564-562394</strong></p>
+            </div>
         <formServSociales/>
     </div>
 </template>
@@ -41,6 +49,11 @@
 import formServSociales from '@/components/FormServSociales.vue';
 import cardSS from '@/components/csppl-info/SilderSS.vue';
 export default {
+    data() {
+        return {
+            mostrarGuardia: false
+        }
+    },
     components: {
         formServSociales,
         cardSS
@@ -64,7 +77,7 @@ html {
 .ss-container {
     padding: 15px;
     background-color: rgba(244, 244, 244, 0.9); 
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 0;
 }
 .title {
@@ -88,7 +101,7 @@ h3 {
     color: #333;
     margin-top: 10px;
 }
-p {
+.ss-container p {
     font-size: 18px;
     line-height: 1.6;
     color: #333;
@@ -109,5 +122,40 @@ li {
 }
 i {
     color: #28a745;
+}
+.guardia-btn i {
+    color: white;
+}
+.guardia-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2848ff;
+    color: white;
+    padding: 12px 18px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+.guardia-btn:hover {
+    background-color: #0e1850;
+}
+
+.guardia-popup {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    font-size: 18px;
+    color: #0e1850;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
 }
 </style>
