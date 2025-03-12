@@ -1,90 +1,96 @@
 <template>
     <div class="container">
-        <section class="servicios">
-            <div class="slider">
-                <transition name="fade" mode="out-in">
-                    <div
-                        class="slider__content animate__animated"
-                        :class="animationClass"
-                        :key="servicios[currentIndex].titulo"
-                        :style="{ backgroundImage: `url(${servicios[currentIndex].imagen})` }"
-                    >
-                        <div class="slider__text">
-                            <h2>{{ servicios[currentIndex].titulo }}</h2>
-                            <p>{{ servicios[currentIndex].descripcion }}</p>
-                            <button @click="showMoreInfo">Más info</button>
-                        </div>
-                    </div>
-                </transition>
-                <div class="slider__controls">
-                    <button @click="previousService" class="control-button">←</button>
-                    <button @click="nextService" class="control-button">→</button>
-                </div>
+      <section class="servicios">
+        <div class="slider">
+          <transition name="fade" mode="out-in">
+            <div
+              class="slider__content animate__animated"
+              :class="animationClass"
+              :key="servicios[currentIndex].titulo"
+              :style="{ backgroundImage: `url(${servicios[currentIndex].imagen})` }"
+            >
+              <div class="slider__text">
+                <h2>{{ servicios[currentIndex].titulo }}</h2>
+                <p>{{ servicios[currentIndex].descripcion }}</p>
+                <p></p>
+                <button @click="showMoreInfo">Más info</button>
+              </div>
             </div>
-        </section>
+          </transition>
+          <div class="slider__controls">
+            <button @click="previousService" class="control-button">←</button>
+            <button @click="nextService" class="control-button">→</button>
+          </div>
+        </div>
+      </section>
     </div>
-</template>
-
-<script>
-import "animate.css";
-
-export default {
+  </template>
+  
+  <script>
+  import "animate.css";
+  
+  export default {
     data() {
-        return {
-            currentIndex: 0,
-            animationClass: "animate__fadeIn",
-            interval: null,
-            servicios: [
-                {
-                    titulo: "Traslado Social",
-                    imagen: "https://coopspportena.com.ar/sites/default/files/styles/noticia_interna/public/field/image/Imagen%20Article%20web%20traslado%20social-01.jpg?itok=YsTgMpEu",
-                    descripcion: "Servicio de traslado programado para pacientes que no pueden movilizarse de otro modo.",
-                },
-                {
-                    titulo: "Banco de Sangre",
-                    imagen: "https://www.coopspportena.com.ar/sites/default/files/styles/noticia_interna/public/field/image/Foto2.jpeg?itok=cRUvFYo4",
-                    descripcion: "Banco solidario para garantizar sangre de calidad en tratamientos y emergencias.",
-                },
-                {
-                    titulo: "Sepelio",
-                    imagen: "https://coopspportena.com.ar/sites/default/files/styles/noticia_interna/public/field/image/IMG_5039%5B1%5D.JPG?itok=6l6uR4Fk",
-                    descripcion: "Cobertura integral con respeto y acompañamiento a familiares.",
-                }
-            ]
-        };
+      return {
+        currentIndex: 0,
+        animationClass: "animate__fadeIn",
+        interval: null,
+        servicios: [
+          {
+            titulo: "Traslado Social",
+            imagen: "https://coopspportena.com.ar/sites/default/files/styles/noticia_interna/public/field/image/Imagen%20Article%20web%20traslado%20social-01.jpg?itok=YsTgMpEu",
+            descripcion: "Servicio de traslado programado para pacientes que no pueden movilizarse de otro modo.",
+            ruta: "/detalle-traslado",
+          },
+          {
+            titulo: "Banco de Sangre",
+            imagen: "https://www.coopspportena.com.ar/sites/default/files/styles/noticia_interna/public/field/image/Foto2.jpeg?itok=cRUvFYo4",
+            descripcion: "Banco solidario para garantizar sangre de calidad en tratamientos y emergencias.",
+            ruta: "/detalle-banco",
+          },
+          {
+            titulo: "Sepelio",
+            imagen: "https://coopspportena.com.ar/sites/default/files/styles/noticia_interna/public/field/image/IMG_5039%5B1%5D.JPG?itok=6l6uR4Fk",
+            descripcion: "Cobertura integral con respeto y acompañamiento a familiares.",
+            ruta: "/detalle-sepelio",
+          }
+        ]
+      };
     },
     mounted() {
-        this.startAutoSlide();
+      this.startAutoSlide();
     },
     methods: {
-        nextService() {
-            this.animationClass = "animate__fadeOut";
-            setTimeout(() => {
-                this.currentIndex = (this.currentIndex + 1) % this.servicios.length;
-                this.animationClass = "animate__fadeIn";
-            }, 250);
-        },
-        previousService() {
-            this.animationClass = "animate__fadeOut";
-            setTimeout(() => {
-                this.currentIndex = (this.currentIndex - 1 + this.servicios.length) % this.servicios.length;
-                this.animationClass = "animate__fadeIn";
-            }, 250);
-        },
-        startAutoSlide() {
-            this.interval = setInterval(() => {
-                this.nextService();
-            }, 8000);
-        },
-        showMoreInfo() {
-        }
+      nextService() {
+        this.animationClass = "animate__fadeOut";
+        setTimeout(() => {
+          this.currentIndex = (this.currentIndex + 1) % this.servicios.length;
+          this.animationClass = "animate__fadeIn";
+        }, 250);
+      },
+      previousService() {
+        this.animationClass = "animate__fadeOut";
+        setTimeout(() => {
+          this.currentIndex = (this.currentIndex - 1 + this.servicios.length) % this.servicios.length;
+          this.animationClass = "animate__fadeIn";
+        }, 250);
+      },
+      startAutoSlide() {
+        this.interval = setInterval(() => {
+          this.nextService();
+        }, 8000);
+      },
+      showMoreInfo() {
+        const ruta = this.servicios[this.currentIndex].ruta;
+        this.$router.push(ruta); 
+      }
     },
     beforeDestroy() {
-        clearInterval(this.interval);
+      clearInterval(this.interval);
     }
-};
-</script>
-
+  };
+  </script>
+  
 <style scoped>
 .container {
     text-align: center;

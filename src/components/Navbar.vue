@@ -37,11 +37,20 @@
                 <li><router-link to="/agua" class="dropdown__link" @click="closeMenu"><i class="ri-water-flash-line"></i>Agua Potable</router-link></li>
                 <li><router-link to="/telecomunicaciones" class="dropdown__link" @click="closeMenu"><i class="ri-wifi-line"></i>Internet y Telefonía</router-link></li>
                 <li><router-link to="/telefono" class="dropdown__link" @click="closeMenu"><i class="ri-phone-line"></i>Telefonía</router-link></li>
-                <li><router-link to="/servicios-sociales" class="dropdown__link" @click="closeMenu"><i class="ri-first-aid-kit-line"></i>Servicios Sociales</router-link></li>
                 <li>
                   <router-link to="/cooplus" class="dropdown__link cooplus" @click="closeMenu">
                     <i class="ri-tv-line"></i> COOPLUS+
                   </router-link>
+                </li>
+                <li class="dropdown__subitem" @mouseover="serviciosSocialesOpen = true" @mouseleave="serviciosSocialesOpen = false">
+                  <router-link to="/servicios-sociales" class="dropdown__link" @click="closeMenu">
+                    <i class="ri-first-aid-kit-line"></i>Servicios Sociales<i :class="['ri-arrow-down-s-line', { 'rotate-arrow': serviciosSocialesOpen }]"></i>
+                  </router-link>
+                  <ul v-if="serviciosSocialesOpen" class="submenu__menu" :class="{ show: serviciosSocialesOpen }">
+  <li><router-link to="/detalle-traslado" class="dropdown__link" @click="closeMenu"><i class="ri-truck-line"></i>Traslado Social</router-link></li>
+  <li><router-link to="/detalle-banco" class="dropdown__link" @click="closeMenu"><i class="ri-drop-line"></i>Banco de Sangre</router-link></li>
+  <li><router-link to="/detalle-sepelio" class="dropdown__link" @click="closeMenu"><i class="ri-cross-fill"></i>Sepelio</router-link></li>
+</ul>
                 </li>
               </ul>
             </li>
@@ -71,6 +80,7 @@
         dropdownOpen: false,
         userMenuOpen: false,
         usMenuOpen: false,
+        serviciosSocialesOpen: false,
       };
     },
     methods: {
@@ -80,6 +90,7 @@
           this.dropdownOpen = false;
           this.userMenuOpen = false;
           this.usMenuOpen = false;
+          this.serviciosSocialesOpen = false;
         }
       },
       toggleDropdown() {
@@ -87,6 +98,9 @@
       },
       toggleUserMenu() {
         this.userMenuOpen = !this.userMenuOpen;
+      },
+      toggleServiciosSociales() {
+        this.serviciosSocialesOpen = !this.serviciosSocialesOpen;
       },
       toggleUsMenu() {
         this.usMenuOpen = !this.usMenuOpen;
@@ -96,6 +110,7 @@
         this.dropdownOpen = false;
         this.userMenuOpen = false;
         this.usMenuOpen = false;
+        this.serviciosSocialesOpen = false;
       },
     },
   };
@@ -116,50 +131,50 @@
   width: 100%;
 }
   
-  .nav__logo {
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #fff;
-  }
+.nav__logo {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+}
   
-  .nav__logo-img {
-    height: 80px;
-  }
+.nav__logo-img {
+  height: 80px;
+}
   
-  .nav__toggle {
-    font-size: 1.8rem;
-    cursor: pointer;
-    display: none;
-  }
+.nav__toggle {
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: none;
+}
   
-  .nav__menu {
-    display: flex;
-  }
+.nav__menu {
+  display: flex;
+}
   
-  .nav__list {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-  }
+.nav__list {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
   
-  .nav__link {
-    text-decoration: none;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-  }
+.nav__link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
   
-  .nav__link:hover {
-    color: #7fb6ff;
-  }
+.nav__link:hover {
+  color: #7fb6ff;
+}
   
-  .dropdown__item {
-    position: relative;
-  }
+.dropdown__item {
+  position: relative;
+}
   
-  .dropdown__menu {
+.dropdown__menu {
   position: absolute;
   background: hsl(221, 53%, 12%);
   padding: 0.5rem 0;
@@ -172,30 +187,54 @@
   flex-direction: column;
   z-index: 100;
 }
-  
-  .dropdown__link {
-    padding: 0.5rem 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: #fff;
-    font-size: 0.9rem;
-  }
-  
-  .dropdown__link:hover {
-    background: #135c97;
-    border-radius: 3px;
-  }
-  .dropdown__link.cooplus:hover {
-    background: white !important;
-    color: #eb01ef !important; 
-  }
+.dropdown__submenu {
+  top: 0;
+  left: 50%;
+  background-color: hsl(221, 53%, 12%);
+  display: none;
+  z-index: 100;
+  width: max-content;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .dropdown__link.cooplus:hover i {
-    color: #eb01ef !important;
-  }
+.dropdown__submenu li {
+  padding: 0.5rem 1rem;
+}
+
+.dropdown__submenu li:hover {
+  background-color: #135c97;
+}
+
+.dropdown__item:hover .submenu__menu {
+  display: block;
+}
   
+.dropdown__link {
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.9rem;
+}
+  
+.dropdown__link:hover {
+  background: #135c97;
+  border-radius: 3px;
+}
+.dropdown__link.cooplus:hover {
+  background: white !important;
+  color: #eb01ef !important; 
+}
+
+.dropdown__link.cooplus:hover i {
+  color: #eb01ef !important;
+}
+.rotate-arrow {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
+}
 @media (max-width: 768px) {
   .nav__toggle {
     display: block;

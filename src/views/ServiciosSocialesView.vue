@@ -1,7 +1,7 @@
 <template>
 <h1 class="title">Servicios Sociales</h1>
     <cardSS/>
-    <h2 class="title">Recomendaciones Generales:</h2>
+    <h2 class="subtitle-left">Recomendaciones Generales:</h2>
     <br>
     <div class="servicios-sociales">
         <div class="ss-container">
@@ -85,6 +85,14 @@ html {
     background-color: #1f2c79;
     font-size: 2.5rem;
     padding: 15px;
+}
+.subtitle-left{
+    color: #ffffff;
+    background-color: #1f2c79;
+    font-size: 2.4rem;
+    padding: 15px;
+    padding-right: 120px;
+    padding-left: 120px;
 }
 .subtitle {
     color: #333;
