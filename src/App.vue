@@ -1,10 +1,11 @@
 <template>
-  <Navbar/>
-  <div>
-      <router-view></router-view>
+  <div id="app">
+    <navbar v-if="!$route.meta.hideNavbar" />
+    <router-view />
+    <footer v-if="!$route.meta.hideFooter" />
   </div>
-  <Footer></Footer>
 </template>
+
 
 <script>
   import Navbar from './components/Navbar.vue';

@@ -122,7 +122,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 40px 20px;
   top: 0;
   left: 0;
   z-index: 1000;
@@ -132,7 +132,6 @@
 }
   
 .nav__logo {
-  font-size: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -155,14 +154,14 @@
   
 .nav__list {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.4rem;
   list-style: none;
 }
   
 .nav__link {
   text-decoration: none;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.05rem;
   cursor: pointer;
 }
   
