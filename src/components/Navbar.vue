@@ -17,16 +17,16 @@
           <ul class="nav__list">
             <li><router-link to="/" class="nav__link" @click="closeMenu">Inicio</router-link></li>
             <li class="dropdown__item">
-            <div class="nav__link" @click="toggleUsMenu">
-              Quienes Somos <i class="ri-arrow-down-s-line dropdown-arrow"></i>
-            </div>
-            <ul v-if="usMenuOpen" class="dropdown__menu">
-              <li><router-link to="/historia" class="dropdown__link" @click="closeMenu">Historia</router-link></li>
-              <li><router-link to="/mvv-objetivos" class="dropdown__link" @click="closeMenu">Misión, Valores y Objetivos</router-link></li>
-              <li><router-link to="/autoridades" class="dropdown__link" @click="closeMenu">Autoridades</router-link></li>
-              <li><router-link to="/trabajo-inter" class="dropdown__link" @click="closeMenu">Trabajo Institucional</router-link></li>
-            </ul>
-          </li>
+              <div class="nav__link" @click="toggleUsMenu">
+                Quienes Somos<i class="ri-arrow-down-s-line dropdown__arrow"></i>
+              </div>
+              <ul v-if="usMenuOpen" class="dropdown__menu">
+                <li><router-link to="/historia" class="dropdown__link" @click="closeMenu">Historia</router-link></li>
+                <li><router-link to="/mvv-objetivos" class="dropdown__link" @click="closeMenu">Misión, Valores y Objetivos</router-link></li>
+                <li><router-link to="/autoridades" class="dropdown__link" @click="closeMenu">Autoridades</router-link></li>
+                <li><router-link to="/trabajo-inter" class="dropdown__link" @click="closeMenu">Trabajo Institucional</router-link></li>
+              </ul>
+            </li>
   
             <li class="dropdown__item">
               <div class="nav__link" @click="toggleDropdown">
@@ -47,14 +47,14 @@
                     <i class="ri-first-aid-kit-line"></i>Servicios Sociales<i :class="['ri-arrow-down-s-line', { 'rotate-arrow': serviciosSocialesOpen }]"></i>
                   </router-link>
                   <ul v-if="serviciosSocialesOpen" class="submenu__menu" :class="{ show: serviciosSocialesOpen }">
-  <li><router-link to="/detalle-traslado" class="dropdown__link" @click="closeMenu"><i class="ri-truck-line"></i>Traslado Social</router-link></li>
-  <li><router-link to="/detalle-banco" class="dropdown__link" @click="closeMenu"><i class="ri-drop-line"></i>Banco de Sangre</router-link></li>
-  <li><router-link to="/detalle-sepelio" class="dropdown__link" @click="closeMenu"><i class="ri-cross-fill"></i>Sepelio</router-link></li>
-</ul>
+                    <li><router-link to="/detalle-traslado" class="dropdown__link" @click="closeMenu"><i class="ri-truck-line"></i>Traslado Social</router-link></li>
+                    <li><router-link to="/detalle-banco" class="dropdown__link" @click="closeMenu"><i class="ri-drop-line"></i>Banco de Sangre</router-link></li>
+                    <li><router-link to="/detalle-sepelio" class="dropdown__link" @click="closeMenu"><i class="ri-cross-fill"></i>Sepelio</router-link></li>
+                  </ul>
                 </li>
               </ul>
             </li>
-            <li><router-link to="/contact" class="nav__link" @click="closeMenu">Contacto</router-link></li>
+            <li><router-link to="/contacto" class="nav__link" @click="closeMenu">Contacto</router-link></li>
             
             <li class="dropdown__item user__menu">
               <div class="nav__link" @click="toggleUserMenu">

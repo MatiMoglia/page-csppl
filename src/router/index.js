@@ -10,6 +10,7 @@ import AguaView from '@/views/AguaView.vue';
 import InternetView from '@/views/InternetView.vue';
 import Telefonia from '@/views/Telefonia.vue';
 import ServiciosSocialesView from '@/views/ServiciosSocialesView.vue';
+import ContactoView from '@/views/ContactoView.vue';
 
 import detalleSepelio from '@/components/detalleSS/DetalleSepelio.vue';
 import detalleBanco from '@/components/detalleSS/DetalleBanco.vue';
@@ -70,6 +71,11 @@ const routes = [
     path: '/servicios-sociales',
     name: 'ServiciosSocialesView',
     component: ServiciosSocialesView,
+  },
+  {
+    path: '/contacto',
+    name: 'ContactoView',
+    component: ContactoView,
   },
   {
     path: '/detalle-sepelio',
