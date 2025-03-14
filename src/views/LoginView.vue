@@ -1,4 +1,7 @@
 <template>
+    <div class="back-button" data-aos="fade-right">
+        <button @click="$router.push('/')">Volver al menú</button>
+      </div>
     <div class="login-container">
       <div class="login-form">
         <div class="cyber-bg"></div>
@@ -26,15 +29,17 @@
                 
               />
             </div>
-            <button class="btn-login">INGRESAR</button>
+            <button class="btn-login">Ingresar</button>
           </form>
           <div class="register-link">
             <p>¿No tienes cuenta? <router-link to="/registro">Regístrate aquí</router-link></p>
           </div>
         </div>
       </div> 
-      <div class="login-image">
+      <div class="wrapper" data-aos="fade-right">
+        <div class="login-image">
         <img src="../assets/css/img/logo nuevo.jpg" alt="Banner" />
+      </div>
       </div>
     </div>
 </template>
@@ -60,12 +65,14 @@
         const success = await this.login({ email: this.email, password: this.password });
         if (success) {
             toast.success("Inicio de sesión exitoso", {
-            autoClose: 5000,
+            autoClose: 3000,
         });
-        this.$router.push("/");
+        setTimeout(() => {
+          this.$router.push("/");
+        }, 3000);
         } else {
             toast.error("Error: Email o contraseña incorrectos", {
-            autoClose: 5000, 
+            autoClose: 3000, 
         });
         }
       }
@@ -78,147 +85,167 @@
   
 <style scoped>
   body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.back-button button {
+  margin-top: 5px;
+  width: 100%;
+  padding: 7px;
+  background: #030c3d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.5s ease;
+  font-family: "Montserrat", sans-serif;
+}
+.back-button button:hover {
+  background: #c75353;
 }
 
 .login-container {
-    display: flex;
-    height: 100vh;
-    justify-content: space-between;
-    background: #f0f0f0;
+  display: flex;
+  height: 100vh;
+  justify-content: space-between;
+  background: #f0f0f0;
 }
   
 .login-form {
-    flex: 1;
-    max-width: 600px;
-    padding: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #ddd;
+  flex: 1;
+  max-width: 600px;
+  padding: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ddd;
+  border-right: 10px solid #1f2c79;
 }
   
 .logo-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 }
   
 .logo {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 10px solid #1f2c79 ;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 10px solid #1f2c79 ;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .logo:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
   
 .name {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #1f2c79;
-    text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1f2c79;
+  text-align: center;
 }
   
 .form-field {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid #1f2c79;
-    padding: 12px;
-    border-radius: 8px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #1f2c79;
+  padding: 12px;
+  border-radius: 8px;
 }
   
 .form-field input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: rgb(55, 110, 212);
-    font-size: 1rem;
-    font-family: "Montserrat", sans-serif;
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgb(55, 110, 212);
+  font-size: 1.1rem;
+  font-family: "Montserrat", sans-serif;
 }
   
 .btn-login {
-    margin-top: 25px;
-    width: 100%;
-    padding: 12px;
-    background: #0e1850;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
+  margin-top: 25px;
+  width: 100%;
+  padding: 12px;
+  background: #0e1850;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
 }
   
 .btn-login:hover {
-    background: #2848ff;
+  background: #2848ff;
 }
   
 i {
-    font-size: 1.2rem;
-    color: #2848ff;
-    margin-right: 10px;
-    font-weight: bold;
+  font-size: 1.2rem;
+  color: #2848ff;
+  margin-right: 10px;
+  font-weight: bold;
 }
   
 .register-link {
-    margin-top: 10px;
-    text-align: center;
-    color: #4e4e4e;
+  margin-top: 10px;
+  text-align: center;
+  color: #4e4e4e;
 }
   
 .register-link a {
-    color: #2848ff;
-    text-decoration: none;
-    font-weight: bold;
+  color: #2848ff;
+  text-decoration: none;
+  font-weight: bold;
 }
   
 .register-link a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
   
 .login-image {
-    flex: 1;
-    background-size: cover;
-    background-position: center;
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: right;
 }
   
 .login-image img {
-    max-width: 80%;
-    height: auto;
-    object-fit: cover;
+  max-width: 220%;
+  max-height: 100%;
 }
 .cyber-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+  position: fixed;
+  top: 1;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 .wrapper {
-    max-width: 400px;
-    width: 90%; 
-    padding: 30px;
-    border-radius: 15px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  max-width: 400px;
+  width: 90%; 
+  padding: 30px;
+  border-radius: 15px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>

@@ -11,7 +11,7 @@ import InternetView from '@/views/InternetView.vue';
 import Telefonia from '@/views/Telefonia.vue';
 import ServiciosSocialesView from '@/views/ServiciosSocialesView.vue';
 import ContactoView from '@/views/ContactoView.vue';
-import PerfilView from '@/views/PerfilView.vue';
+import RegisterView from '@/views/RegisterView.vue';
 import LoginView from '@/views/LoginView.vue';
 
 import detalleSepelio from '@/components/detalleSS/DetalleSepelio.vue';
@@ -95,9 +95,13 @@ const routes = [
     component: detalleTraslado,
   },
   {
-    path: '/perfil',
-    name: 'PerfilView',
-    component: PerfilView,
+    path: '/registro',
+    name: 'RegisterView',
+    component: RegisterView,
+    meta: {
+      hideNavbar: true,
+      hideFooter: true,
+    }
   },
   {
     path: '/login',
