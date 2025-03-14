@@ -1,123 +1,148 @@
 <template>
-    <header class="header">
-      <nav class="nav container">
-        <div class="nav__data">
-          <router-link to="/" class="nav__logo">
-            <img src="@/assets/css/img/logo nuevo-Photoroom-Photoroom.png" 
-              alt="Coop de Servicios Públicos de Porteña" 
-              class="nav__logo-img" />
-          </router-link>
-  
-          <div class="nav__toggle" @click="toggleMenu">
-            <i :class="menuOpen ? 'ri-close-line nav__close' : 'ri-menu-line nav__burger'"></i>
-          </div>
+  <header class="header">
+    <nav class="nav container">
+      <div class="nav__data">
+        <router-link to="/" class="nav__logo">
+          <img src="@/assets/css/img/logo nuevo-Photoroom-Photoroom.png" 
+            alt="Coop de Servicios Públicos de Porteña" 
+            class="nav__logo-img" />
+        </router-link>
+
+        <div class="nav__toggle" @click="toggleMenu">
+          <i :class="menuOpen ? 'ri-close-line nav__close' : 'ri-menu-line nav__burger'"></i>
         </div>
-  
-        <div :class="['nav__menu', { 'show-menu': menuOpen }]">
-          <ul class="nav__list">
-            <li><router-link to="/" class="nav__link" @click="closeMenu">Inicio</router-link></li>
-            <li class="dropdown__item">
-              <div class="nav__link" @click="toggleUsMenu">
-                Quienes Somos<i class="ri-arrow-down-s-line dropdown__arrow"></i>
-              </div>
-              <ul v-if="usMenuOpen" class="dropdown__menu">
-                <li><router-link to="/historia" class="dropdown__link" @click="closeMenu">Historia</router-link></li>
-                <li><router-link to="/mvv-objetivos" class="dropdown__link" @click="closeMenu">Misión, Valores y Objetivos</router-link></li>
-                <li><router-link to="/autoridades" class="dropdown__link" @click="closeMenu">Autoridades</router-link></li>
-                <li><router-link to="/trabajo-inter" class="dropdown__link" @click="closeMenu">Trabajo Institucional</router-link></li>
-              </ul>
-            </li>
-  
-            <li class="dropdown__item">
-              <div class="nav__link" @click="toggleDropdown">
-                Servicios <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-              </div>
-              <ul v-if="dropdownOpen" class="dropdown__menu">
-                <li><router-link to="/energia" class="dropdown__link" @click="closeMenu"><i class="ri-flashlight-line"></i>Energía</router-link></li>
-                <li><router-link to="/agua" class="dropdown__link" @click="closeMenu"><i class="ri-water-flash-line"></i>Agua Potable</router-link></li>
-                <li><router-link to="/telecomunicaciones" class="dropdown__link" @click="closeMenu"><i class="ri-wifi-line"></i>Internet y Telefonía</router-link></li>
-                <li><router-link to="/telefono" class="dropdown__link" @click="closeMenu"><i class="ri-phone-line"></i>Telefonía</router-link></li>
-                <li>
-                  <router-link to="/cooplus" class="dropdown__link cooplus" @click="closeMenu">
-                    <i class="ri-tv-line"></i> COOPLUS+
-                  </router-link>
-                </li>
-                <li class="dropdown__subitem" @mouseover="serviciosSocialesOpen = true" @mouseleave="serviciosSocialesOpen = false">
-                  <router-link to="/servicios-sociales" class="dropdown__link" @click="closeMenu">
-                    <i class="ri-first-aid-kit-line"></i>Servicios Sociales<i :class="['ri-arrow-down-s-line', { 'rotate-arrow': serviciosSocialesOpen }]"></i>
-                  </router-link>
-                  <ul v-if="serviciosSocialesOpen" class="submenu__menu" :class="{ show: serviciosSocialesOpen }">
-                    <li><router-link to="/detalle-traslado" class="dropdown__link" @click="closeMenu"><i class="ri-truck-line"></i>Traslado Social</router-link></li>
-                    <li><router-link to="/detalle-banco" class="dropdown__link" @click="closeMenu"><i class="ri-drop-line"></i>Banco de Sangre</router-link></li>
-                    <li><router-link to="/detalle-sepelio" class="dropdown__link" @click="closeMenu"><i class="ri-cross-fill"></i>Sepelio</router-link></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><router-link to="/contacto" class="nav__link" @click="closeMenu">Contacto</router-link></li>
-            
-            <li class="dropdown__item user__menu">
-              <div class="nav__link" @click="toggleUserMenu">
-                <i class="ri-user-line"></i> Mi Cuenta <i class="ri-arrow-down-s-line dropdown__arrow"></i>
-              </div>
-              <ul v-if="userMenuOpen" class="dropdown__menu">
+      </div>
+
+      <div :class="['nav__menu', { 'show-menu': menuOpen }]">
+        <ul class="nav__list">
+          <li><router-link to="/" class="nav__link" @click="closeMenu">Inicio</router-link></li>
+          <li class="dropdown__item">
+            <div class="nav__link" @click="toggleUsMenu">
+              Quienes Somos<i class="ri-arrow-down-s-line dropdown__arrow"></i>
+            </div>
+            <ul v-if="usMenuOpen" class="dropdown__menu">
+              <li><router-link to="/historia" class="dropdown__link" @click="closeMenu">Historia</router-link></li>
+              <li><router-link to="/mvv-objetivos" class="dropdown__link" @click="closeMenu">Misión, Valores y Objetivos</router-link></li>
+              <li><router-link to="/autoridades" class="dropdown__link" @click="closeMenu">Autoridades</router-link></li>
+              <li><router-link to="/trabajo-inter" class="dropdown__link" @click="closeMenu">Trabajo Institucional</router-link></li>
+            </ul>
+          </li>
+
+          <li class="dropdown__item">
+            <div class="nav__link" @click="toggleDropdown">
+              Servicios <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+            </div>
+            <ul v-if="dropdownOpen" class="dropdown__menu">
+              <li><router-link to="/energia" class="dropdown__link" @click="closeMenu"><i class="ri-flashlight-line"></i>Energía</router-link></li>
+              <li><router-link to="/agua" class="dropdown__link" @click="closeMenu"><i class="ri-water-flash-line"></i>Agua Potable</router-link></li>
+              <li><router-link to="/telecomunicaciones" class="dropdown__link" @click="closeMenu"><i class="ri-wifi-line"></i>Internet y Telefonía</router-link></li>
+              <li><router-link to="/telefono" class="dropdown__link" @click="closeMenu"><i class="ri-phone-line"></i>Telefonía</router-link></li>
+              <li>
+                <router-link to="/cooplus" class="dropdown__link cooplus" @click="closeMenu">
+                  <i class="ri-tv-line"></i> COOPLUS+
+                </router-link>
+              </li>
+              <li class="dropdown__subitem" @mouseover="serviciosSocialesOpen = true" @mouseleave="serviciosSocialesOpen = false">
+                <router-link to="/servicios-sociales" class="dropdown__link" @click="closeMenu">
+                  <i class="ri-first-aid-kit-line"></i>Servicios Sociales<i :class="['ri-arrow-down-s-line', { 'rotate-arrow': serviciosSocialesOpen }]"></i>
+                </router-link>
+                <ul v-if="serviciosSocialesOpen" class="submenu__menu" :class="{ show: serviciosSocialesOpen }">
+                  <li><router-link to="/detalle-traslado" class="dropdown__link" @click="closeMenu"><i class="ri-truck-line"></i>Traslado Social</router-link></li>
+                  <li><router-link to="/detalle-banco" class="dropdown__link" @click="closeMenu"><i class="ri-drop-line"></i>Banco de Sangre</router-link></li>
+                  <li><router-link to="/detalle-sepelio" class="dropdown__link" @click="closeMenu"><i class="ri-cross-fill"></i>Sepelio</router-link></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><router-link to="/contacto" class="nav__link" @click="closeMenu">Contacto</router-link></li>
+          
+          <li class="dropdown__item user__menu">
+            <div class="nav__link" @click="toggleUserMenu">
+              <i class="ri-user-line"></i> 
+              {{ isAuthenticated ? `Bienvenido ${userName}` : "Mi Cuenta" }} 
+              <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+            </div>
+            <p v-if="isAuthenticated" class="user__email">{{ getUser?.email}}</p>
+            <ul v-if="userMenuOpen" class="dropdown__menu">
+              <template v-if="!isAuthenticated">
                 <li><router-link to="/login" class="dropdown__link" @click="closeMenu">Iniciar Sesión</router-link></li>
-                <li><router-link to="/register" class="dropdown__link" @click="closeMenu">Registrarse</router-link></li>
+                <li><router-link to="/registro" class="dropdown__link" @click="closeMenu">Registrarse</router-link></li>
+              </template>
+              <template v-else>
                 <li><router-link to="/profile" class="dropdown__link" @click="closeMenu">Mi Perfil</router-link></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+                <li><a href="#" class="dropdown__link logout" @click="logout">Cerrar Sesión</a></li>
+              </template>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 </template>
-  
+
 <script>
-  export default {
-    data() {
-      return {
-        menuOpen: false,
-        dropdownOpen: false,
-        userMenuOpen: false,
-        usMenuOpen: false,
-        serviciosSocialesOpen: false,
-      };
+import { mapGetters, mapActions } from "vuex";
+
+export default {
+  data() {
+    return {
+      menuOpen: false,
+      dropdownOpen: false,
+      userMenuOpen: false,
+      usMenuOpen: false,
+      serviciosSocialesOpen: false,
+    };
+  },
+  computed: {
+    ...mapGetters("auth", ["isAuthenticated", "getUser"]),
+    userName() {
+      return this.getUser ? this.getUser.name : "Usuario";
+    }
+  },
+  methods: {
+    ...mapActions("auth", ["logout"]),
+    
+    toggleMenu() {
+      this.menuOpen = !this.menuOpen;
+      if (!this.menuOpen) {
+        this.closeMenu();
+      }
     },
-    methods: {
-      toggleMenu() {
-        this.menuOpen = !this.menuOpen;
-        if (!this.menuOpen) {
-          this.dropdownOpen = false;
-          this.userMenuOpen = false;
-          this.usMenuOpen = false;
-          this.serviciosSocialesOpen = false;
-        }
-      },
-      toggleDropdown() {
-        this.dropdownOpen = !this.dropdownOpen;
-      },
-      toggleUserMenu() {
-        this.userMenuOpen = !this.userMenuOpen;
-      },
-      toggleServiciosSociales() {
-        this.serviciosSocialesOpen = !this.serviciosSocialesOpen;
-      },
-      toggleUsMenu() {
-        this.usMenuOpen = !this.usMenuOpen;
-      },
-      closeMenu() {
-        this.menuOpen = false;
-        this.dropdownOpen = false;
-        this.userMenuOpen = false;
-        this.usMenuOpen = false;
-        this.serviciosSocialesOpen = false;
-      },
+    toggleDropdown() {
+      this.dropdownOpen = !this.dropdownOpen;
     },
-  };
+    toggleUserMenu() {
+      this.userMenuOpen = !this.userMenuOpen;
+    },
+    toggleServiciosSociales() {
+      this.serviciosSocialesOpen = !this.serviciosSocialesOpen;
+    },
+    toggleUsMenu() {
+      this.usMenuOpen = !this.usMenuOpen;
+    },
+    closeMenu() {
+      this.menuOpen = false;
+      this.dropdownOpen = false;
+      this.userMenuOpen = false;
+      this.usMenuOpen = false;
+      this.serviciosSocialesOpen = false;
+    },
+    async logoutUser() {
+      await this.logout();
+      this.closeMenu();
+      this.$router.push("/login");
+    }
+  }
+};
 </script>
   
   
 <style scoped>
+.user__email {
+  font-size: 0.8rem;  
+  color: #b0b0b0;  
+  margin-top: -40px;
+}
 .nav {
   display: flex;
   justify-content: space-between;
@@ -130,49 +155,49 @@
   color: #fff;
   width: 100%;
 }
-  
+
 .nav__logo {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   color: #fff;
 }
-  
+
 .nav__logo-img {
   height: 80px;
 }
-  
+
 .nav__toggle {
   font-size: 1.8rem;
   cursor: pointer;
   display: none;
 }
-  
+
 .nav__menu {
   display: flex;
 }
-  
+
 .nav__list {
   display: flex;
   gap: 1.4rem;
   list-style: none;
 }
-  
+
 .nav__link {
   text-decoration: none;
   color: #fff;
   font-size: 1.05rem;
   cursor: pointer;
 }
-  
+
 .nav__link:hover {
   color: #7fb6ff;
 }
-  
+
 .dropdown__item {
   position: relative;
 }
-  
+
 .dropdown__menu {
   position: absolute;
   background: hsl(221, 53%, 12%);
@@ -207,7 +232,7 @@
 .dropdown__item:hover .submenu__menu {
   display: block;
 }
-  
+
 .dropdown__link {
   padding: 0.5rem 1rem;
   display: flex;
@@ -217,18 +242,26 @@
   color: #fff;
   font-size: 0.9rem;
 }
-  
+
 .dropdown__link:hover {
   background: #135c97;
   border-radius: 3px;
 }
 .dropdown__link.cooplus:hover {
   background: white !important;
-  color: #eb01ef !important; 
+  color: #eb01ef !important;
 }
 
 .dropdown__link.cooplus:hover i {
   color: #eb01ef !important;
+}
+.dropdown__link.logout:hover {
+  background: white !important;
+  color: #ef0101 !important;
+}
+
+.dropdown__link.logout:hover i {
+  color: #ef0101 !important;
 }
 .rotate-arrow {
   transform: rotate(180deg);
@@ -238,7 +271,7 @@
   .nav__toggle {
     display: block;
   }
-  
+
   .nav__menu {
     display: none;
     flex-direction: column;
@@ -249,11 +282,11 @@
     width: 100%;
     padding: 1rem;
   }
-  
+
   .show-menu {
     display: flex;
   }
-  
+
   .nav__list {
     flex-direction: column;
     gap: 1rem;
@@ -270,4 +303,3 @@
   }
 }
 </style>
-  
