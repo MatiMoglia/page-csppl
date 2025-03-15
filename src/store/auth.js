@@ -17,27 +17,25 @@ export default {
     async login({ commit }, { email, password }) {
       try {
         let user = await apiUsers.loginUser(email, password);
-
+    
         if (!user) {
           console.log("Usuario no encontrado en la primera API. Intentando en la segunda API...");
           user = await apiUsers.loginUser2(email, password); 
         }
-
+    
         if (user) {
-          if (user.email === "admin@example.com" && user.password === "adminPassword") {
-            user.isAdmin = true;
-          } else {
-            user.isAdmin = false; 
-          }
-
+          user = Object.assign({}, user, { 
+            isAdmin: user.email === "admcsppl@gmail.com" && user.password === "admin123"
+          });
+    
+          console.log("User with isAdmin:", user);
           commit("SET_USER", user);
           return true;
         } else {
-          throw new Error("Email o contraseña incorrectos.");
+          console.log("Email o contraseña incorrectos.");
         }
       } catch (error) {
-        console.error("Error al intentar iniciar sesión:", error);
-        throw new Error(error.message);
+        console.log("Error al intentar iniciar sesión:", error);
       }
     },
     logout({ commit }) {

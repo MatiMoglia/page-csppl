@@ -13,6 +13,7 @@ import ServiciosSocialesView from '@/views/ServiciosSocialesView.vue';
 import ContactoView from '@/views/ContactoView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import LoginView from '@/views/LoginView.vue';
+import AdministracionView from '@/views/AdministracionView.vue';
 
 import detalleSepelio from '@/components/detalleSS/DetalleSepelio.vue';
 import detalleBanco from '@/components/detalleSS/DetalleBanco.vue';
@@ -111,6 +112,11 @@ const routes = [
       hideNavbar: true,
       hideFooter: true,
     }
+  },
+  {
+    path: '/administracion',
+    name: 'AdministracionView',
+    component: AdministracionView,
   }
 ]
 

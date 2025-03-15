@@ -55,7 +55,9 @@
             </ul>
           </li>
           <li><router-link to="/contacto" class="nav__link" @click="closeMenu">Contacto</router-link></li>
-          
+          <div v-if="isAdmin" class="admin">
+            <li><router-link to="/administracion" class="nav__link admin" @click="closeMenu">Admin</router-link></li>
+          </div>
           <li class="dropdown__item user__menu">
             <div class="nav__link" @click="toggleUserMenu">
               <i class="ri-user-line"></i> 
@@ -94,10 +96,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("auth", ["isAuthenticated", "getUser"]),
+    ...mapGetters("auth", ["isAuthenticated", "getUser", "isAdmin"]),
     userName() {
       return this.getUser ? this.getUser.name : "Usuario";
-    }
+    },
   },
   methods: {
     ...mapActions("auth", ["logout"]),
@@ -132,7 +134,7 @@ export default {
       this.closeMenu();
       this.$router.push("/login");
     }
-  }
+  },
 };
 </script>
   
@@ -266,6 +268,22 @@ export default {
 .rotate-arrow {
   transform: rotate(180deg);
   transition: transform 0.3s ease;
+}
+.admin {
+  background-color: #135c97;
+  padding: 3.5px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  
+}
+.admin:hover {
+  background: #0e82ff;
+}
+.nav__link.admin {
+  color: white;
+}
+.nav__link.admin li{
+  background: none !important; 
 }
 @media (max-width: 768px) {
   .nav__toggle {
