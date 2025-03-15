@@ -2,33 +2,46 @@ import axios from "axios";
 
 const apiClient = axios.create({
   baseURL: "https://csppl-fd7e.restdb.io/rest/",
-  headers: { "x-apikey": "67d4e0a7dc399be3a048db8f" },
+  headers: { "x-apikey": "67d4e0a7dc399be3a048db8f", "Content-Type": "application/json" },
 });
+
 export default {
   async enviarFormulario(formData) {
     try {
-      const response = await apiClient.post('forminternet', formData);
-  
-      if (response.status === 201) {
-        console.log('Formulario enviado correctamente', response.data);
-        return response.data;  
-      } else {
-        console.error('Error al enviar el formulario:', response);
-        throw new Error('Error en la solicitud');
-      }
+      const response = await apiClient.post("forminternet", formData);
+      return { success: true, data: response.data };
     } catch (error) {
-      console.error('Error en la solicitud de la API:', error);
-      throw new Error(error.response?.data?.message || 'Error en la solicitud');
-    }
-  },
-  async obtenerFormulario(id) {
-    try {
-      const response = await apiClient.get(`forminternet/${id}`);
-      return response.data;
-    } catch (error) {
-      console.error('Error al obtener el formulario:', error);
-      throw new Error('Error en la solicitud');
+      return manejarError(error, "Error al enviar el formulario");
     }
   },
 
+  async obtenerFormularios() {
+    try {
+      const response = await apiClient.get("forms");
+      return { success: true, data: response.data };
+    } catch (error) {
+      return manejarError(error, "Error al obtener el formulario");
+    }
+  },
+  async actualizarFormulario(id, formData) {
+    try {
+      const response = await apiClient.patch(`/forms/${id}`, formData);
+      return { success: true, data: response.data }; 
+    } catch (error) {
+      return manejarError(error, "Error al actualizar el formulario");
+    }
+  },
+  async eliminarFormulario(id) {
+    try {
+      await apiClient.delete(`forms/${id}`);
+      return { success: true, message: "Formulario eliminado correctamente" };
+    } catch (error) {
+      return manejarError(error, "Error al eliminar el formulario");
+    }
+  },
 };
+
+function manejarError(error, mensaje) {
+  console.error(mensaje, error.response?.data || error.message);
+  return { success: false, error: error.response?.data?.message || mensaje };
+}

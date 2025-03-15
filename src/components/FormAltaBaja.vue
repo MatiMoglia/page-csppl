@@ -3,7 +3,7 @@
       <div class="form-section">
         <h2>Formulario ALTA/BAJA de {{ servicio }}</h2>
         <form @submit.prevent="enviarFormulario">
-  
+          
           <label for="nombre">Nombre y Apellido *</label>
           <input type="text" id="nombre" v-model="formSolicitud.nombre" :class="{'input-error': !formSolicitud.nombre && formSubmitted}" required />
   
@@ -55,7 +55,6 @@
               <li v-for="(file, index) in formSolicitud.files" :key="index">{{ file.name }}</li>
             </ul>
           </div>
-  
           <div class="archivo-info" v-if="sugerencia === 'si'">
             <p><strong>Sugerencia:</strong> Adjuntar permiso municipal y certificación si es necesario. Consultar en administración al <strong style="color: green;">3564331499</strong>.</p>
           </div>
@@ -101,7 +100,9 @@ export default {
           files: [],
           tipoInternet: '',
           megasInternet: '' ,
-          email: ''
+          email: '',
+          servicio: this.servicio, 
+          fechapedido: new Date().toISOString().split('T')[0]
         },
         formSubmitted: false
       };
@@ -121,7 +122,8 @@ export default {
     methods: {
       enviarFormulario() {
         this.loading = true;
-
+        this.formSolicitud.fechapedido = new Date().toISOString().split('T')[0];
+        
         if (this.formSolicitud.nombre === "") {
           toast.error("Ingrese el nombre completo.");
         } else if (this.formSolicitud.email === "") {
@@ -139,7 +141,7 @@ export default {
                 toast.success("Formulario enviado con éxito");
                 this.resetFormulario();
               } else {
-                toast.error("Error al enviar el formulario");
+                console.log("Error al enviar el formulario");
               }
             })
             .catch(error => {

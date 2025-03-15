@@ -102,6 +102,7 @@ const routes = [
     meta: {
       hideNavbar: true,
       hideFooter: true,
+      hideSpam: true,
     }
   },
   {
@@ -111,6 +112,7 @@ const routes = [
     meta: {
       hideNavbar: true,
       hideFooter: true,
+      hideSpam: true,
     }
   },
   {

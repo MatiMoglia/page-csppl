@@ -24,9 +24,9 @@
         </div>
       </section>
     </div>
-  </template>
+</template>
   
-  <script>
+ <script>
   import "animate.css";
   
   export default {
@@ -80,15 +80,11 @@
       clearInterval(this.interval);
     },
   };
-  </script>
+</script>
   
-  <style scoped>
+<style scoped>
   .container {
     text-align: center;
-  }
-  
-  .servicios {
-    margin-top: 20px;
   }
   
   .slider {
@@ -139,5 +135,5 @@
   .slider__controls button:hover {
     background: rgba(7, 58, 100, 0.267);
   }
-  </style>
+</style>
   

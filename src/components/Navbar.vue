@@ -166,7 +166,7 @@ export default {
 }
 
 .nav__logo-img {
-  height: 80px;
+  height: 100px;
 }
 
 .nav__toggle {
