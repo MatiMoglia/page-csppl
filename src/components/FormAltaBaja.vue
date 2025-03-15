@@ -40,9 +40,11 @@
               Dar de Baja
             </button>
           </div>
-  
+          <label for="email">Correo electrónico *</label>
+          <input type="text" id="em il" v-model="formSolicitud.email" :class="{'input-error': !formSolicitud.email && formSubmitted}" required />
+
           <label for="descripcion">Descripción</label>
-          <textarea id="descripcion" v-model="formSolicitud.descripcion" :class="{'input-error': !formSolicitud.descripcion && formSubmitted}" required placeholder="Ingrese una descripción del inmueble"></textarea>
+          <textarea id="descripcion" v-model="formSolicitud.descripcion" :class="{'input-error': !formSolicitud.descripcion && formSubmitted}" placeholder="Ingrese una descripción del inmueble"></textarea>
           <div v-if="adjuntar === 'si'">
             <label for="documentos">Adjuntar Documentos</label>
             <input type="file" id="documentos" @change="handleFileUpload" multiple />
@@ -67,7 +69,7 @@
 <script>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
-
+import apiClient from '../services/apiForms'; 
 export default {
   props: {
       servicio: {
@@ -98,7 +100,8 @@ export default {
           descripcion: '',
           files: [],
           tipoInternet: '',
-          megasInternet: '' 
+          megasInternet: '' ,
+          email: ''
         },
         formSubmitted: false
       };
@@ -116,23 +119,50 @@ export default {
       }
     },
     methods: {
-    enviarFormulario() {
-      this.formSubmitted = true;
-      const requiredFields = ['nombre', 'telefono', 'dni', 'accion', 'domicilio'];
-      const isFormValid = requiredFields.every(field => this.formSolicitud[field]);
-  
-      if (!isFormValid) {
-        toast.error('Por favor, complete todos los campos obligatorios.');
-        return;
-      }
-  
-      if (this.formSolicitud.files.length === 0) {
-        toast.error('Por favor, adjunte los documentos necesarios.');
-        return;
-      }
-  
-      toast.success('Formulario enviado correctamente.');
-      this.resetForm();
+      enviarFormulario() {
+        this.loading = true;
+
+        if (this.formSolicitud.nombre === "") {
+          toast.error("Ingrese el nombre completo.");
+        } else if (this.formSolicitud.email === "") {
+          toast.error("Ingrese el correo electrónico.");
+        } else if (!this.isValidEmail(this.formSolicitud.email)) {
+          toast.error("El correo electrónico no es válido.");
+        } else if (this.formSolicitud.telefono === "") {
+          toast.error("Ingrese el número de teléfono.");
+        } else if (this.adjuntar === 'si' && this.formSolicitud.files.length === 0) {
+          toast.error("Por favor, adjunte los documentos necesarios.");
+        } else {
+          apiClient.enviarFormulario(this.formSolicitud)
+            .then(response => {
+              if (response.status === 201) {
+                toast.success("Formulario enviado con éxito");
+                this.resetFormulario();
+              } else {
+                toast.error("Error al enviar el formulario");
+              }
+            })
+            .catch(error => {
+              toast.error("Error al enviar el formulario: " + (error.response ? error.response.data : error.message));
+            })
+            .finally(() => {
+              this.loading = false;
+            });
+          }
+      },
+    isValidEmail(email) {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      return emailRegex.test(email);
+    },
+    resetFormulario() {
+    this.formSolicitud = {
+        nombre: "",
+        email: "",
+        telefono: "",
+        files: [],
+      };
+      this.adjuntar = 'no';
+      this.sugerencia = 'no';
     },
     handleFileUpload(event) {
       const files = event.target.files;
@@ -149,11 +179,11 @@ export default {
         files: []
       };
       this.formSubmitted = false;
-    },
+      },
     toggleAccion(accion) {
       this.formSolicitud.accion = this.formSolicitud.accion === accion ? '' : accion;
     }
-  } 
+  }
 };
 </script>
 
