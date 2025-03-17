@@ -1,8 +1,8 @@
 <template>
+    <h1 class="title">Energía Eléctrica</h1>
+    <br>
     <div class="energia">
-        <br>
         <div class="energia-container">
-            <h1 class="title">Energía Eléctrica</h1>
             <button class="guardia-btn" @click="mostrarGuardia = !mostrarGuardia">
                 <i class="ri-flashlight-line"></i>
             </button>
@@ -119,31 +119,33 @@ export default {
 </script>
 
 <style scoped>
+html {
+  scroll-behavior: smooth;
+}
 .energia {
     justify-content: center;
     align-items: center;
     min-height: 60vh;
     padding-right: 120px;
     padding-left: 120px;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
-                    url('https://www.coopspportena.com.ar/sites/default/files/styles/noticia_interna/public/field/image/WhatsApp%20Image%202025-01-17%20at%208.20.57%20AM.jpeg?itok=gTlnozhF');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 .energia button {
-        font-family:"Montserrat", sans-serif;
+    font-family:"Montserrat", sans-serif;
 }
 .title {
-    margin-top: 0px;
-    margin-bottom: 20px;
-    font-size: 36px;
-    color: #333;
+    color: #ffffff;
+    background-color: #1f2c79;
+    font-size: 2.5rem;
+    padding: 15px;
 }
 .energia-container {
     padding: 15px;
     background-color: rgba(244, 244, 244, 0.9); 
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+    border-left: 5px solid #0e1850;
 }
 
 h1, h2 {
@@ -266,8 +268,8 @@ li {
 }
 .guardia-btn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 110px;
+    right: 30px;
     background-color: #2848ff;
     color: white;
     padding: 12px 18px;
@@ -285,8 +287,8 @@ li {
 
 .guardia-popup {
     position: fixed;
-    bottom: 70px;
-    right: 20px;
+    bottom: 160px;
+    right: 30px;
     background: white;
     padding: 10px 15px;
     border-radius: 8px;

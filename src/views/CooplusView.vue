@@ -1,12 +1,12 @@
 <template>
     <div>
-      <div class="banner-container">
+      <div class="banner-container" data-aos="fade-up">
         <img src="https://www.coopspportena.com.ar/sites/default/files/BANNER%20PACKS_BANNER%20PACKS.jpg" 
              alt="Banner Cooplus">
       </div>
-      <h1>COOPLUS+</h1>
+      <h1 class="title" data-aos="fade-up">COOPLUS+</h1>
       
-      <div class="container-cooplus">
+      <div class="container-cooplus" data-aos="fade-up" data-aos-delay="200">
         <p>
           La nueva forma de ver televisión, un producto diferente que desde la Cooperativa queremos ofrecerte para que puedas tener TV HD + Internet de 100, 200 y 300 Megas + Telefonía en tu casa. Esta experiencia viene a transformar tu forma de ver televisión, más de 100 canales en vivo y el mejor contenido On Demand, desde cualquier dispositivo, donde sea que estés. COOPLUS, + evolución para vos.
         </p>
@@ -14,10 +14,10 @@
           (Todo el Equipamiento que instalamos en tu hogar se entrega en comodato. Esto significa que en caso de solicitar la baja del servicio deberás devolverlo a la Cooperativa.)
         </p>
       </div>
-      <h1>¡Nuestros Packs!</h1>
+      <h2 class="subtitle" data-aos="zoom-in">¡Nuestros Packs!</h2>
       <div class="container-packs">
             <div 
-                class="pack" 
+                class="pack" id="hogar-pack" data-aos="flip-left"
                 :id="'hogar-pack'"
                 @mouseover="highlightPack(true, 'hogar-pack')" 
                 @mouseleave="highlightPack(false, 'hogar-pack')" 
@@ -40,7 +40,7 @@
             </div>
 
             <div 
-                class="pack" 
+                class="pack" id="cooplus-pack" data-aos="flip-right"
                 :id="'cooplus-pack'"
                 @mouseover="highlightPack(true, 'cooplus-pack')" 
                 @mouseleave="highlightPack(false, 'cooplus-pack')" 
@@ -62,11 +62,11 @@
                 <button>PEDILO ACÁ</button>
             </div>
         </div>
-        <div class="container-adhesion">
-          <h1>¡Adherite ahora mismo!</h1>
+        <div class="container-adhesion" data-aos="fade-up" data-aos-delay="200">
+          <h1 class="title">¡Adherite ahora mismo!</h1>
         <p>Completa el siguiente formulario para poder elegir el pack que desees y disfrutar del servicio.</p>
         </div>
-      <div class="container-form" id="formulario">
+      <div class="container-form" id="formulario" data-aos="fade-up" data-aos-delay="200">
         <formCooplus :pack="selectedPack"/>
       </div>
     </div>
@@ -74,7 +74,9 @@
   
 <script>
 import formCooplus from "@/components/FormCooplus";
-  
+import AOS from "aos";
+import "aos/dist/aos.css";
+
   export default {
     components: {
       formCooplus
@@ -99,27 +101,35 @@ import formCooplus from "@/components/FormCooplus";
         document.getElementById('formulario').scrollIntoView({ behavior: 'smooth' });
         this.selectedPack = packName;
       }
+    },
+    mounted() {
+    AOS.init();
     }
   };
 </script>
 <style scoped>
-  h1 {
-    text-align: center;
-    font-size: 2.8rem;
-    color: #ca43ca;
-    margin-top: 20px;
-  }
-  
-  .container-cooplus, .container-packs {
-    margin: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    padding-left: 120px;
-    padding-right: 120px;
-  }
 
-  .container-packs {
+.container-cooplus, .container-packs {
+  margin: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  padding-left: 120px;
+  padding-right: 120px;
+}
+.title {
+  color: #ffffff;
+  background-color: #1f2c79;
+  font-size: 2.5rem;
+  padding: 15px;
+  text-align: center;
+}
+.subtitle {
+  color: #333;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+.container-packs {
   display: flex;
   justify-content: space-between;
   gap: 10px;
@@ -143,12 +153,12 @@ import formCooplus from "@/components/FormCooplus";
   box-shadow: 0 4px 15px rgba(65, 89, 226, 0.849);
 }
 .pack h2 {
-    background: #0e1850; 
-    color: rgb(255, 255, 255);
-    padding: 15px;
-    margin: -20px -20px 20px -20px; 
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  background: #0e1850; 
+  color: rgb(255, 255, 255);
+  padding: 15px;
+  margin: -20px -20px 20px -20px; 
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 h2 {
@@ -158,7 +168,7 @@ h2 {
 }
 
 p {
-  font-size: 1em;
+  font-size: 1.2em;
   color: #000000;
   text-align: center;
   margin-top: 10px;
@@ -216,6 +226,15 @@ button:hover {
   width: 100%;
   height: auto;
   display: block;
+}
+.container-adhesion {
+  color: #ffffff;
+  background-color: #1f2c79;
+}
+.container-adhesion p{
+  color: #ffffff;
+  padding: 20px;
+  margin-top: -10px;
 }
 </style>
   

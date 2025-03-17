@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container">
+  <div class="form-container" data-aos="fade-up">
     <div class="form-section">
       <h2>Formulario de Adhesión</h2>
       <form @submit.prevent="enviarFormulario">
@@ -49,12 +49,12 @@
   </div>
 
   <div class="video-consulta-container">
-    <div class="video-section">
+    <div class="video-section" data-aos="fade-right" data-aos-delay="200">
       <h3>Conoce más sobre nuestro servicio</h3>
       <iframe width="100%" height="315" src="https://www.youtube.com/embed/cQCvt9xZoSY" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <div class="dropdown" @mouseenter="mostrarFormularioConsulta = true" @mouseleave="mostrarFormularioConsulta = false">
+    <div class="dropdown" data-aos="flip-left" data-aos-delay="500" @mouseenter="mostrarFormularioConsulta = true" @mouseleave="mostrarFormularioConsulta = false">
       <button class="dropdown-btn">
         ¿Tienes alguna consulta?
         <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarFormularioConsulta}"></i>
@@ -78,6 +78,8 @@
 <script>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default {
   data() {
@@ -154,6 +156,9 @@ export default {
       };
       this.formSubmittedConsulta = false; 
     }
+  },
+  mounted() {
+    AOS.init();
   }
 };
 </script>

@@ -392,8 +392,8 @@ li {
 
 .guardia-btn {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 110px;
+    right: 30px;
     background-color: #2848ff;
     color: white;
     padding: 12px 18px;
@@ -411,8 +411,8 @@ li {
 
 .guardia-popup {
     position: fixed;
-    bottom: 70px;
-    right: 20px;
+    bottom: 160px;
+    right: 30px;
     background: white;
     padding: 10px 15px;
     border-radius: 8px;
