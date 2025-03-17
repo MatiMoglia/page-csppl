@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: "https://csppl-fd7e.restdb.io/rest/formcooplus",
+    baseURL: "https://csppl-fd7e.restdb.io/rest/",
     headers: { "x-apikey": "67d4e0a7dc399be3a048db8f", "Content-Type": "application/json" },
 });
 
 export default {
     async enviarFormulario(formData) {
         try {
-            const response = await apiClient.post("", formData);
+            const response = await apiClient.post("formcooplus", formData);
             return { success: true, data: response.data };
         } catch (error) {
             return manejarError(error, "Error al enviar el formulario");
@@ -16,7 +16,7 @@ export default {
     },
     async obtenerFormularios() {
         try {
-            const response = await apiClient.get("/");
+            const response = await apiClient.get("formcooplus");
             return { success: true, data: response.data };
         } catch (error) {
             return manejarError(error, "Error al obtener los formularios");
@@ -24,7 +24,7 @@ export default {
     },
     async actualizarFormulario(id, formData) {
         try {
-            const response = await apiClient.patch(`/${id}`, formData);
+            const response = await apiClient.patch(`formcooplus/${id}`, formData);
             return { success: true, data: response.data };
         } catch (error) {
             return manejarError(error, "Error al actualizar el formulario");
@@ -32,7 +32,7 @@ export default {
     },
     async eliminarFormulario(id) {
         try {
-            await apiClient.delete(`/${id}`);
+            await apiClient.delete(`formcooplus/${id}`);
             return { success: true, message: "Formulario eliminado correctamente" };
         } catch (error) {
             return manejarError(error, "Error al eliminar el formulario");
