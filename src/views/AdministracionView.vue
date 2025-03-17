@@ -1,243 +1,314 @@
 <template>
-    <div class="admin-container">
-      <h2>Administrar Formularios</h2>
+  <div class="admin-container">
+    <h2>Administrar Formularios de Alta/Baja de Servicios</h2>
+    <div class="table-container">
       <table>
         <thead>
           <tr>
+            <th :style="{ width: '100px' }">Servicio</th>
             <th>Nombre</th>
             <th>Teléfono</th>
             <th>DNI</th>
             <th>Domicilio</th>
-            <th>Email</th>
-            <th>Acción</th>
-            <th>descripcion</th>
+            <th :style="{ width: '200px' }">Email</th>
+            <th :style="{ width: '70px' }">Acción</th>
+            <th>Descripción</th>
+            <th>Fecha Pedido</th>
             <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="form in formularios" :key="form._id">
+            <td>{{ form.servicio }}</td>
             <td>{{ form.nombre }}</td>
             <td>{{ form.telefono }}</td>
             <td>{{ form.dni }}</td>
             <td>{{ form.domicilio }}</td>
-            <td>{{ form.email }}</td>
+            <td style="font-size: 0.8rem; color: #1f2c79; font-weight: bold;">{{ form.email }}</td>
             <td>{{ form.accion }}</td>
-            <td>{{ form.descripcion }}</td>
+            <td class="wrap-text">{{ form.descripcion }}</td>
             <td>{{ form.fechapedido }}</td>
-            <td>
-              <button @click="editarFormulario(form)">✏️ Editar</button>
-              <button @click="eliminarFormulario(form._id)">🗑️ Eliminar</button>
-              <button @click="imprimirFormulario(form)">🖨️ Imprimir</button>
+            <td class="icon-buttons">
+              <button @click="editarFormulario(form)" title="Editar">
+                <i class="ri-edit-line"></i>
+              </button>
+              <button @click="confirmarEliminacion(form._id)" title="Eliminar">
+                <i class="ri-delete-bin-line"></i>
+              </button>
+              <button @click="imprimirFormulario(form)" title="Imprimir">
+                <i class="ri-printer-line"></i>
+              </button>
             </td>
           </tr>
         </tbody>
       </table>
-  
-      <div v-if="modalAbierto" class="modal">
-        <div class="modal-content">
-          <h3>Editar Formulario</h3>
-          <label>Nombre:</label>
-          <input type="text" v-model="formEdicion.nombre" required />
-  
-          <label>Teléfono:</label>
-          <input type="tel" v-model="formEdicion.telefono" required />
-  
-          <label>Domicilio:</label>
-          <input type="text" v-model="formEdicion.domicilio" required />
+    </div>
+  </div>
 
-          <label>DNI:</label>
-          <input type="number" v-model="formEdicion.dni" required />
-
-          <label>Email:</label>
-          <input type="text" v-model="formEdicion.email" required />
-          
-          <label>Acción:</label>
-          <select v-model="formEdicion.accion">
-            <option value="Alta">Alta</option>
-            <option value="Baja">Baja</option>
-          </select>
-  
-          <button @click="guardarEdicion" :disabled="loading">
-            💾 {{ loading ? "Guardando..." : "Guardar" }}
-          </button>
-          <button @click="cerrarModal">❌ Cerrar</button>
-        </div>
+  <div v-if="modalAbierto" class="modal animate__animated animate__fadeIn">
+    <div class="modal-content animate__animated animate__zoomIn">
+      <h3>Editar Formulario</h3>
+      <label>Nombre:</label>
+      <input type="text" v-model="formEdicion.nombre" required />
+      <label>Teléfono:</label>
+      <input type="tel" v-model="formEdicion.telefono" required />
+      <label>Domicilio:</label>
+      <input type="text" v-model="formEdicion.domicilio" required />
+      <label>DNI:</label>
+      <input type="number" v-model="formEdicion.dni" required />
+      <label>Email:</label>
+      <input type="text" v-model="formEdicion.email" required />
+      <label>Acción:</label>
+      <select v-model="formEdicion.accion">
+        <option value="Alta">Alta</option>
+        <option value="Baja">Baja</option>
+      </select>
+      <div class="modal-actions">
+        <button @click="guardarEdicion"><i class="ri-save-3-line"></i></button>
+        <button @click="cerrarModal"><i class="ri-close-line"></i></button>
       </div>
     </div>
+  </div>
+
+  <div v-if="modalEliminar" class="modal animate__animated animate__fadeIn">
+    <div class="modal-content animate__animated animate__zoomIn">
+      <h3 style="margin-bottom: 10px;">¿Estás seguro de eliminar este formulario?</h3>
+      <p>Esta acción no se puede deshacer.</p>
+      <div class="modal-actions eliminar">
+        <button @click="eliminarFormularioConfirmado"><i class="ri-delete-bin-line"></i> Eliminar</button>
+        <button @click="cerrarModalEliminar"><i class="ri-close-line"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
 </template>
-  
+
 <script>
 import apiClient from "../services/apiForms";
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
 export default {
-    data() {
-      return {
-        formularios: [],
-        modalAbierto: false,
-        formEdicion: { 
-            nombre: "",
-            telefono: "",
-            dni: "",
-            accion: "",
-            email:"",
-            domicilio: "",
-            descripcion: "",
-            fechapedido: "",
-        },
-        loading: false,
-      };
+  data() {
+    return {
+      formularios: [],
+      modalAbierto: false,
+      modalEliminar: false,
+      idEliminar: null,
+      formEdicion: { 
+        nombre: "",
+        telefono: "",
+        dni: "",
+        accion: "",
+        email: "",
+        domicilio: "",
+        descripcion: "",
+        fechapedido: "",
+        servicio: "",
+      },
+      loading: false,
+    };
+  },
+  methods: {
+    async cargarFormularios() {
+      try {
+        const response = await apiClient.obtenerFormularios();
+        if (response.success && Array.isArray(response.data)) {
+          this.formularios = response.data;
+        } else {
+          toast.error("Error al cargar formularios", response.error || "Datos inválidos");
+        }
+      } catch (error) {
+        toast.error("Error cargando los formularios", error);
+      }
     },
-    methods: {
-      async cargarFormularios() {
-        try {
-          const response = await apiClient.obtenerFormularios();
-          if (response.success && Array.isArray(response.data)) {
-            this.formularios = response.data;
-          } else {
-            toast.error("Error al cargar formularios", response.error || "Datos inválidos");
-          }
-        } catch (error) {
-          toast.error("Error cargando los formularios", error);
-        }
-      },
-      editarFormulario(form) {
-        this.formEdicion = { ...form };
-        this.modalAbierto = true;
-      },
-      async eliminarFormulario(id) {
-        if (!confirm("¿Seguro que deseas eliminar este formulario?")) return;
-        
-        try {
-          const response = await apiClient.eliminarFormulario(id);
-          if (response.success) {
-            this.formularios = this.formularios.filter((f) => f._id !== id);
-          } else {
-            toast.error("Error al eliminar el formulario", response.error);
-          }
-        } catch (error) {
-          toast.error("Error eliminando el formulario", error);
-        }
-      },
-      imprimirFormulario(form) {
-        const contenido = `
-          <h2>Formulario de ${form.accion}</h2>
-          <p><strong>Nombre:</strong> ${form.nombre}</p>
-          <p><strong>Teléfono:</strong> ${form.telefono}</p>
-          <p><strong>DNI:</strong> ${form.dni}</p>
-          <p><strong>Email:</strong> ${form.email}</p>
-          <p><strong>Acción:</strong> ${form.accion}</p>
-        `;
-        const ventana = window.open("", "", "width=600,height=400");
-        ventana.document.write(contenido);
-        ventana.document.close();
-        ventana.print();
-      },
-      async guardarEdicion() {
-        if (!this.formEdicion.nombre || !this.formEdicion.telefono || !this.formEdicion.dni) {
-            toast.error("Todos los campos son obligatorios.");
-            return;
-        }
-        this.loading = true;
-
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, "0"); // Agrega ceros si es necesario
-        const day = String(now.getDate()).padStart(2, "0");
-
-        this.formEdicion.fechapedido = `${year}/${month}/${day}`;
-
-        try {
-            const response = await apiClient.actualizarFormulario(this.formEdicion._id, this.formEdicion);
-            if (response.success) {
-            toast.success("Formulario actualizado correctamente.");
-            this.modalAbierto = false;
-            this.cargarFormularios();
-            } else {
-            toast.error(response.error || "Error al guardar la edición.");
-            }
-        } catch (error) {
-            alert("Error al guardar la edición.");
-            console.error("Error:", error);
-        } finally {
-            this.loading = false;
-        }
-        },
-      cerrarModal() {
-        this.modalAbierto = false;
-      },
+    editarFormulario(form) {
+      this.formEdicion = { ...form };
+      this.modalAbierto = true;
     },
-    mounted() {
-      this.cargarFormularios();
+    confirmarEliminacion(id) {
+      this.idEliminar = id;
+      this.modalEliminar = true;
     },
-  };
+    async eliminarFormularioConfirmado() {
+      try {
+        const response = await apiClient.eliminarFormulario(this.idEliminar);
+        if (response.success) {
+          this.formularios = this.formularios.filter((f) => f._id !== this.idEliminar);
+          toast.success("Formulario eliminado correctamente.");
+        } else {
+          toast.error("Error al eliminar el formulario", response.error);
+        }
+      } catch (error) {
+        toast.error("Error eliminando el formulario", error);
+      } finally {
+        this.cerrarModalEliminar();
+      }
+    },
+    imprimirFormulario(form) {
+      const contenido = `
+        <h2>Formulario de ${form.accion}</h2>
+        <p><strong>Nombre:</strong> ${form.nombre}</p>
+        <p><strong>Teléfono:</strong> ${form.telefono}</p>
+        <p><strong>DNI:</strong> ${form.dni}</p>
+        <p><strong>Email:</strong> ${form.email}</p>
+        <p><strong>Acción:</strong> ${form.accion}</p>
+      `;
+      const ventana = window.open("", "", "width=600,height=400");
+      ventana.document.write(contenido);
+      ventana.document.close();
+      ventana.print();
+    },
+    async guardarEdicion() {
+      if (!this.formEdicion.nombre || !this.formEdicion.telefono || !this.formEdicion.dni) {
+        toast.error("Todos los campos son obligatorios.");
+        return;
+      }
+      this.loading = true;
+
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, "0");
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+
+      this.formEdicion.fechapedido = `${day}/${month} ${hours}:${minutes}`;
+
+      try {
+        const response = await apiClient.actualizarFormulario(this.formEdicion._id, this.formEdicion);
+        if (response.success) {
+          toast.success("Formulario actualizado correctamente.");
+          this.modalAbierto = false;
+          this.cargarFormularios();
+        } else {
+          toast.error(response.error || "Error al guardar la edición.");
+        }
+      } catch (error) {
+        toast.error("Error al guardar la edición.");
+        console.error("Error:", error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    cerrarModal() {
+      this.modalAbierto = false;
+    },
+    cerrarModalEliminar() {
+      this.modalEliminar = false;
+      this.idEliminar = null;
+    }
+  },
+  mounted() {
+    this.cargarFormularios();
+  },
+};
 </script>
-  
 <style scoped>
 .admin-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
+  padding: 20px;
+  max-width: 1600px;
+  margin: auto;
 }
-  
+
+.table-container {
+  padding-left: 50px;
+  padding-right: 50px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
 h2 {
-    text-align: center;
+  text-align: center;
 }
-  
+
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  table-layout: fixed; 
 }
-  
+
 th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
+  border: 1px solid #ddd;
+  padding: 5px;
+  text-align: center;
+  white-space: normal;
+  word-wrap: break-word;
 }
-  
-th {
-    background: #f4f4f4;
+
+tbody tr {
+  height: auto;
 }
-button {
-    margin: 5px;
-    padding: 8px 12px;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    border-radius: 4px;
+
+.wrap-text {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 200px;
 }
-  
-button:hover {
-    opacity: 0.8;
+
+.icon-buttons {
+  justify-content: center;
+  gap: 15px;
 }
-  
+
+.icon-buttons button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.icon-buttons button:hover {
+  opacity: 0.7;
+  color: #007bff;
+}
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-  
+
 .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 350px;
 }
-  
+
 input, select {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-actions button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-actions button:hover {
+  color: #007bff;
+}
+.eliminar {
+  margin-top: 20px; 
+}
+.eliminar button:hover {
+  font-size: 20px; 
+} 
 </style>
-  
