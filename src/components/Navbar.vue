@@ -3,7 +3,7 @@
     <nav class="nav container">
       <div class="nav__data">
         <router-link to="/" class="nav__logo">
-          <img src="@/assets/css/img/logo nuevo-Photoroom-Photoroom.png" 
+          <img src="../assets/css/img/Cooperativa de Servicios Publicos de Portena Ltda-Photoroom.png" 
             alt="Coop de Servicios Públicos de Porteña" 
             class="nav__logo-img" />
         </router-link>
@@ -166,6 +166,7 @@ export default {
 }
 
 .nav__logo-img {
+  margin-top: 12px;
   height: 100px;
 }
 
