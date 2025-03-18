@@ -143,7 +143,7 @@ export default {
 .user__email {
   font-size: 0.8rem;  
   color: #b0b0b0;  
-  margin-top: -40px;
+  margin-top: -45px;
 }
 .nav {
   display: flex;

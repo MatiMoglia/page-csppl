@@ -48,4 +48,53 @@ export default {
       throw error;
     }
   },
+  async getAllUsers() {
+    try {
+      const response1 = await apiClient.get("usuarios");
+      const response2 = await apiClient2.get("usuarios1");
+      console.log("Usuarios de la primera API: ", response1.data);
+      console.log("Usuarios de la segunda API: ", response2.data);
+      
+      return [...response1.data, ...response2.data];
+    } catch (error) {
+      console.error("Error al obtener usuarios:", error);
+      return [];
+    }
+  },
+  async updateUser(id, userData) {
+    try {
+      const response = await apiClient.patch(`usuarios/${id}`, userData);
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error("Error al actualizar el usuario:", error);
+      return { success: false, error: error.response?.data?.message || "Error al actualizar el usuario" };
+    }
+  },
+  async deleteUser(id) {
+    try {
+      await apiClient.delete(`usuarios/${id}`);
+      return { success: true, message: "Usuario eliminado correctamente" };
+    } catch (error) {
+      console.error("Error al eliminar el usuario:", error);
+      return { success: false, error: error.response?.data?.message || "Error al eliminar el usuario" };
+    }
+  },
+  async updateUser2(id, userData) {
+    try {
+      const response = await apiClient2.patch(`usuarios1/${id}`, userData);
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error("Error al actualizar el usuario en la segunda API:", error);
+      return { success: false, error: error.response?.data?.message || "Error al actualizar el usuario" };
+    }
+  },
+  async deleteUser2(id) {
+    try {
+      await apiClient2.delete(`usuarios1/${id}`);
+      return { success: true, message: "Usuario eliminado correctamente en la segunda API" };
+    } catch (error) {
+      console.error("Error al eliminar el usuario en la segunda API:", error);
+      return { success: false, error: error.response?.data?.message || "Error al eliminar el usuario" };
+    }
+  }
 };

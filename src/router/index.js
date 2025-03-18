@@ -1,4 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import store from '@/store';
+
 import Inicio from '../views/InicioView.vue';
 import Historia from '@/components/csppl-info/Historia.vue';
 import MVVObjetivos from '@/components/csppl-info/MVVObjetivos.vue';
@@ -119,6 +121,13 @@ const routes = [
     path: '/administracion',
     name: 'AdministracionView',
     component: AdministracionView,
+    beforeEnter: (to, from, next) => {
+      if (store.state.auth.user && store.state.auth.user.isAdmin) {
+        next();
+      } else {
+        next('/login');
+      }
+    }
   }
 ]
 
