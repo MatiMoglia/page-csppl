@@ -4,7 +4,6 @@ import store from '@/store';
 import Inicio from '../views/InicioView.vue';
 import Historia from '@/components/csppl-info/Historia.vue';
 import MVVObjetivos from '@/components/csppl-info/MVVObjetivos.vue';
-import trabajoInter from '@/components/csppl-info/trabajoInter.vue';
 import Autoridades from '@/components/csppl-info/Autoridades.vue';
 import CooplusView from '@/views/CooplusView.vue';
 import EnergiaView from '@/views/EnergiaView.vue';
@@ -16,6 +15,7 @@ import ContactoView from '@/views/ContactoView.vue';
 import RegisterView from '@/views/RegisterView.vue';
 import LoginView from '@/views/LoginView.vue';
 import AdministracionView from '@/views/AdministracionView.vue';
+import NovedadesView from '@/views/NovedadesView.vue';
 
 import detalleSepelio from '@/components/detalleSS/DetalleSepelio.vue';
 import detalleBanco from '@/components/detalleSS/DetalleBanco.vue';
@@ -41,11 +41,6 @@ const routes = [
     path: '/autoridades',
     name: 'Autoridades',
     component: Autoridades,
-  },
-  {
-    path: '/trabajo-inter',
-    name: 'TrabajoInter',
-    component: trabajoInter,
   },
   {
     path: '/cooplus',
@@ -128,6 +123,11 @@ const routes = [
         next('/login');
       }
     }
+  },
+  {
+    path: '/novedades',
+    name: 'NovedadesView',
+    component: NovedadesView,
   }
 ]
 

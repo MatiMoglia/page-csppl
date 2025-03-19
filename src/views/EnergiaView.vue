@@ -37,41 +37,41 @@
         </div>
         <div class="dropdown-containers">
             <div class="dropdown" @mouseenter="mostrarMonofasica = true" @mouseleave="mostrarMonofasica = false">
-            <button class="dropdown-btn">
-            ¿Qué es una conexión monofásica?
-            <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarMonofasica}"></i>
-            </button>
-            <div class="dropdown-content" v-show="mostrarMonofasica">
-            <p>ejemplo</p>
-            </div>
-        </div>
-        <div class="dropdown" @mouseenter="mostrarTrifasica = true" @mouseleave="mostrarTrifasica = false">
-            <button class="dropdown-btn">
-            ¿Qué es una conexión trifásica?
-            <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarTrifasica}"></i>
-            </button>
-            <div class="dropdown-content" v-show="mostrarTrifasica">
-            <p>ejemplo</p>
-            </div>
-        </div>
-        <div class="dropdown" @mouseenter="mostrarConvencional = true" @mouseleave="mostrarConvencional = false">
-            <button class="dropdown-btn">
-            ¿Cómo funciona un medidor convencional?
-            <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarConvencional}"></i>
-            </button>
-            <div class="dropdown-content" v-show="mostrarConvencional">
-            <p>ejemplo</p>
-            </div>
-        </div>
-        <div class="dropdown" @mouseenter="mostrarPrepago = true" @mouseleave="mostrarPrepago = false">
-            <button class="dropdown-btn">
-                ¿Cómo funciona un medidor PrePago?
-                <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarPrepago}"></i>
-            </button>
-            <div class="dropdown-content" v-show="mostrarPrepago">
+                <button class="dropdown-btn">
+                ¿Qué es una conexión monofásica?
+                <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarMonofasica}"></i>
+                </button>
+                <div class="dropdown-content" v-show="mostrarMonofasica">
                 <p>ejemplo</p>
+                </div>
             </div>
-        </div>
+            <div class="dropdown" @mouseenter="mostrarTrifasica = true" @mouseleave="mostrarTrifasica = false">
+                <button class="dropdown-btn">
+                ¿Qué es una conexión trifásica?
+                <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarTrifasica}"></i>
+                </button>
+                <div class="dropdown-content" v-show="mostrarTrifasica">
+                <p>ejemplo</p>
+                </div>
+            </div>
+            <div class="dropdown" @mouseenter="mostrarConvencional = true" @mouseleave="mostrarConvencional = false">
+                <button class="dropdown-btn">
+                ¿Cómo funciona un medidor convencional?
+                <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarConvencional}"></i>
+                </button>
+                <div class="dropdown-content" v-show="mostrarConvencional">
+                <p>ejemplo</p>
+                </div>
+            </div>
+            <div class="dropdown" @mouseenter="mostrarPrepago = true" @mouseleave="mostrarPrepago = false">
+                <button class="dropdown-btn">
+                    ¿Cómo funciona un medidor PrePago?
+                    <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarPrepago}"></i>
+                </button>
+                <div class="dropdown-content" v-show="mostrarPrepago">
+                    <p>ejemplo</p>
+                </div>
+            </div>
         </div>
         <div class="alumbrado-container">
             <h2>Alumbrado Público:</h2>

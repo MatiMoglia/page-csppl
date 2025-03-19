@@ -16,6 +16,7 @@
       <div :class="['nav__menu', { 'show-menu': menuOpen }]">
         <ul class="nav__list">
           <li><router-link to="/" class="nav__link" @click="closeMenu">Inicio</router-link></li>
+          <li><router-link to="/novedades" class="nav__link" @click="closeMenu">Novedades</router-link></li>
           <li class="dropdown__item">
             <div class="nav__link" @click="toggleUsMenu">
               Quienes Somos<i class="ri-arrow-down-s-line dropdown__arrow"></i>
@@ -24,7 +25,6 @@
               <li><router-link to="/historia" class="dropdown__link" @click="closeMenu">Historia</router-link></li>
               <li><router-link to="/mvv-objetivos" class="dropdown__link" @click="closeMenu">Misión, Valores y Objetivos</router-link></li>
               <li><router-link to="/autoridades" class="dropdown__link" @click="closeMenu">Autoridades</router-link></li>
-              <li><router-link to="/trabajo-inter" class="dropdown__link" @click="closeMenu">Trabajo Institucional</router-link></li>
             </ul>
           </li>
 
@@ -143,7 +143,7 @@ export default {
 .user__email {
   font-size: 0.8rem;  
   color: #b0b0b0;  
-  margin-top: -45px;
+  margin-top: -40px;
 }
 .nav {
   display: flex;

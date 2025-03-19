@@ -1,4 +1,7 @@
 <template>
+      <div v-if="loading" class="loading-overlay">
+        <div class="spinner"></div>
+      </div>
     <div class="back-button" data-aos="fade-right">
         <button @click="$router.push('/')">Volver al menú</button>
       </div>
@@ -57,11 +60,13 @@
       return {
         email: "",
         password: "",
-      };
+        loading: false,
+      }
     },
     methods: {
         ...mapActions("auth", ["login"]),
         async handleLogin() {
+          this.loading = true;
         const success = await this.login({ email: this.email, password: this.password });
         if (success) {
             toast.success("Inicio de sesión exitoso", {
@@ -71,10 +76,10 @@
           this.$router.push("/");
         }, 3000);
         } else {
-            toast.error("Error: Email o contraseña incorrectos", {
-            autoClose: 3000, 
-        });
+          toast.error("Error: Email o contraseña incorrectos", { autoClose: 3000});
+          this.loading = true;
         }
+        
       }
     },
     mounted() {
@@ -88,6 +93,31 @@
   margin: 0;
   padding: 0;
   height: 100%;
+}
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 6px solid #0e144b;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 .back-button {
   position: absolute;
