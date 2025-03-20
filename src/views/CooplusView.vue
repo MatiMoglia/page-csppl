@@ -117,7 +117,7 @@
       <h1 class="title">¡Adherite ahora mismo!</h1>
       <p>Completa el siguiente formulario para poder elegir el pack que desees y disfrutar del servicio.</p>
     </div>
-    <div class="container-form" id="formulario" data-aos="fade-up" data-aos-delay="200">
+    <div class="container-form" id="formulario"  data-aos-delay="200">
       <formCooplus :pack="selectedPack"/>
     </div>
 </template>

@@ -81,7 +81,7 @@ export default {
 }
 
 .section-title h2 {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #0e1850;
   margin: 0;
   border-left: 5px solid #0e1850;
