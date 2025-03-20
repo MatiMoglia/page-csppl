@@ -1,6 +1,8 @@
 <template>
     <h1 class="title">Novedades principales</h1>
-    <br>
+    <div v-if="loading" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
     <div class="portal-noticias">
       <div class="slider-container">
         <div class="slider">
@@ -24,16 +26,18 @@
         </div>
       </div>
       <div class="noticias-destacadas">
-        <div v-for="(novedad, index) in ultimasNoticias" :key="'detalle-' + index" class="novedad-detalle">
-            <img :src="novedad.imagen" :alt="novedad.titulo" class="novedad-img" />
-            <div class="novedad-texto">
-                <h2>{{ novedad.titulo }}</h2>
-                <p><strong>Fecha de publicación:</strong> {{ formatFecha(novedad.fechaPublicacion) }}</p>
-                <p>{{ novedad.subtitulo }}</p>
-                <p>{{ novedad.descripcion }}</p>
-            </div>
+    <h2 class="subtitle">Ultimas novedades subidas:</h2>
+    <div v-for="(novedad, index) in ultimasNoticias" :key="'detalle-' + index" class="novedad-detalle">
+        <img :src="novedad.imagen" :alt="novedad.titulo" class="novedad-img" />
+        <div class="novedad-texto">
+            <h2>{{ novedad.titulo }}</h2>
+            <p><strong>Fecha de publicación:</strong> {{ formatFecha(novedad.fecha) }}</p>
+            <p>{{ novedad.subtitulo }}</p>
+            <p>{{ novedad.contenido }}</p>
+            <button @click="verNovedad(novedad.id)">Leer más</button>
         </div>
-      </div>
+    </div>
+</div>
       <div class="redes-sociales">
         <h2>¡Síguenos en nuestras redes sociales!</h2>
         <div class="social-links">
@@ -45,7 +49,7 @@
           </a>
         </div>
       </div>
-      <NovedadesGrid />
+      <NovedadesGriad />
       <trabajoInter/>
     </div>
 </template>
@@ -54,12 +58,15 @@
 import apiNovs from "@/services/apiNovs";
 import NovedadesGrid from "@/components/NovedadesGrid.vue";
 import trabajoInter from "@/components/csppl-info/trabajoInter.vue";
+import { toast } from 'vue3-toastify';
+
 export default {
     data() {
       return {
         novedades: [],
         currentSlide: 0,
-        interval: null
+        interval: null,
+        loading: false,
       };
     },
     components: {
@@ -75,11 +82,29 @@ export default {
       },
     },
     methods: {
-      async fetchNovedades() {
-        this.novedades = await apiNovs.getNovedades();
+        async fetchNovedades() {
+        this.loading = true;
+        try {
+            const response = await apiNovs.getNovedades();
+
+            if (Array.isArray(response)) {  
+                this.novedades = response;  
+            } else {  
+                console.log("Respuesta inesperada:", response);  
+                this.novedades = [];  
+                toast.error("Error al cargar las novedades");  
+            }
+
+        } catch (error) {
+            console.error("Error en fetchNovedades:", error);
+            this.novedades = [];
+            toast.error("Error al cargar las novedades");
+        } finally {
+            this.loading = false;
+        }
       },
       verNovedad(id) {
-        this.$router.push({ name: "Novedades", params: { id } });
+        this.$router.push({ name: "NovedadDetalle", params: { id } });
       },
       nextSlide() {
         this.currentSlide = (this.currentSlide + 1) % this.sliderNovedades.length;
@@ -107,6 +132,31 @@ export default {
 </script>
   
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 6px solid #0e144b;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .noticias-destacadas {
   width: 80%;
   margin-top: 20px;
@@ -128,9 +178,10 @@ export default {
   gap: 20px;
   background: white;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 15px;
   align-items: center;
+  background-color: rgba(244, 244, 244, 0.9); 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
 .novedad-img {
@@ -155,6 +206,13 @@ export default {
   padding: 15px;
   text-align: center;
 }
+.subtitle {
+    padding: 15px;
+    border-left: 5px solid #0e1850;
+    font-size: 1.5rem;
+    color: #1f2c79;
+    margin-bottom: 20px;
+}
   
 .portal-noticias {
   display: flex;
@@ -165,7 +223,7 @@ export default {
   
 .slider-container {
   position: relative;
-  width: 80%;
+  width: 100%;
   overflow: hidden;
   border-radius: 10px;
 }
@@ -179,6 +237,9 @@ export default {
   min-width: 100%;
   display: none;
   position: relative;
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
 }
   
 .slide.active {
@@ -187,21 +248,39 @@ export default {
   
 .slide-img {
   width: 100%;
-  height: 450px;
+  min-height: 200px;
+  max-height: 400px;
   object-fit: cover;
-  border-radius: 10px;
 }
   
 .slide-text {
   position: absolute;
-  bottom: 15px;
-  left: 15px;
+  bottom: 35px;
+  left: 110px;
   background: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 15px;
   border-radius: 5px;
-}
   
+}
+button {
+  margin-top: 10px;
+  background-color: #112491;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 15px;
+  cursor: pointer;
+  text-align: left;
+  align-items: center;
+  transition: ease 0.4s;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+button:hover {
+  background-color: #445adb;
+}
 .slider-controls {
   position: absolute;
   top: 50%;
@@ -214,7 +293,7 @@ export default {
   background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  padding: 10px;
+  padding: 15px;
   cursor: pointer;
   font-size: 1.5rem;
   border-radius: 5px;
@@ -228,12 +307,12 @@ export default {
   padding: 10px 15px;
   font-size: 15px;
   cursor: pointer;
-  transition: 0.3s;
   text-align: left;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   transition: ease 0.4s;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
 }
 .slider button:hover {
   background-color: #445adb;

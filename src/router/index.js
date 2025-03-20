@@ -128,6 +128,12 @@ const routes = [
     path: '/novedades',
     name: 'NovedadesView',
     component: NovedadesView,
+  },
+  {
+    path: "/novedad/:id",
+    name: "NovedadDetalle",
+    component: () => import("@/components/NovedadDetalle.vue"),
+    props: true
   }
 ]
 
