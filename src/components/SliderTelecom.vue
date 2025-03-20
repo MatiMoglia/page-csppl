@@ -2,7 +2,6 @@
     <div class="container">
       <section class="servicios">
         <div class="slider">
-          <!-- Animación de deslizamiento para los banners -->
           <transition name="fade" mode="out-in">
             <div
               :key="servicios[currentIndex].imagen"
@@ -38,12 +37,12 @@
           {
             nombre: "Fibra Óptica",
             descripcion: "Contratá la mejor velocidad de internet para tu hogar.",
-            imagen: "https://media.istockphoto.com/id/1215789535/es/foto/familia-feliz-con-los-ni%C3%B1os-sentarse-en-el-sof%C3%A1-usando-la-computadora-port%C3%A1til.jpg?s=612x612&w=0&k=20&c=m__P8CWt_onNg1irKYGKVWRs5AqDI2io-nJAjNE2K1U=",
+            imagen: "https://www.cirrus.cl/wp-content/uploads/2022/05/Slide_01_internet.jpg",
           },
           {
-            nombre: "Telefonía Fija",
-            descripcion: "Conectate con el mejor servicio de telefonía.",
-            imagen: "https://cloudfront-eu-central-1.images.arcpublishing.com/prisaradio/HXF7Q6YTMNKSZG5XTVIBNKQPCY.jpg",
+            nombre: "Internet Rural",
+            descripcion: "Servicio para la zona rural de Porteña.",
+            imagen: "https://www.clarin.com/2018/04/28/BJwIVYGpf_1256x620__1.jpg",
           },
         ],
       };
@@ -104,7 +103,7 @@ p {
   .slider__banner {
     position: relative;
     width: 100%;
-    min-height: 300px;
+    min-height: 400px;
     background-size: cover;
     background-position: center;
     transition: background-image 0.5s ease-in-out;
@@ -119,7 +118,7 @@ p {
     color: white;
     padding: 15px;
     text-align: center;
-    width: 80%;
+    width: 60%;
   }
   
   .slider__controls {

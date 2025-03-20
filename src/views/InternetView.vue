@@ -19,16 +19,25 @@
             <div class="plans-container">
                 <div class="plan-card highlighted">
                     <span class="most-popular">El más pedido</span>
+                    <div class="img-container">
+                        <img src="@/assets/css/img/logo-transp.png" alt="imagen 100MB">
+                    </div>
                     <h4>Plan 100MB</h4>
                     <p class="price">$19.999</p>
                     <button class="btn-lo-quiero" @click="scrollToFormulario">Lo quiero</button>
                 </div>
                 <div class="plan-card highlighted">
+                    <div class="img-container">
+                        <img src="@/assets/css/img/logo-transp.png" alt="imagen 100MB">
+                    </div>
                     <h4>Plan 200MB</h4>
                     <p class="price">$29.999</p>
                     <button class="btn-lo-quiero" @click="scrollToFormulario">Lo quiero</button>
                 </div>
                 <div class="plan-card highlighted">
+                    <div class="img-container">
+                        <img src="@/assets/css/img/logo-transp.png" alt="imagen 100MB">
+                    </div>
                     <h4>Plan 300MB</h4>
                     <p class="price">$49.999</p>
                     <button class="btn-lo-quiero" @click="scrollToFormulario">Lo quiero</button>
@@ -163,15 +172,11 @@ export default {
 html {
   scroll-behavior: smooth;
 }
-.fibra-optica-banner {
-    background-image: url('https://www.programadesconecta.com/wp-content/uploads/2021/07/Post-Family-Watch.jpg');
-    background-size: cover;
-    background-position: center;
-    padding: 60px 20px;
-    color: white;
-    font-weight: bold;
+.img-container img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
 }
-
 .banner-title {
     font-size: 2.5rem;
     margin-bottom: 10px;
@@ -322,6 +327,7 @@ li {
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 .btn-solicitar:hover {
@@ -334,6 +340,7 @@ li {
     border: none;
     border-radius: 5px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-transform: uppercase;
@@ -371,7 +378,6 @@ li {
     font-weight: bold;
     color: #2848ff;
     box-shadow: 0 8px 20px rgba(40, 72, 255, 0.2);
-    background-color: #f0f5ff;
 }
 .most-popular {
     background-color: #ff9800;
@@ -428,7 +434,8 @@ li {
     padding: 10px;
     font-size: 16px;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
     margin-top: 10px;
     transition: background-color 0.3s ease;

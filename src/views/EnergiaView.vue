@@ -42,7 +42,10 @@
                 <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarMonofasica}"></i>
                 </button>
                 <div class="dropdown-content" v-show="mostrarMonofasica">
-                <p>ejemplo</p>
+                    <p>Este tipo de instalación son las más habituales para uso doméstico, encontrándose en viviendas.
+                        La misma consiste en circular la corriente por una sola vía, es decir,
+                        por un solo cable, por ende, la instalación monofásica posee una sola fase y dispone de una única corriente alterna.
+                    </p>
                 </div>
             </div>
             <div class="dropdown" @mouseenter="mostrarTrifasica = true" @mouseleave="mostrarTrifasica = false">
@@ -51,7 +54,10 @@
                 <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarTrifasica}"></i>
                 </button>
                 <div class="dropdown-content" v-show="mostrarTrifasica">
-                <p>ejemplo</p>
+                    <p>Una instalación trifásica es un sistema eléctrico donde la electricidad se distribuye a través de tres canales o vías principales que trabajan juntas.
+                        A diferencia del sistema monofásico que usa un solo canal, 
+                        el trifásico divide la electricidad en tres partes que funcionan de manera simultánea pero desfasada.
+                    </p>
                 </div>
             </div>
             <div class="dropdown" @mouseenter="mostrarConvencional = true" @mouseleave="mostrarConvencional = false">
@@ -60,7 +66,9 @@
                 <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarConvencional}"></i>
                 </button>
                 <div class="dropdown-content" v-show="mostrarConvencional">
-                <p>ejemplo</p>
+                    <p>Un medidor convencional requiere que un lector lo lea mensualmente y simplemente muestra una lectura .
+                        A partir de esta lectura, se genera una factura después del consumo de electricidad.
+                    </p>
                 </div>
             </div>
             <div class="dropdown" @mouseenter="mostrarPrepago = true" @mouseleave="mostrarPrepago = false">
@@ -69,7 +77,9 @@
                     <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarPrepago}"></i>
                 </button>
                 <div class="dropdown-content" v-show="mostrarPrepago">
-                    <p>ejemplo</p>
+                    <p>Los medidores de prepago requieren que el cliente pague por su energía antes de usarla.
+                        Esto significa que solo puede usar la electricidad que ha pagado y no puede usar más de lo que le permite su saldo. 
+                    </p>
                 </div>
             </div>
         </div>
@@ -204,6 +214,9 @@ li {
     border: 1px solid #ddd;
     padding: 10px;
     margin-top: 5px;
+}
+.dropdown-content p {
+    font-size: 15px;
 }
 
 .dropdown-arrow {
