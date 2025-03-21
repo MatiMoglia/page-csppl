@@ -69,9 +69,11 @@
               <template v-if="!isAuthenticated">
                 <li><router-link to="/login" class="dropdown__link" @click="closeMenu">Iniciar Sesión</router-link></li>
                 <li><router-link to="/registro" class="dropdown__link" @click="closeMenu">Registrarse</router-link></li>
+                <li><router-link to="/reclamos" class="dropdown__link" @click="closeMenu">Reclamos</router-link></li>
               </template>
               <template v-else>
                 <li><router-link to="/profile" class="dropdown__link" @click="closeMenu">Mi Perfil</router-link></li>
+                <li><router-link to="/reclamos" class="dropdown__link" @click="closeMenu">Reclamos</router-link></li>
                 <li><a href="#" class="dropdown__link logout" @click="logout">Cerrar Sesión</a></li>
               </template>
             </ul>
