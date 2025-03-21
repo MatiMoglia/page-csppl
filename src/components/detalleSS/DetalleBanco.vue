@@ -100,13 +100,14 @@
                         <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarRequisitos}"></i>
                     </button>
                     <div class="dropdown-content" v-show="mostrarRequisitos">
-                        <div class="form-container" @click.stop>
-                            <p>Para ser voluntario necesitas cumplir con los siguientes requisitos:</p>
+                        <div class="requisitos-container" @click.stop>
+                            <p>Para ser voluntario necesitas cumplir con los siguientes requisitos minimos:</p>
                             <ul>
-                                <li>Ser mayor de 18 años.</li>
-                                <li>Gozar de buena salud.</li>
-                                <li>No tener antecedentes de enfermedades infecciosas.</li>
+                                <li><i class="ri-drop-line"></i> Ser mayor de 18 años.</li>
+                                <li><i class="ri-drop-line"></i> Gozar de buena salud.</li>
+                                <li><i class="ri-drop-line"></i> No tener antecedentes de enfermedades infecciosas.</li>
                             </ul>
+                            <p style="margin-top: 10px;">Ante cualquier duda, comunicarse al <strong>3564-562394</strong>.</p>
                         </div>
                     </div>
                 </div>
@@ -118,6 +119,7 @@
 <script>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import apiDonantes from '@/services/apiDonantes';
 
 export default {
     name: "BancoDeSangre",
@@ -129,13 +131,14 @@ export default {
             telefono: "",
             grupoSanguineo: "",
             tieneEnfermedad: "no",
+            nombreEnfermedad: "",
             mostrarFormulario: false,
             mostrarRequisitos: false,
             registros: [],
         };
     },
     methods: {
-        guardarDatos() {
+        async guardarDatos() {
             if (!this.nombre || !this.dni || !this.edad || !this.telefono || !this.grupoSanguineo) {
                 toast.error("Todos los campos son obligatorios.");
                 return;
@@ -145,7 +148,8 @@ export default {
                 toast.error("Debe ingresar el nombre de la enfermedad.");
                 return;
             }
-            const nuevoRegistro = {
+
+            const nuevoDonante = {
                 nombre: this.nombre,
                 dni: this.dni,
                 edad: this.edad,
@@ -155,7 +159,13 @@ export default {
                 nombreEnfermedad: this.tieneEnfermedad === "si" ? this.nombreEnfermedad : null
             };
 
-            this.registros.push(nuevoRegistro);
+            try {
+
+                await apiDonantes.agregarDonante(nuevoDonante); 
+                toast.success("Datos enviados correctamente.");
+            } catch (error) {
+                toast.error("Hubo un error al enviar los datos.");
+            }
 
             this.nombre = "";
             this.dni = "";
@@ -164,10 +174,8 @@ export default {
             this.grupoSanguineo = "";
             this.tieneEnfermedad = "no";
             this.nombreEnfermedad = "";
-
-            toast.success("Datos guardados correctamente.");
         }
-    },
+    }
 };
 </script>
 
@@ -175,7 +183,10 @@ export default {
 .form-container {
   margin: 10px;
   padding: 30px;
-  border-radius: 10px;
+}
+.requisitos-container {
+  margin: 10px;
+  padding: 10px;
 }
 label {
   font-weight: bold;
@@ -185,7 +196,7 @@ label {
 button {
   width: 100%;
   padding: 12px;
-  background-color: #2ab300;
+  background-color: #1f2c79;
   color: white;
   font-size: 16px;
   border: none;
@@ -196,7 +207,7 @@ button {
   font-weight: bold;
 }
 button:hover {
-  background-color: #40e60e;
+  background-color: #3148c5;
 }
 input, select {
   width: 100%;
@@ -207,7 +218,20 @@ input, select {
   font-size: 16px;
   transition: border-color 0.3s;
 }
-
+ul {
+  padding: 0;
+  list-style: none;
+  margin-top: 10px;
+}
+li {
+  font-size: 15px;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+.requisitos-container i {
+    margin-right: 5px;
+    color: #213ac9;
+}
 .ss-container {
     padding: 20px;
     font-family: "Montserrat", sans-serif;
