@@ -3,16 +3,10 @@
     <h2 class="subtitle">Gestión del Grupo Familiar</h2>
     <form>
       <h3>Datos del titular del servicio:</h3>
-      <p>Primero ingrese alguno de estos datos para determinar el titular del servicio.</p>
+      <p>Primero ingrese este dato para determinar el titular del servicio.</p>
       <div>
-        <label for="nombre">Nombre y Apellido</label>
-        <input type="text" id="nombre" v-model="nuevoFamiliar.titular" @input="seleccionarCampo('titular')" />
-
-        <label for="dni">DNI</label>
-        <input type="number" id="dni" v-model="nuevoFamiliar.dniTitular" @input="seleccionarCampo('dniTitular')" />
-
         <label for="nroTitular">Número de Titular</label>
-        <input type="number" id="nroTitular" v-model="nuevoFamiliar.nroTitular" @input="seleccionarCampo('nroTitular')" />
+        <input type="text" id="nroTitular" v-model="nuevoFamiliar.nroTitular" @input="seleccionarCampo('nroTitular')" />
         <div class="titular">
           <button class="btn-consulta"
                   :class="{'active': tipoConsulta === 'consulta'}"
@@ -20,35 +14,41 @@
             Consultar titular existente
           </button>
           <button class="btn-nuevo"
-              :class="{ 'active': tipoConsulta === 'nuevo' }"
-              :disabled="!habilitarNuevo"
-              @click="agregarTitular">
-        Nuevo Titular
+            :class="{ 'active': tipoConsulta === 'nuevo' }"
+            :disabled="!habilitarNuevo"
+            @click="abrirModal">
+            Nuevo Titular
           </button>
         </div>
-        <div v-if="titularEncontrado">
-            <h3>Titular Encontrado:</h3>
-            <p><strong>Nombre:</strong> {{ titularEncontrado.titular }}</p>
-            <p><strong>DNI:</strong> {{ titularEncontrado.dniTitular }}</p>
-            <p><strong>Número de Titular:</strong> {{ titularEncontrado.nroTitular }}</p>
-          </div>
       </div>
     </form>
     <form @submit.prevent="agregarFamiliar">
       <br><br><br>
       <h3>Agregar personas del grupo familiar:</h3>
 
+      <label for="nroTitular">Número del Titular: *</label>
+      <input type="text" id="nroTitular" v-model="nuevoFamiliar.nroTitular" :disabled="titularEncontrado" 
+        :class="['input-bloqueado', { 'input-encontrado': titularEncontrado }]" readonly>
+
+      <label for="dniTitular">DNI del Titular: *</label>
+      <input type="text" id="dniTitular" name="dniTitular" v-model="nuevoFamiliar.dniTitular" :disabled="titularEncontrado" 
+        :class="['input-bloqueado', { 'input-encontrado': titularEncontrado }]" readonly />
+
+      <label for="nombreTitular">Nombre del Titular: *</label>
+      <input type="text" id="nombreTitular" name="nombreTitular" v-model="nuevoFamiliar.titular" :disabled="titularEncontrado" 
+        :class="['input-bloqueado', { 'input-encontrado': titularEncontrado }]" readonly />
+
       <label for="nombre">Nombre y Apellido *</label>
-      <input type="text" id="nombre" v-model="nuevoFamiliar.nombre" />
+      <input type="text" id="nombre" v-model="nuevoFamiliar.nombre" required />
 
       <label for="dni">DNI *</label>
-      <input type="number" id="dni" v-model="nuevoFamiliar.dni"/>
+      <input type="text" id="dni" v-model="nuevoFamiliar.dni" required />
 
       <label for="fechaNacimiento">Fecha de Nacimiento *</label>
-      <input type="date" id="fechaNacimiento" v-model="nuevoFamiliar.fechaNacimiento" />
+      <input type="date" id="fechaNacimiento" v-model="nuevoFamiliar.fechaNacimiento" required />
       
       <label for="grupoSanguineo">Grupo Sanguíneo *</label>
-      <select id="grupoSanguineo" v-model="nuevoFamiliar.grupoSanguineo">
+      <select id="grupoSanguineo" v-model="nuevoFamiliar.grupoSanguineo" required>
           <option value="">Seleccione</option>
           <option v-for="grupo in gruposSanguineos" :key="grupo" :value="grupo">{{ grupo }}</option>
       </select>
@@ -72,25 +72,34 @@
               </button>
           </div>
 
-      <button class="btn-enviar" type="submit">Agregar Familiar</button>
+          <button class="btn-enviar" type="submit" :disabled="botonDeshabilitado">Agregar Familiar</button>
     </form>
-
-    <h3>Miembros del Grupo Familiar</h3>
-    <ul>
-        <li v-for="(familiar, index) in familiares" :key="index">
-            {{ familiar.nombre }} - {{ familiar.dni }} - {{ familiar.fechaNacimiento }} - {{ familiar.grupoSanguineo }}
-            <br>SS: {{familiar.servicios }}
-            <br>Titular: {{ familiar.titular }}
-            <button @click="eliminarFamiliar(index)" class="btn-delete">Eliminar</button>
-        </li>
-    </ul>
-    <button @click="enviarGrupoFamiliar" v-if="familiares.length > 0">Enviar Grupo Familiar</button>
   </div>
+  <div v-if="mostrarModal" class="modal">
+  <div class="modal-content">
+    <h3 style="text-align: center;">Nuevo Titular</h3>
+
+    <label for="numeroTitular">Número Titular: *</label>
+    <input type="number" id="numeroTitular" v-model="nuevoTitular.numero" style="text-align: center;" class="input-bloqueado" readonly />
+
+    <label for="nombreTitular">Nombre Completo: *</label>
+    <input type="text" id="nombreTitular" v-model="nuevoTitular.nombre" required />
+
+    <label for="dniTitular">DNI: *</label>
+    <input type="text" id="dniTitular" v-model="nuevoTitular.dni" required />
+
+    <div class="modal-buttons">
+      <button @click="guardarTitular" class="btn-guardar"><i class="ri-save-3-line"></i></button>
+      <button @click="cerrarModal" class="btn-cerrar"><i class="ri-close-line"></i></button>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
+import apiSS from '@/services/apiSS';
 
 export default {
   data() {
@@ -103,36 +112,54 @@ export default {
         grupoSanguineo: '',
         dni: '',
         servicios: [],
-        mostrarFamiliares: false,
         nroTitular: '',
       },
       familiares: [],
       gruposSanguineos: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
-      titulares: [
-        { titular: "Juan Pérez", dniTitular: 12345678, nroTitular: 1001 },
-        { titular: "Mati Moglia", dniTitular: 45700951, nroTitular: 1002 }
-      ],
-      titularEncontrado: null,
+      titularEncontrado: false,
       mensaje: "",
       tipoConsulta: "",
       campoSeleccionado: null,
-      habilitarNuevo: false
+      habilitarNuevo: false,
+      botonDeshabilitado: false,
+      mostrarModal: false,
+      nuevoTitular: {
+        nombre: '',
+        dni: '',
+        numero: '',
+      },
     };
   },
   methods: {
-    agregarFamiliar() {
-      if (!this.nuevoFamiliar.nombre || !this.nuevoFamiliar.dni || !this.nuevoFamiliar.fechaNacimiento || !this.nuevoFamiliar.grupoSanguineo) {
-        toast.error("Debe completar todos los campos obligatorios para agregar un familiar.");
+    async consultarTitular() {
+      if (!this.nuevoFamiliar.nroTitular) {
+        this.mensaje = "Debe ingresar un número de titular para la consulta.";
+        toast.error(this.mensaje);
         return;
       }
-      this.familiares.push({ ...this.nuevoFamiliar });
-      this.nuevoFamiliar = { nombre: '', fechaNacimiento: '', grupoSanguineo: '', dni: '', titular: '', dniTitular: '', servicios: [] };
-    },
-    eliminarFamiliar(index) {
-      this.familiares.splice(index, 1);
-    },
-    enviarGrupoFamiliar() {
-      toast.success(`Grupo enviado con ${this.familiares.length} familiares`);
+
+      try {
+        const resultado = await apiSS.obtenerAdherentes(this.nuevoFamiliar.nroTitular);
+
+        console.log("Resultado API:", resultado);
+
+        if (resultado.success && resultado.data.length > 0) {
+          this.nuevoFamiliar.nroTitular = `${this.nuevoFamiliar.nroTitular}`;
+          this.titularEncontrado = true;  
+          this.mensaje = "";
+          await this.obtenerDatosTitular(this.nuevoFamiliar.nroTitular);
+          this.habilitarNuevo = false;
+        } else {
+          this.mensaje = "Titular no encontrado. ¿Desea agregarlo?";
+          toast.info(this.mensaje);
+          this.titularEncontrado = false;
+          this.habilitarNuevo = true;
+        }
+      } catch (error) {
+        console.error("Error al obtener los adherentes", error);
+        this.mensaje = "Error al consultar el titular.";
+        toast.error(this.mensaje);
+      }
     },
     toggleServicio(servicio) {
       const index = this.nuevoFamiliar.servicios.indexOf(servicio);
@@ -143,64 +170,175 @@ export default {
       }
     },
     seleccionarCoberturaTotal() {
-      if (this.nuevoFamiliar.servicios.length === 3) {
-        this.nuevoFamiliar.servicios = [];
-      } else {
-        this.nuevoFamiliar.servicios = ['Traslado', 'Sepelio', 'Banco de Sangre'];
-      }
+      this.nuevoFamiliar.servicios = ['Traslado', 'Sepelio', 'Banco de Sangre'];
     },
     seleccionarCampo(campo) {
       this.campoSeleccionado = campo;
     },
-    consultarTitular() {
-      if (this.tipoConsulta === 'consulta') {
-      this.tipoConsulta = ''; 
-    } else {
-      this.tipoConsulta = 'consulta';
-    }
-
-      if (!this.campoSeleccionado) {
-        this.mensaje = "Debe ingresar al menos un dato para la consulta del titular.";
-        toast.error(this.mensaje);
+    async agregarFamiliar() {
+      if (!this.nuevoFamiliar.nroTitular || 
+          !this.nuevoFamiliar.nombre || 
+          !this.nuevoFamiliar.dni || 
+          !this.nuevoFamiliar.fechaNacimiento || 
+          !this.nuevoFamiliar.grupoSanguineo) {
+        toast.error('Todos los campos son obligatorios');
+        return; 
+      }
+      if (this.nuevoFamiliar.servicios.length === 0) {
+        toast.error('Debe seleccionar al menos un servicio social');
         return;
       }
 
-      this.titularEncontrado = this.titulares.find(t =>
-        this.campoSeleccionado === "titular" ? t.titular.toLowerCase() === this.nuevoFamiliar.titular.toLowerCase() :
-        this.campoSeleccionado === "dniTitular" ? t.dniTitular === Number(this.nuevoFamiliar.dniTitular) :
-        this.campoSeleccionado === "nroTitular" ? t.nroTitular === Number(this.nuevoFamiliar.nroTitular) :
-        false
-      );
+      this.botonDeshabilitado = true;
 
-      if (this.titularEncontrado) {
-        this.mensaje = "";
-        this.habilitarNuevo = false;
-      } else {
-        this.mensaje = "Titular no encontrado. ¿Desea agregarlo?";
-        toast.info(this.mensaje);
-        this.habilitarNuevo = true;
-        this.titularEncontrado = null;
+      try {
+        const response = await apiSS.agregarFamiliar(this.nuevoFamiliar);
+        if (response.success) {
+          toast.success('Familiar agregado exitosamente');
+          this.nuevoFamiliar = {
+            nroTitular: '',
+            dniTitular: '',
+            titular: '',
+            nombre: '',
+            dni: '',
+            fechaNacimiento: '',
+            grupoSanguineo: '',
+            servicios: [],
+          };
+        } else {
+          toast.error('Error al agregar familiar');
+        }
+      } catch (error) {
+        toast.error('Hubo un problema al agregar el familiar');
+      } finally {
+        this.botonDeshabilitado = false; 
       }
     },
-    agregarTitular() {
-      if (!this.nuevoFamiliar.titular || !this.nuevoFamiliar.dniTitular || !this.nuevoFamiliar.nroTitular) {
-        this.mensaje = "Debe completar todos los campos antes de agregar un nuevo titular.";
-        toast.error(this.mensaje);
+    async obtenerDatosTitular(nroTitular) {
+      try {
+        const response = await apiSS.obtenerDatosTitular(nroTitular);
+
+        if (response.success) {
+          this.nuevoFamiliar.dniTitular = response.data.dniTitular;
+          this.nuevoFamiliar.titular = response.data.titular;
+        } else {
+          toast.warning("No se encontraron datos del titular.");
+          this.nuevoFamiliar.dniTitular = "";
+          this.nuevoFamiliar.titular = "";
+        }
+      } catch (error) {
+        console.error("Error al obtener los datos del titular", error);
+        toast.error("Hubo un problema al obtener los datos del titular.");
+      }
+    },
+    abrirModal() {
+    this.mostrarModal = true;
+    },
+
+    cerrarModal() {
+      this.mostrarModal = false;
+    },
+
+    async guardarTitular() {
+      if (!this.nuevoTitular.nombre || !this.nuevoTitular.dni) {
+        toast.error("Debe completar todos los campos del nuevo titular.");
         return;
       }
 
-      this.titulares.push({ ...this.nuevoFamiliar });
+      try {
+        const response = await apiSS.guardarNuevoTitular(this.nuevoTitular);
 
-      this.mensaje = "Titular agregado con éxito.";
-      this.habilitarNuevo = false;
-      this.tipoConsulta = '';
-      this.nuevoFamiliar = { titular: '', dniTitular: '', nroTitular: '', nombre: '', dni: '', fechaNacimiento: '', grupoSanguineo: '', servicios: [] };
+        if (response.success) {
+          toast.success("Nuevo titular guardado exitosamente.");
+          this.nuevoFamiliar.nroTitular = this.nuevoTitular.nroTitular;
+          this.nuevoFamiliar.dniTitular = this.nuevoTitular.dni;
+          this.nuevoFamiliar.titular = this.nuevoTitular.nombre;
+          this.cerrarModal(); 
+        } else {
+          toast.error("Error al guardar el nuevo titular.");
+        }
+      } catch (error) {
+        console.error("Error al guardar el nuevo titular", error);
+        toast.error("Hubo un problema al guardar el titular.");
+      }
+    },
+  },
+  computed: {
+    numeroTitular() {
+      return Math.floor(1000 + Math.random() * 9000);
     }
+  },
+  created() {
+    this.nuevoTitular.numero = this.numeroTitular;
   }
 };
 </script>
 
 <style scoped>
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-guardar {
+  padding: 10px;
+  background-color: #11365e;
+  color: white;
+  border-radius: 5px;
+  font-size: 15px;
+  transition: background-color 0.3s;
+  border: 1px solid #ddd;
+  border: none;
+  cursor: pointer;
+}
+.btn-guardar:hover {
+  background-color: #2e47d4;
+}
+.btn-cerrar {
+  padding: 10px;
+  background-color: #e23434;
+  color: white;
+  border-radius: 5px;
+  font-size: 15px;
+  transition: background-color 0.3s;
+  border: 1px solid #ddd;
+  border: none;
+  cursor: pointer;
+}
+.btn-cerrar:hover {
+  background-color: #f83636;
+}
+.input-bloqueado {
+  background-color: #e8ecf1; 
+  color: #363636; 
+  font-family: "Montserrat", sans-serif;
+  cursor: not-allowed; 
+  border: 1px solid #aaa; 
+  transition: border 0.3s ease-in-out;
+}
+.input-encontrado {
+  border: 2px solid #28a745 !important; 
+}
 .form-container {
   margin: 10px;
   padding: 30px;
