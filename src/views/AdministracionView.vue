@@ -1,5 +1,5 @@
 <template>
-  <h1 class="title">Manejo de ADMIN</h1>
+  <h1 class="title">Panel de Administración</h1>
   <div class="button-container">
     <button @click="toggleForm('mostrarFormulario')" class="btn-formulario">
       {{ mostrarFormulario ? 'Ocultar' : 'Mostrar' }} Formularios de ALTA/BAJA
@@ -10,28 +10,42 @@
     <button @click="toggleForm('mostrarCorreos')" class="btn-correos">
       {{ mostrarCorreos ? 'Ocultar' : 'Mostrar' }} Datos de usuarios
     </button>
+    <button @click="toggleForm('mostrarReclamos')" class="btn-reclamos">
+      {{ mostrarReclamos ? 'Ocultar' : 'Mostrar' }} Reclamos
+    </button>
+    <button @click="toggleForm('mostrarDonantes')" class="btn-donantes">
+      {{ mostrarDonantes ? 'Ocultar' : 'Mostrar' }} Donantes
+    </button>
   </div>
   <MVCAltaBaja v-if="mostrarFormulario" />
   <MVCCooplus v-if="mostrarCooplus" />
   <Correos v-if="mostrarCorreos" />
+  <ListaReclamos v-if="mostrarReclamos" />
+  <ListaDonantes v-if="mostrarDonantes" />
 </template>
 
 <script>
 import MVCAltaBaja from '@/components/forms/MVCAlta-Baja.vue';
 import MVCCooplus from '@/components/forms/MVCCooplus.vue';
 import Correos from '@/components/forms/Correos.vue';
+import ListaReclamos from '@/components/forms/ListaReclamos.vue';
+import ListaDonantes from '@/components/forms/ListaDonantes.vue';
 
 export default {
   components: {
     MVCAltaBaja,
     MVCCooplus,
     Correos,
+    ListaReclamos,
+    ListaDonantes
   },
   data() {
     return {
       mostrarFormulario: false,
       mostrarCooplus: false,
       mostrarCorreos: false,
+      mostrarReclamos: false,
+      mostrarDonantes: false
     };
   },
   methods: {
@@ -39,7 +53,8 @@ export default {
       this.mostrarFormulario = false;
       this.mostrarCooplus = false;
       this.mostrarCorreos = false;
-
+      this.mostrarReclamos = false;
+      this.mostrarDonantes = false;
       this[form] = !this[form];
     }
   }
@@ -96,5 +111,11 @@ button {
 }
 .btn-correos:hover {
   background-color: #1d70be;
+}
+.btn-reclamos:hover {
+  background-color: #29943a;
+}
+.btn-donantes:hover {
+  background-color: #29943a;
 }
 </style>

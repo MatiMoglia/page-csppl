@@ -9,7 +9,7 @@ export default {
     async obtenerDonantes() {
         try {
           const response = await apiClient.get("donantes");
-          return response.data;
+          return { success: true, data: response.data };
         } catch (error) {
             return manejarError(error, "Error al obtener los donantes");
         }
@@ -21,7 +21,15 @@ export default {
         } catch (error) {
             return manejarError(error, "Error al inscribir el donante");
         }
-    }
+    },
+    async eliminarFormulario(id) {
+        try {
+          await apiClient.delete(`donantes/${id}`);
+          return { success: true, message: "Donante eliminado correctamente" };
+        } catch (error) {
+          return manejarError(error, "Error al eliminar el formulario");
+        }
+      },
 }
 
 function manejarError(error, mensaje) {
