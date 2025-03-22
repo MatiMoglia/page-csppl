@@ -13,8 +13,8 @@
           <label for="telefono">Teléfono: *</label>
           <input type="text" id="telefono" v-model="formReclamo.telefono" required />
   
-          <label for="email">Email: (opcional)</label>
-          <input type="email" id="email" v-model="formReclamo.email" />
+          <label for="email">Email: *</label>
+          <input type="email" id="email" v-model="formReclamo.email" required/>
   
           <label>Selecciona el Servicio *</label>
           <select v-model="formReclamo.servicio" required>
@@ -45,6 +45,7 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import apiReclamos from '@/services/apiReclamos';
 import NrosGuardia from './csppl-info/NrosGuardia.vue';
+import { mapGetters } from 'vuex';
 
 export default {
     data() {
@@ -64,7 +65,13 @@ export default {
     components: {
         NrosGuardia
     },
+    computed: {
+      ...mapGetters("auth", ["isAuthenticated", "getUser"]),
+    },
     methods: {
+      emailAutocompletado() {
+        return this.isAuthenticated && this.getUser ? this.getUser.email : '';
+      },
       async enviarFormulario() {
         this.formReclamo.fechaReclamo = new Date().toISOString().split('T')[0];
         this.formReclamo.estado = "pendiente";
@@ -120,7 +127,12 @@ export default {
           estado: ''
         };
       }
-    }
+    },
+    mounted() {
+      if (this.isAuthenticated) {
+        this.formReclamo.email = this.getUser.email;
+      }
+    },
   };
 </script>  
 <style scoped>

@@ -6,7 +6,10 @@
           
           <label for="nombre">Nombre y Apellido *</label>
           <input type="text" id="nombre" v-model="formSolicitud.nombre" :class="{'input-error': !formSolicitud.nombre && formSubmitted}" required />
-  
+          
+          <label for="email">Correo electrónico *</label>
+          <input type="text" id="email" v-model="formSolicitud.email" :class="{'input-error': !formSolicitud.email && formSubmitted}" required />
+
           <label for="telefono">Teléfono *</label>
           <input type="tel" id="telefono" v-model="formSolicitud.telefono" :class="{'input-error': !formSolicitud.telefono && formSubmitted}" required />
   
@@ -40,9 +43,6 @@
               Dar de Baja
             </button>
           </div>
-          <label for="email">Correo electrónico *</label>
-          <input type="text" id="em il" v-model="formSolicitud.email" :class="{'input-error': !formSolicitud.email && formSubmitted}" required />
-
           <label for="descripcion">Descripción</label>
           <textarea id="descripcion" v-model="formSolicitud.descripcion" :class="{'input-error': !formSolicitud.descripcion && formSubmitted}" placeholder="Ingrese una descripción del inmueble"></textarea>
           <div v-if="adjuntar === 'si'">
@@ -69,6 +69,8 @@
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import apiClient from '../services/apiForms'; 
+import { mapGetters } from 'vuex';
+
 export default {
   props: {
       servicio: {
@@ -108,6 +110,7 @@ export default {
       };
     },
     computed: {	
+      ...mapGetters("auth", ["isAuthenticated", "getUser"]),
       opcionesMegas() {
         if (this.formSolicitud.tipoInternet === 'fibra') {
           return [100, 200, 300];
@@ -120,6 +123,9 @@ export default {
       }
     },
     methods: {
+      emailAutocompletado() {
+        return this.isAuthenticated && this.getUser ? this.getUser.email : '';
+      },
       enviarFormulario() {
         this.loading = true;
         this.formSolicitud.fechapedido = new Date().toISOString().split('T')[0];
@@ -178,6 +184,7 @@ export default {
         accion: '',
         domicilio: '',
         descripcion: '',
+        email: '',
         files: []
       };
       this.formSubmitted = false;
@@ -185,7 +192,12 @@ export default {
     toggleAccion(accion) {
       this.formSolicitud.accion = this.formSolicitud.accion === accion ? '' : accion;
     }
-  }
+  },
+  mounted() {
+    if (this.isAuthenticated) {
+      this.formSolicitud.email = this.getUser.email;
+    }
+  },
 };
 </script>
 
