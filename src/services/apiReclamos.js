@@ -30,14 +30,24 @@ export default {
           return manejarError(error, "Error al actualizar el formulario");
         }
       },
-      async eliminarFormulario(id) {
+    async eliminarFormulario(id) {
         try {
           await apiClient.delete(`reclamos/${id}`);
           return { success: true, message: "Formulario eliminado correctamente" };
         } catch (error) {
           return manejarError(error, "Error al eliminar el formulario");
         }
-      },
+    },
+    async buscarReclamos(email) {
+        try {
+            const response = await apiClient.get(`reclamos?q={"email": "${email}"}`);
+            
+            return response.data.length > 0 ? response.data : []; 
+        } catch (error) {
+            console.error("Error al obtener reclamos:", error);
+            return []; 
+        }
+    }
 };
 
 function manejarError(error, mensaje) {

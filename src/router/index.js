@@ -17,6 +17,8 @@ import LoginView from '@/views/LoginView.vue';
 import AdministracionView from '@/views/AdministracionView.vue';
 import NovedadesView from '@/views/NovedadesView.vue';
 import ReclamosView from '@/views/ReclamosView.vue';
+import PerfilView from '@/views/PerfilView.vue';
+
 import detalleSepelio from '@/components/detalleSS/DetalleSepelio.vue';
 import detalleBanco from '@/components/detalleSS/DetalleBanco.vue';
 import detalleTraslado from '@/components/detalleSS/DetalleTraslado.vue';
@@ -139,6 +141,18 @@ const routes = [
     path: '/reclamos',
     name: 'ReclamosView',
     component: ReclamosView,
+  },
+  {
+    path: '/perfil',
+    name: 'PerfilView',
+    component: PerfilView,
+    /*beforeEnter: (to, from, next) => {
+      if (store.state.auth.user) {
+        next();
+      } else {
+        next('/login');
+      }
+    }*/
   }
 ]
 

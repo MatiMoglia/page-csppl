@@ -6,39 +6,49 @@ const apiClient = axios.create({
 });
 
 export default {
-  async enviarFormulario(formData) {
-    try {
-      const response = await apiClient.post("forminternet", formData);
-      return { success: true, data: response.data };
-    } catch (error) {
-      return manejarError(error, "Error al enviar el formulario");
-    }
+    async enviarFormulario(formData) {
+      try {
+        const response = await apiClient.post("forminternet", formData);
+        return { success: true, data: response.data };
+      } catch (error) {
+        return manejarError(error, "Error al enviar el formulario");
+      }
   },
 
   async obtenerFormularios() {
-    try {
-      const response = await apiClient.get("forms");
-      return { success: true, data: response.data };
-    } catch (error) {
-      return manejarError(error, "Error al obtener el formulario");
-    }
+      try {
+        const response = await apiClient.get("forms");
+        return { success: true, data: response.data };
+      } catch (error) {
+        return manejarError(error, "Error al obtener el formulario");
+      }
   },
   async actualizarFormulario(id, formData) {
-    try {
-      const response = await apiClient.patch(`/forms/${id}`, formData);
-      return { success: true, data: response.data }; 
-    } catch (error) {
-      return manejarError(error, "Error al actualizar el formulario");
-    }
+      try {
+        const response = await apiClient.patch(`/forms/${id}`, formData);
+        return { success: true, data: response.data }; 
+      } catch (error) {
+        return manejarError(error, "Error al actualizar el formulario");
+      }
   },
   async eliminarFormulario(id) {
-    try {
-      await apiClient.delete(`forms/${id}`);
-      return { success: true, message: "Formulario eliminado correctamente" };
-    } catch (error) {
-      return manejarError(error, "Error al eliminar el formulario");
-    }
+      try {
+        await apiClient.delete(`forms/${id}`);
+        return { success: true, message: "Formulario eliminado correctamente" };
+      } catch (error) {
+        return manejarError(error, "Error al eliminar el formulario");
+      }
   },
+  async buscarForms(email) {
+    try {
+        const response = await apiClient.get(`forms?q={"email": "${email}"}`);
+        
+        return response.data.length > 0 ? response.data : []; 
+    } catch (error) {
+        console.error("Error al obtener reclamos:", error);
+        return []; 
+    }
+  }
 };
 
 function manejarError(error, mensaje) {

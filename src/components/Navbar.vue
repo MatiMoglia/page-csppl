@@ -72,7 +72,7 @@
                 <div v-if="isAdmin">
                   <li><router-link to="/administracion" class="dropdown__link" @click="closeMenu">Panel de ADMIN</router-link></li>
                 </div>
-                <li><router-link to="/profile" class="dropdown__link" @click="closeMenu">Mi Perfil</router-link></li>
+                <li><router-link to="/perfil" class="dropdown__link" @click="closeMenu">Mi Perfil</router-link></li>
                 <li><router-link to="/reclamos" class="dropdown__link" @click="closeMenu">Reclamos</router-link></li>
                 <li><a href="#" class="dropdown__link logout" @click="logout">Cerrar Sesión</a></li>
               </template>

@@ -35,13 +35,13 @@
             <button class="btn-login">Ingresar</button>
           </form>
           <div class="register-link">
-            <p>¿No tienes cuenta? <router-link to="/registro">Regístrate aquí</router-link></p>
+            <p>¿No tienes cuenta? <router-link to="/registro"><br>Regístrate aquí</router-link></p>
           </div>
         </div>
       </div> 
       <div class="wrapper" data-aos="fade-right">
         <div class="login-image">
-        <img src="../assets/css/img/logo nuevo.jpg" alt="Banner" />
+        <img src="../assets/css/img/GLPE26UB6JFNFBSL3ZOB2U34SU.jpg" alt="Banner" />
       </div>
       </div>
     </div>
@@ -150,7 +150,7 @@
   
 .login-form {
   flex: 1;
-  max-width: 600px;
+  max-width: 526px;
   padding: 100px;
   display: flex;
   flex-direction: column;
@@ -256,8 +256,10 @@ i {
 }
   
 .login-image img {
-  max-width: 220%;
-  max-height: 100%;
+  margin-top: 40px;
+  max-width: 210%;
+  max-height: 90%;
+  opacity: 0.7; 
 }
 .cyber-bg {
   position: fixed;
@@ -270,7 +272,6 @@ i {
 .wrapper {
   max-width: 400px;
   width: 90%; 
-  padding: 30px;
   border-radius: 15px;
   color: white;
   display: flex;

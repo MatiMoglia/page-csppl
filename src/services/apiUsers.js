@@ -96,5 +96,26 @@ export default {
       console.error("Error al eliminar el usuario en la segunda API:", error);
       return { success: false, error: error.response?.data?.message || "Error al eliminar el usuario" };
     }
+  },
+  async asociarTitular(usuarioId, nroTitular) {
+    try {
+      const response = await apiClient.patch(`usuarios/${usuarioId}`, { nroTitular });
+        return { success: true, data: response.data };
+    } catch (error) {
+        return manejarError(error, "Error al asociar el número de titular");
+    }
+  },
+  async validarContrasena(id, password) {
+    try {
+      const response = await apiClient.get(`usuarios?q={"_id": "${id}", "password": "${password}"}`);
+      return response.data.length > 0; 
+    } catch (error) {
+      console.error("Error al validar la contraseña:", error);
+      return false;
+    }
   }
 };
+function manejarError(error, mensaje) {
+  console.error(mensaje, error);
+  return { success: false, message: mensaje, error: error };
+}
