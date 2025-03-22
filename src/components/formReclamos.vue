@@ -33,7 +33,7 @@
           <label for="descripcion">Descripcion del Reclamo: *</label>
           <textarea placeholder="Deja tu mensaje aquí..." v-model="formReclamo.descripcion"></textarea>
   
-          <button type="submit">Enviar solicitud</button>
+          <button type="submit">Enviar</button>
         </form>
       </div>
       <NrosGuardia/>
@@ -56,6 +56,7 @@ export default {
           email: '',
           servicio: '',
           descripcion: '',
+          estado:'',
           fechaReclamo: new Date().toISOString().split('T')[0]
         },
       };
@@ -66,7 +67,8 @@ export default {
     methods: {
       async enviarFormulario() {
         this.formReclamo.fechaReclamo = new Date().toISOString().split('T')[0];
-  
+        this.formReclamo.estado = "pendiente";
+
         if (this.formReclamo.nombre === "") {
           toast.error("Ingrese el nombre completo.");
           return;
@@ -114,7 +116,8 @@ export default {
           telefono: '',
           email: '',
           servicio: '',
-          descripcion: ''
+          descripcion: '',
+          estado: ''
         };
       }
     }

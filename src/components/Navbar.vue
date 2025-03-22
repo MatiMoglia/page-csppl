@@ -55,9 +55,6 @@
             </ul>
           </li>
           <li><router-link to="/contacto" class="nav__link" @click="closeMenu">Contacto</router-link></li>
-          <div v-if="isAdmin" class="admin">
-            <li><router-link to="/administracion" class="nav__link admin" @click="closeMenu">Admin</router-link></li>
-          </div>
           <li class="dropdown__item user__menu">
             <div class="nav__link" @click="toggleUserMenu">
               <i class="ri-user-line"></i> 
@@ -72,6 +69,9 @@
                 <li><router-link to="/reclamos" class="dropdown__link" @click="closeMenu">Reclamos</router-link></li>
               </template>
               <template v-else>
+                <div v-if="isAdmin">
+                  <li><router-link to="/administracion" class="dropdown__link" @click="closeMenu">Panel de ADMIN</router-link></li>
+                </div>
                 <li><router-link to="/profile" class="dropdown__link" @click="closeMenu">Mi Perfil</router-link></li>
                 <li><router-link to="/reclamos" class="dropdown__link" @click="closeMenu">Reclamos</router-link></li>
                 <li><a href="#" class="dropdown__link logout" @click="logout">Cerrar Sesión</a></li>
@@ -146,6 +146,7 @@ export default {
   font-size: 0.8rem;  
   color: #b0b0b0;  
   margin-top: -40px;
+  margin-left: 20px;
 }
 .nav {
   display: flex;
@@ -168,7 +169,7 @@ export default {
 }
 
 .nav__logo-img {
-  margin-top: 12px;
+  margin-top: 10px;
   height: 100px;
 }
 
@@ -191,7 +192,7 @@ export default {
 .nav__link {
   text-decoration: none;
   color: #fff;
-  font-size: 1.05rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 

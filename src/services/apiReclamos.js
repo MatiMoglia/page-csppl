@@ -13,7 +13,31 @@ export default {
         } catch (error) {
             return manejarError(error, "Error al enviar el reclamo");
         }
-    }
+    },
+    async obtenerReclamos() {
+        try {
+            const response = await apiClient.get("reclamos");
+            return { success: true, data: response.data };
+        } catch (error) {
+            return manejarError(error, "Error al obtener los reclamos");
+        }
+    },
+    async actualizarFormulario(id, formData) {
+        try {
+          const response = await apiClient.patch(`reclamos/${id}`, formData);
+          return { success: true, data: response.data }; 
+        } catch (error) {
+          return manejarError(error, "Error al actualizar el formulario");
+        }
+      },
+      async eliminarFormulario(id) {
+        try {
+          await apiClient.delete(`reclamos/${id}`);
+          return { success: true, message: "Formulario eliminado correctamente" };
+        } catch (error) {
+          return manejarError(error, "Error al eliminar el formulario");
+        }
+      },
 };
 
 function manejarError(error, mensaje) {
