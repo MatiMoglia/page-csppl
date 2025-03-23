@@ -37,7 +37,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .numeros {
     text-align: center;
     width: 100%;

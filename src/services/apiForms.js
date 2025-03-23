@@ -14,7 +14,6 @@ export default {
         return manejarError(error, "Error al enviar el formulario");
       }
   },
-
   async obtenerFormularios() {
       try {
         const response = await apiClient.get("forms");

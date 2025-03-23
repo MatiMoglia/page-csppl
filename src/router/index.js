@@ -22,6 +22,8 @@ import PerfilView from '@/views/PerfilView.vue';
 import detalleSepelio from '@/components/detalleSS/DetalleSepelio.vue';
 import detalleBanco from '@/components/detalleSS/DetalleBanco.vue';
 import detalleTraslado from '@/components/detalleSS/DetalleTraslado.vue';
+import testInt from '@/components/comp-inicio/testInt.vue';
+import facturaDigital from '@/components/comp-inicio/facturaDigital.vue';
 
 const routes = [
   {
@@ -146,14 +148,25 @@ const routes = [
     path: '/perfil',
     name: 'PerfilView',
     component: PerfilView,
-    /*beforeEnter: (to, from, next) => {
+    beforeEnter: (to, from, next) => {
       if (store.state.auth.user) {
         next();
       } else {
         next('/login');
       }
-    }*/
-  }
+    }
+  },
+  {
+    path: '/testVelocidad',
+    name: 'testInt',
+    component: testInt,
+  },
+  {
+    path: '/facturaDigital',
+    name: 'FacturaDigital',
+    component: facturaDigital,
+  },
+  
 ]
 
 const router = createRouter({
