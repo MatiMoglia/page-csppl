@@ -18,6 +18,7 @@ import AdministracionView from '@/views/AdministracionView.vue';
 import NovedadesView from '@/views/NovedadesView.vue';
 import ReclamosView from '@/views/ReclamosView.vue';
 import PerfilView from '@/views/PerfilView.vue';
+import NecrologicosView from '@/views/NecrologicosView.vue';
 
 import detalleSepelio from '@/components/detalleSS/DetalleSepelio.vue';
 import detalleBanco from '@/components/detalleSS/DetalleBanco.vue';
@@ -166,6 +167,11 @@ const routes = [
     name: 'FacturaDigital',
     component: facturaDigital,
   },
+  {
+    path: '/necrologicos',
+    name: 'NecrologicosView',
+    component: NecrologicosView,
+  }
   
 ]
 
