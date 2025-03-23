@@ -1,7 +1,7 @@
 <template>
   <div class="form-container">
     <div class="form-section">
-      <h2>Formulario de Adhesión</h2>
+      <h2>Nuestro formulario de Adhesión</h2>
       <form @submit.prevent="enviarFormulario">
         
         <label for="nombreAdhesion">Nombre y Apellido *</label>
@@ -61,15 +61,15 @@
       </button>
 
       <div class="dropdown-content" v-show="mostrarFormularioConsulta">
-        <input type="text" placeholder="Nombre" v-model="formConsulta.nombre" :class="{'input-error': !formConsulta.nombre && formSubmittedConsulta}">
+        <input type="text" placeholder="Nombre" v-model="formConsulta.nombre" required>
 
-        <input type="email" placeholder="Correo electrónico" v-model="formConsulta.email" :class="{'input-error': !formConsulta.email && formSubmittedConsulta}">
+        <input type="email" placeholder="Correo electrónico" v-model="formConsulta.email" required>
 
-        <input type="tel" placeholder="Número de teléfono" v-model="formConsulta.telefono" :class="{'input-error': !formConsulta.telefono && formSubmittedConsulta}">
+        <input type="tel" placeholder="Número de teléfono" v-model="formConsulta.telefono" required>
 
-        <textarea placeholder="Deja tu mensaje aquí..." v-model="formConsulta.consulta" :class="{'input-error': !formConsulta.consulta && formSubmittedConsulta}"></textarea>
+        <textarea placeholder="Deja tu mensaje aquí..." v-model="formConsulta.descripcion" required></textarea>
 
-        <button class="btn-enviar">Enviar</button>
+        <button class="btn-enviar" @click="enviarConsulta">Enviar</button>
       </div>
     </div>
   </div>
@@ -81,6 +81,7 @@ import 'vue3-toastify/dist/index.css';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import apiClient from '../services/apiCooplus'; 
+import apiReclamos from '@/services/apiReclamos';
 export default {
   data() {
     return {
@@ -100,14 +101,50 @@ export default {
         nombre: '',
         email: '',
         telefono: '',
-        consulta: ''
+        descripcion: '',
+        fechaReclamo: '',
+        servicio:'',
+        estado: ''
       },
       formSubmittedAdhesion: false,
-      formSubmittedConsulta: false,
       mostrarFormularioConsulta: false
     };
   },
   methods: {
+      async enviarConsulta() {
+      this.formSubmittedConsulta = true;
+      this.formConsulta.fechaReclamo = new Date().toISOString().split('T')[0];
+      this.formConsulta.servicio = "COOPLUS";
+      this.formConsulta.estado = "Pendiente";
+
+        if (!this.formConsulta.nombre) {
+          toast.error("Ingrese su nombre.");
+          return;
+        } else if (!this.isValidEmail(this.formConsulta.email)) {
+          toast.error("Ingrese un correo electrónico válido.");
+          return;
+        } else if (!this.formConsulta.telefono) {
+          toast.error("Ingrese su número de teléfono.");
+          return;
+        } else if (!this.formConsulta.descripcion) {
+          toast.error("Ingrese su consulta.");
+          return;
+        }
+          try {
+            const response = await apiReclamos.enviarReclamo(this.formConsulta);
+            console.log("Respuesta de la API:", response);
+
+            if (response && response._id) {
+            toast.success("Reclamo enviado con éxito");
+            this.resetFormConsulta();
+            } else {
+            toast.error("Error al enviar el reclamo. Respuesta inesperada.");
+            }
+        } catch (error) {
+            console.error("Error al enviar el reclamo:", error);
+            toast.error("Error al conectar con el servidor.");
+        }
+      },
       enviarFormulario() {
       this.loading = true;
       this.formAdhesion.fechapedido = new Date().toISOString().split('T')[0];
@@ -165,10 +202,9 @@ export default {
         nombre: '',
         email: '',
         telefono: '',
-        consulta: ''
+        descripcion: ''
       };
-      this.formSubmittedConsulta = false; 
-    }
+    },
   },
   mounted() {
     AOS.init();
@@ -193,11 +229,18 @@ export default {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
   
-h2, h3 {
+h2 {
+  text-align: left;
+  color: #0e1850;
+  font-size: 2rem;
+  margin: 0;
+}
+
+h3 {
   text-align: left;
   color: #0e1850;
 }
-  
+
 label {
   font-weight: bold;
   display: block;
@@ -232,7 +275,7 @@ button {
   border-radius: 5px;
   font-size: 1.1em;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: 0.3s ease;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
 }

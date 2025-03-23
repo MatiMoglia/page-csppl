@@ -332,7 +332,7 @@ button:hover {
   z-index: 1000;
 }
 .guardia-btn:hover {
-  background-color: #0e1850;
+  background-color: #d664bd;
 }
 
 .guardia-popup {
@@ -355,7 +355,7 @@ button:hover {
   margin-top: 0px;
 }
 .most-popular {
-  background-color: #d664bd;
+  background-color: #eecd14;
   color: white;
   padding: 5px 10px;
   font-size: 20px;
