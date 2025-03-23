@@ -31,7 +31,7 @@
       
       <div class="footer-section">
         <h3>Data Fiscal</h3>
-        <img src="https://www.afip.gob.ar/images/data-fiscal.jpg" alt="Data Fiscal" class="data-fiscal">
+        <img src="http://www.afip.gob.ar/images/f960/DATAWEB.jpg" alt="Data Fiscal" class="data-fiscal">
       </div>
     </div>
     <div class="footer-bottom">

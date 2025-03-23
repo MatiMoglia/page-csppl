@@ -86,7 +86,7 @@
       </div>
       <div v-if="isModalOpen" class="modal-overlay" @click.self="closeModal">
             <div class="modal-content">
-                <button class="modal-close-btn" @click="closeModal">×</button> <!-- Botón de cierre con "X" -->
+                <button class="modal-close-btn" @click="closeModal">×</button> 
                 <h2>Enviar CV</h2>
                 <form @submit.prevent="handleSubmitCV">
                     <div class="form-group">
