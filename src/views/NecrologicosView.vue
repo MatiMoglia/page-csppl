@@ -5,7 +5,7 @@
       <div v-for="fallecido in paginatedFallecidos" :key="fallecido._id" class="card">
         <h2>{{ fallecido.nombre }}</h2>
         <p class="qepd">Que en paz descanse (Q.E.P.D.)</p>
-        <p><strong>Fallecido el dia:</strong> {{ fallecido.fechadisfuncion }}</p>
+        <p><strong>Fallecido el dia:</strong> {{ fallecido.fallecimiento }}</p>
         <p><strong>Edad:</strong> {{ fallecido.edad }}</p>
         <p><strong>Sepelio:</strong> {{ fallecido.sepelio }}</p>
         <p><strong>Iglesia:</strong> {{ fallecido.iglesia }}</p>
@@ -52,21 +52,34 @@ export default {
       this.currentGroup = index;
     },
     parseDate(dateString) {
-      const [day, month, year] = dateString.split("/").map(Number);
-      return new Date(year, month - 1, day); 
-    }
+      if (!dateString) return null; 
+
+      const dateParts = dateString.split(" ");
+      if (dateParts.length !== 2) return null; 
+
+      const [date, time] = dateParts;
+      const [year, month, day] = date.split("-").map(Number);
+      const [hour, minute] = time.split(":").map(Number);
+
+      return new Date(year, month - 1, day, hour, minute);
+      }
   },
   async created() {
-    const response = await apiAvisos.obtenerDatos();
-    if (response.success) {
-      this.fallecidos = response.data
-        .map(fallecido => ({
-          ...fallecido,
-          fechaOrdenada: this.parseDate(fallecido.fechadisfuncion)
-        }))
-        .sort((a, b) => b.fechaOrdenada - a.fechaOrdenada); 
-    } else {
-      console.error(response.message);
+    try {
+      const response = await apiAvisos.obtenerDatos();
+      if (response.success) {
+        this.fallecidos = response.data
+          .map(fallecido => ({
+            ...fallecido,
+            fechaOrdenada: this.parseDate(fallecido.fallecimiento),
+            fechaSepelio: this.parseDate(fallecido.sepelio)
+          }))
+          .sort((a, b) => b.fechaOrdenada - a.fechaOrdenada);
+          
+        console.error("Error en la API:", response.message);
+      }
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
     }
   },
 };

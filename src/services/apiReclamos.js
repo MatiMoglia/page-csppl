@@ -29,7 +29,7 @@ export default {
         } catch (error) {
           return manejarError(error, "Error al actualizar el formulario");
         }
-      },
+    },
     async eliminarFormulario(id) {
         try {
           await apiClient.delete(`reclamos/${id}`);
