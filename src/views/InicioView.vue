@@ -5,6 +5,7 @@
     <CardCooponline/>
     <CooplusCard/>
     <SliderSpam/>
+    <Novedades/>
     <CardNecrologia/>
     <NrosGuardia/>
     <Redes/>

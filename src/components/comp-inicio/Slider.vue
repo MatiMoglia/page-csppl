@@ -71,10 +71,17 @@ export default {
         },
         {
           nombre: "Servicio de Fibra Optica",
-          descripcion: "Conoce nuestros nuevos packs de Internet",
+          descripcion: "Conoce nuestros nuevos packs de Internet.",
           imagen:
             "https://www.velocom.com.ar/wp-content/uploads/sites/6/post-internet-fibra-optica.jpg",
           ruta: "/telecomunicaciones",
+        },
+        {
+          nombre: "Donar sangre es donar Vida",
+          descripcion: "Completa el formulario para ser voluntario.",
+          imagen:
+            "https://www.life-source.org/wp-content/uploads/2020/11/iStock-1173492798-1200x673.jpg",
+          ruta: "/detalle-banco",
         },
       ],
     };
