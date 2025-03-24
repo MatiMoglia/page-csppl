@@ -18,8 +18,8 @@
 <style scoped>
 .coopOnline-container {
     width: 100%;
-    max-width: 1150px;
-    height: 220px;
+    max-width: 800px;
+    height: 180px;
     margin: 40px auto;
     position: relative;
     cursor: pointer;

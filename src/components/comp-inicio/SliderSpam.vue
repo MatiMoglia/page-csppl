@@ -32,20 +32,12 @@ export default {
             ruta: "/testVelocidad",
           },
           {
-            imagen: "https://www.coopspportena.com.ar/sites/default/files/styles/banner_principal_2_hd/public/Banner%20digital_factura%20digital-02.jpg?itok=Fa6bIzt9",
-            ruta: "/facturaDigital",
+            imagen:  require("@/assets/css/img/convenios.jpg"),
+            ruta: "/contacto",
           },
           {
-            imagen: "https://www.coopspportena.com.ar/sites/default/files/styles/banner_principal_2_hd/public/banner-telecomunicaciones.jpg?itok=jXOG7ZnR",
-            ruta: "/internet",
-          },
-          {
-            imagen: "https://www.coopspportena.com.ar/sites/default/files/styles/banner_principal_2_hd/public/banner-gas.jpg?itok=YZL-kmLw",
-            ruta: "/gas-natural",
-          },
-          {
-            imagen: "https://www.coopspportena.com.ar/sites/default/files/styles/banner_principal_2_hd/public/banner-telefonia.jpg?itok=nbQ_6VNi",
-            ruta: "/telefonia",
+            imagen: require("@/assets/css/img/internet300.jpg"),
+            ruta: "/telecomunicaciones",
           },
         ],
       };
@@ -85,7 +77,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
   
 .slider-item {
@@ -97,7 +90,7 @@ export default {
 }
   
 .slider-img {
-    width: 80%;
+    width: 85%;
     height: 100%;
     object-fit: cover;
 }
@@ -105,26 +98,26 @@ export default {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
     color: white;
     border: none;
-    padding: 15px;
-    font-size: 20px;
+    padding: 10px;
+    font-size: 25px;
     cursor: pointer;
     z-index: 10;
-    transition: background 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .left {
-    left: 5%;
+    left: 8%;
 }
 
 .right {
-    right: 5%;
+    right: 8%;
 }
 
 .arrow:hover {
-    background: rgba(255, 255, 255, 0.5);
     color: black;
 }
 

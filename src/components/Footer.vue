@@ -29,7 +29,7 @@
         </div>
       </div>
       
-      <div class="footer-section">
+      <div class="footer-section data-fiscal-section">
         <h3>Data Fiscal</h3>
         <img src="http://www.afip.gob.ar/images/f960/DATAWEB.jpg" alt="Data Fiscal" class="data-fiscal">
       </div>
@@ -56,6 +56,12 @@ methods: {
 </script>
 
 <style scoped>
+.footer-section.data-fiscal-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 .footer {
   background-color: #121941;
   color: white;

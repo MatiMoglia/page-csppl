@@ -74,10 +74,10 @@
             <div class="redes-sociales">
                 <h2>¡Síguenos en nuestras redes sociales!</h2>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/" target="_blank">
+                    <a href="https://www.facebook.com/coop.portena?locale=es_LA" target="_blank">
                         <i class="ri-facebook-fill"></i> Facebook
                     </a>
-                    <a href="https://www.instagram.com/" target="_blank">
+                    <a href="https://www.instagram.com/coop.portena?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
                         <i class="ri-instagram-fill"></i> Instagram
                     </a>
                 </div>

@@ -1,43 +1,55 @@
 <template>
-  <div class="numeros">
-        <h2>Nuestros números de guardia:</h2>
+    <h2 class="title">Numeros de Guardia</h2>
+    <div class="numeros">
         <div class="fila">
-        <div class="card">
-            <i class="ri-phone-line"></i>
-            <p>Guardia <br>Telecomunicaciones</p>
-            <strong>3564630995</strong>
+            <div class="card">
+                <i class="ri-phone-line"></i>
+                <p>Guardia <br>Telecomunicaciones</p>
+                <strong>3564630995</strong>
+            </div>
+            <div class="card">
+                <i class="ri-phone-line"></i>
+                <p>Guardia <br> Energía Eléctrica</p>
+                <strong>3564593558</strong>
+            </div>
+            <div class="card">
+                <i class="ri-phone-line"></i>
+                <p>Guardia <br>Agua Potable</p>
+                <strong>3564593561</strong>
+            </div>
         </div>
-        <div class="card">
-            <i class="ri-phone-line"></i>
-            <p>Guardia <br> Energía Eléctrica</p>
-            <strong>3564593558</strong>
+        <div class="fila">
+            <div class="card">
+                <i class="ri-phone-line"></i>
+                <p>Guardia <br>Traslado Social</p>
+                <strong>3564593560</strong>
+            </div>
+            <div class="card">
+                <i class="ri-phone-line"></i>
+                <p>Guardia <br>Banco de Sangre</p>
+                <strong>3564562394</strong>
+            </div>
+            <div class="card">
+                <i class="ri-phone-line"></i>
+                <p>Guardia <br>Sepelio</p>
+                <strong>3564330362</strong>
+            </div>
         </div>
-        <div class="card">
-            <i class="ri-phone-line"></i>
-            <p>Guardia <br>Agua Potable</p>
-            <strong>3564593561</strong>
-        </div>
-    </div>
-    <div class="fila">
-        <div class="card">
-            <i class="ri-phone-line"></i>
-            <p>Guardia <br>Traslado Social</p>
-            <strong>3564593560</strong>
-        </div>
-        <div class="card">
-            <i class="ri-phone-line"></i>
-            <p>Guardia <br>Banco de Sangre</p>
-            <strong>3564562394</strong>
-        </div>
-        <div class="card">
-            <i class="ri-phone-line"></i>
-            <p>Guardia <br>Sepelio</p>
-            <strong>3564330362</strong>
-        </div>
-    </div>
   </div>
 </template>
 <style scoped>
+.title {
+    color: #1f2c79;
+    background-color: #ececec38;
+    font-size: 2rem;
+    border-left: 5px solid #0e1850;
+    border-right: 5px solid #0e1850;
+    margin-left: 100px;
+    margin-right: 100px;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}  
 .numeros {
     text-align: center;
     width: 100%;
@@ -49,11 +61,6 @@
     gap: 15px;
     margin-bottom: 10px;
 }
-h2 {
-    color: #0e1850;
-    text-align: center;
-    margin: 30px;
-}
 
 .numeros-guardia {
     display: flex;
@@ -64,23 +71,22 @@ h2 {
 
 .card {
     background: #fff;
-    padding: 20px;
+    padding: 50px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 250px;
+    width: 300px;
+    height: 200px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .card i {
-    font-size: 30px;
+    font-size: 40px;
     color: #113e6e;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .card strong {

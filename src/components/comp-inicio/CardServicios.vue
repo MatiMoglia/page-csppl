@@ -66,7 +66,7 @@ export default {
 }
 .title {
   color: #1f2c79;
-  background-color: #ececec;
+  background-color: #ececec38;
   font-size: 2.4rem;
   padding: 15px;
   border-left: 5px solid #0e1850;

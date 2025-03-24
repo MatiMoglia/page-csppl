@@ -19,7 +19,7 @@
 <style scoped>
 .title {
   color: #be53a7;
-  background-color: #ececec;
+  background-color: #ececec38;
   font-size: 2rem;
   border-left: 5px solid #0e1850;
   border-right: 5px solid #0e1850;
