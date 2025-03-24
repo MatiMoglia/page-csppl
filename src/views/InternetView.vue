@@ -46,7 +46,7 @@
             
             <h3 class="section-title">Ventajas de contratar Fibra Óptica</h3>
             <CardCarousel/>
-            <h3 class="section-title" style="text-align: left; margin-bottom: 5px;">Requisitos y Condiciones:</h3>
+            <h3 class="section-title" style="text-align: left; margin-bottom: 10px; border: none;">Requisitos y Condiciones:</h3>
             <p class="description">La fibra óptica es la última tecnología de banda ancha que ofrece multitud de ventajas sobre las conexiones tradicionales de cobre.
                  Sin embargo, su despliegue demanda una serie de requerimientos con los que debe contar el edificio donde se vaya a instalar.</p>
                  <div class="dropdown-containers">
@@ -116,7 +116,7 @@
                     <h3>4 MB de Internet</h3>
                     <p class="price">$12.499</p>
                     <button class="btn-solicitar">Solicitar</button>
-                    <button class="btn-consultar">
+                    <button class="btn-consultar" @click="redirigirWhatsApp()">
                         <i class="ri-phone-line"></i> Consultar
                     </button>
                 </div>
@@ -126,7 +126,7 @@
                     <h3>5 MB de Internet</h3>
                     <p class="price">$23.599</p>
                     <button class="btn-solicitar">Solicitar</button>
-                    <button class="btn-consultar">
+                    <button class="btn-consultar" @click="redirigirWhatsApp()">
                         <i class="ri-phone-line"></i> Consultar
                     </button>
                 </div>
@@ -163,7 +163,13 @@ export default {
         scrollToFormulario() {
             const formulario = document.getElementById("formulario");
             formulario.scrollIntoView({ behavior: "smooth" });
-        }
+        },
+        redirigirWhatsApp() {
+        const numero = "5493564331499";
+        const mensaje = "Quiero consultar sobre el servicio de Internet Cobre/Rural";
+        const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+        window.open(url, "_blank");
+      }
     }
 };
 </script>
@@ -241,10 +247,13 @@ li {
     margin: 12px;
 }
 .subtitle {
-    color: #333;
-    text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+    background: #0e1850; 
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: -20px -20px 20px -20px; 
+    border-top-left-radius: 10px;
+     border-top-right-radius: 10px;
+     font-size: 2rem;
 }
 .section-title {
     text-align: center;
@@ -252,6 +261,8 @@ li {
     font-size: 1.8rem;
     margin-bottom: 30px;
     margin-top: 20px;
+    border-left: 3px solid #0e1850;
+    border-right: 3px solid #0e1850;
 }
 .service-list, .requirements-list, .conditions-list {
     list-style: none;

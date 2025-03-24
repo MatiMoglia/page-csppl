@@ -8,9 +8,9 @@
         ></iframe>
       </div>
     </div>
-  </template>
+</template>
   
-  <style scoped>
+<style scoped>
   .container {
     display: flex;
     flex-direction: column;
@@ -48,5 +48,5 @@
     border-radius: 10px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
   }
-  </style>
+</style>
   

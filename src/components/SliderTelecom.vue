@@ -9,7 +9,7 @@
               :style="{ backgroundImage: 'url(' + servicios[currentIndex].imagen + ')' }"
             >
               <div class="slider__text">
-                <h1>{{ servicios[currentIndex].nombre }}</h1>
+                <h2>{{ servicios[currentIndex].nombre }}</h2>
                 <p>{{ servicios[currentIndex].descripcion }}</p>
               </div>
             </div>
@@ -22,12 +22,12 @@
         </div>
       </section>
     </div>
-  </template>
+</template>
   
-  <script>
-  import "animate.css";
+<script>
+ import "animate.css";
   
-  export default {
+export default {
     data() {
       return {
         currentIndex: 0,
@@ -41,8 +41,13 @@
           },
           {
             nombre: "Internet Rural",
-            descripcion: "Servicio para la zona rural de Porteña.",
+            descripcion: "Contrata el servicio para la zona rural de Porteña.",
             imagen: "https://www.clarin.com/2018/04/28/BJwIVYGpf_1256x620__1.jpg",
+          },
+          {
+            nombre: "Precios Accesibles",
+            descripcion: "Elegi el pack de Internet que mas te convenga.",
+            imagen: "https://www.coopspportena.com.ar/sites/default/files/styles/banner_principal_2_hd/public/Banner%20digital_guias%20telefonicas-03.jpg?itok=L-MMmDXt",
           },
         ],
       };
@@ -79,49 +84,53 @@
 </script>
   
 <style scoped>
-h1 {
-    font-size: 1.9rem;
-    margin-bottom: 10px;
-}
-p {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-}
   .container {
     text-align: center;
     max-width: 100%;
     overflow: hidden;
-  }
+}
   
-  .slider {
+.slider {
     position: relative;
     width: 100%;
     margin: auto;
     overflow: hidden;
-  }
+}
   
-  .slider__banner {
+.slider__banner {
     position: relative;
     width: 100%;
     min-height: 400px;
     background-size: cover;
     background-position: center;
     transition: background-image 0.5s ease-in-out;
-  }
+}
   
-  .slider__text {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 15px;
-    text-align: center;
-    width: 60%;
-  }
-  
-  .slider__controls {
+.slider__text {
+  position: absolute;
+  bottom: 10%;
+  left: 30%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+  color: #052241;
+  padding: 15px;
+  text-align: center;
+  width: 50%;
+  background-color: rgba(255, 255, 255, 0.534);
+}
+
+.slider__text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.slider__text p {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.slider__controls {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -129,28 +138,28 @@ p {
     display: flex;
     justify-content: space-between;
     transform: translate(-50%, -50%);
-  }
+}
   
-  .slider__controls button {
+.slider__controls button {
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
     padding: 10px;
     font-size: 20px;
     cursor: pointer;
-  }
+}
   
-  .slider__controls button:hover {
+.slider__controls button:hover {
     background: rgba(7, 58, 100, 0.267);
-  }
+}
   
-  .fade-enter-active,
-  .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
     transition: opacity 0.5s ease;
-  }
+}
   
-  .fade-enter, .fade-leave-to {
+.fade-enter, .fade-leave-to {
     opacity: 0;
-  }
+}
 </style>
   
