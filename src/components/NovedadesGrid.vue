@@ -56,7 +56,12 @@ export default {
   },
   methods: {
     async fetchNovedades() {
-      this.novedades = await apiNovs.getNovedades();
+      const response = await apiNovs.getNovedades();
+      if (response.success) {
+        this.novedades = response.data; 
+      } else {
+        console.error("No se pudieron obtener las novedades.");
+      }
     },
     goToGroup(index) {
       this.startIndex = index * 3;
@@ -77,10 +82,16 @@ export default {
   padding: 20px;
 }
 h2 {
-  font-size: 1.8rem;
   color: #1f2c79;
-  padding: 15px;
-  width: 100%;
+  background-color: #ececec38;
+  font-size: 2rem;
+  border-left: 5px solid #0e1850;
+  border-right: 5px solid #0e1850;
+  margin-left: 100px;
+  margin-right: 100px;
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 .novedades-grid {
   display: flex;
@@ -123,6 +134,7 @@ h2 {
   cursor: pointer;
   margin-top: 10px;
   border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .novedad-text button:hover {

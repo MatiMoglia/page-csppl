@@ -17,12 +17,12 @@
       <p class="detalle-fecha">{{ novedad?.fecha }}</p>
       <p class="detalle-contenido">{{ novedad?.contenido }}</p>
     </div>
-  </template>
+</template>
   
-  <script>
-  import { ref, onMounted } from "vue";
-  import { useRoute } from "vue-router";
-  import apiNovs from "@/services/apiNovs";
+<script>
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import apiNovs from "@/services/apiNovs";
   
   export default {
   setup() {
@@ -30,18 +30,24 @@
     const novedad = ref(null);
     const loading = ref(true);
 
-    const obtenerNovedadPorId = async (id) => {
-      try {
-        loading.value = true; 
-        const novedades = await apiNovs.getNovedades();
-        return novedades.find((n) => n.id === id) || null;
-      } catch (error) {
-        console.error("Error al obtener la novedad:", error);
+      const obtenerNovedadPorId = async (id) => {
+    try {
+      loading.value = true; 
+      const response = await apiNovs.getNovedades();
+      
+      if (response.success) {
+        return response.data.find((n) => n.id == id) || null; 
+      } else {
+        console.error("Error: la API no devolvió datos correctos.");
         return null;
-      } finally {
-        loading.value = false; 
       }
-    };
+    } catch (error) {
+      console.error("Error al obtener la novedad:", error);
+      return null;
+    } finally {
+      loading.value = false; 
+    }
+  };
 
     onMounted(async () => {
       novedad.value = await obtenerNovedadPorId(route.params.id);
@@ -54,24 +60,24 @@
   
 <style scoped>
 .loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.377);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.377);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .spinner {
-  border: 6px solid #0e144b;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 2s linear infinite;
+    border: 6px solid #0e144b;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
 }
 
 @keyframes spin {

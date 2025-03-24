@@ -1,5 +1,5 @@
 <template>
-    <h1 class="title">Novedades principales</h1>
+    <h1 class="title">Nuestras Novedades y Noticias</h1>
     <div v-if="loading" class="loading-overlay">
         <div class="spinner"></div>
     </div>
@@ -26,30 +26,20 @@
         </div>
       </div>
       <div class="noticias-destacadas">
-    <h2 class="subtitle">Ultimas novedades subidas:</h2>
-    <div v-for="(novedad, index) in ultimasNoticias" :key="'detalle-' + index" class="novedad-detalle">
-        <img :src="novedad.imagen" :alt="novedad.titulo" class="novedad-img" />
-        <div class="novedad-texto">
-            <h2>{{ novedad.titulo }}</h2>
-            <p><strong>Fecha de publicación:</strong> {{ formatFecha(novedad.fecha) }}</p>
-            <p>{{ novedad.subtitulo }}</p>
-            <p>{{ novedad.contenido }}</p>
-            <button @click="verNovedad(novedad.id)">Leer más</button>
-        </div>
-    </div>
-</div>
-      <div class="redes-sociales">
-        <h2>¡Síguenos en nuestras redes sociales!</h2>
-        <div class="social-links">
-          <a href="https://www.facebook.com/" target="_blank">
-            <i class="ri-facebook-fill"></i> Facebook
-          </a>
-          <a href="https://www.instagram.com/" target="_blank">
-            <i class="ri-instagram-fill"></i> Instagram
-          </a>
-        </div>
+          <h2 class="subtitle">Todo lo nuevo de la Coop:</h2>
+          <div v-for="(novedad, index) in ultimasNoticias" :key="'detalle-' + index" class="novedad-detalle">
+              <img :src="novedad.imagen" :alt="novedad.titulo" class="novedad-img" />
+              <div class="novedad-texto">
+                  <h2>{{ novedad.titulo }}</h2>
+                  <p><strong>Fecha de publicación:</strong> {{ formatFecha(novedad.fecha) }}</p>
+                  <p>{{ novedad.subtitulo }}</p>
+                  <p>{{ novedad.contenido }}</p>
+                  <button @click="verNovedad(novedad.id)">Leer más</button>
+              </div>
+          </div>
       </div>
-      <NovedadesGriad />
+      <NovedadesGrid />
+      <redes />
       <trabajoInter/>
     </div>
 </template>
@@ -58,6 +48,7 @@
 import apiNovs from "@/services/apiNovs";
 import NovedadesGrid from "@/components/NovedadesGrid.vue";
 import trabajoInter from "@/components/csppl-info/trabajoInter.vue";
+import redes from "@/components/comp-inicio/redes.vue";
 import { toast } from 'vue3-toastify';
 
 export default {
@@ -71,7 +62,8 @@ export default {
     },
     components: {
       NovedadesGrid,
-      trabajoInter
+      trabajoInter,
+      redes,
     },
     computed: {
       sliderNovedades() {
@@ -82,25 +74,25 @@ export default {
       },
     },
     methods: {
-        async fetchNovedades() {
+      async fetchNovedades() {
         this.loading = true;
         try {
-            const response = await apiNovs.getNovedades();
-
-            if (Array.isArray(response)) {  
-                this.novedades = response;  
-            } else {  
-                console.log("Respuesta inesperada:", response);  
-                this.novedades = [];  
-                toast.error("Error al cargar las novedades");  
-            }
+          const response = await apiNovs.getNovedades();
+          
+          if (response.success && Array.isArray(response.data)) {  
+            this.novedades = response.data;  
+          } else {  
+            console.log("Respuesta inesperada:", response);  
+            this.novedades = [];  
+            toast.error("Error al cargar las novedades");  
+          }
 
         } catch (error) {
-            console.error("Error en fetchNovedades:", error);
-            this.novedades = [];
-            toast.error("Error al cargar las novedades");
+          console.error("Error en fetchNovedades:", error);
+          this.novedades = [];
+          toast.error("Error al cargar las novedades");
         } finally {
-            this.loading = false;
+          this.loading = false;
         }
       },
       verNovedad(id) {
@@ -207,10 +199,15 @@ export default {
   text-align: center;
 }
 .subtitle {
-    padding: 15px;
-    border-left: 5px solid #0e1850;
-    font-size: 1.5rem;
     color: #1f2c79;
+    background-color: #ececec38;
+    font-size: 2.2rem;
+    border-left: 5px solid #0e1850;
+    border-right: 5px solid #0e1850;
+    margin-left: 100px;
+    margin-right: 100px;
+    text-align: left;
+    padding: 20px;
     margin-bottom: 20px;
 }
   
