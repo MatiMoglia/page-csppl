@@ -5,6 +5,7 @@
     <router-view />
     <Footer v-if="!$route.meta.hideFooter" />
     <ChatBot/>
+    <wspLogo/>
   </div>
 </template>
 
@@ -14,12 +15,14 @@
   import Footer from './components/Footer.vue';
   import Spamlogin from './components/SpamLogin.vue';
   import ChatBot from './components/Chatbot.vue';
+  import wspLogo from './components/wspLogo.vue';
   export default {
     components: {
       Navbar,
       Footer,
       Spamlogin,
-      ChatBot
+      ChatBot,
+      wspLogo
     }
   };
 </script>
