@@ -9,7 +9,7 @@ export default {
     async enviarFormulario(formData) {
         try {
             const response = await apiClient.post("formcooplus", formData);
-            return { success: true, data: response.data };
+            return response.data;
         } catch (error) {
             return manejarError(error, "Error al enviar el formulario");
         }

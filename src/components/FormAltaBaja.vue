@@ -1,4 +1,7 @@
 <template>
+    <div v-if="loading" class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
     <div class="form-container">
       <div class="form-section">
         <h2>Formulario ALTA/BAJA de {{ servicio }}</h2>
@@ -106,7 +109,8 @@ export default {
           servicio: this.servicio, 
           fechapedido: new Date().toISOString().split('T')[0]
         },
-        formSubmitted: false
+        formSubmitted: false,
+        loading: false
       };
     },
     computed: {	
@@ -149,6 +153,7 @@ export default {
 
             if (response && response._id) {
             toast.success("Formulario enviado con éxito");
+            this.loading = false;
             this.resetForm();
             } else {
             toast.error("Error al enviar el formulario. Respuesta inesperada.");
@@ -156,6 +161,7 @@ export default {
         } catch (error) {
             console.error("Error al enviar el formulario:", error);
             toast.error("Error al conectar con el formulario.");
+            this.loading = false;
         }
       },
     isValidEmail(email) {
@@ -202,6 +208,32 @@ export default {
 </script>
 
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+.spinner {
+  border: 6px solid #0e144b;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .form-container {
     display: grid;
     padding: 20px;

@@ -63,8 +63,8 @@ export default {
   },
   async updateUser(id, userData) {
     try {
-      const response = await apiClient.patch(`usuarios/${id}`, userData);
-      return { success: true, data: response.data };
+      await apiClient.patch(`usuarios/${id}`, userData);
+      return { success: true, message: "Formulario eliminado correctamente" };
     } catch (error) {
       console.error("Error al actualizar el usuario:", error);
       return { success: false, error: error.response?.data?.message || "Error al actualizar el usuario" };
@@ -73,7 +73,7 @@ export default {
   async deleteUser(id) {
     try {
       await apiClient.delete(`usuarios/${id}`);
-      return { success: true, message: "Usuario eliminado correctamente" };
+      return { success: true, message: "Formulario eliminado correctamente" };
     } catch (error) {
       console.error("Error al eliminar el usuario:", error);
       return { success: false, error: error.response?.data?.message || "Error al eliminar el usuario" };
@@ -81,8 +81,8 @@ export default {
   },
   async updateUser2(id, userData) {
     try {
-      const response = await apiClient2.patch(`usuarios1/${id}`, userData);
-      return { success: true, data: response.data };
+      await apiClient2.patch(`usuarios1/${id}`, userData);
+      return { success: true, message: "Formulario eliminado correctamente" };
     } catch (error) {
       console.error("Error al actualizar el usuario en la segunda API:", error);
       return { success: false, error: error.response?.data?.message || "Error al actualizar el usuario" };
@@ -91,7 +91,7 @@ export default {
   async deleteUser2(id) {
     try {
       await apiClient2.delete(`usuarios1/${id}`);
-      return { success: true, message: "Usuario eliminado correctamente en la segunda API" };
+      return { success: true, message: "Formulario eliminado correctamente" };
     } catch (error) {
       console.error("Error al eliminar el usuario en la segunda API:", error);
       return { success: false, error: error.response?.data?.message || "Error al eliminar el usuario" };

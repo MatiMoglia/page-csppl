@@ -113,6 +113,7 @@
           const response = await apiClient.eliminarFormulario(this.idEliminar);
           if (response.success) {
             this.donantes = this.donantes.filter((f) => f._id !== this.idEliminar);
+            this.cargarDonantes();
             toast.success("Formulario eliminado correctamente.");
           } else {
             toast.error("Error al eliminar el formulario", response.error);
@@ -161,6 +162,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
 .spinner {

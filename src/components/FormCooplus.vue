@@ -1,14 +1,17 @@
 <template>
   <div class="form-container">
+    <div v-if="loading" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
     <div class="form-section">
       <h2>Nuestro formulario de Adhesión</h2>
       <form @submit.prevent="enviarFormulario">
         
         <label for="nombreAdhesion">Nombre y Apellido *</label>
-        <input type="text" id="nombreAdhesion" v-model="formAdhesion.nombre" :class="{'input-error': !formAdhesion.nombre && formSubmittedAdhesion}" required />
+        <input type="text" id="nombreAdhesion" v-model="formAdhesion.name" :class="{'input-error': !formAdhesion.nombre && formSubmittedAdhesion}" required />
         
         <label for="direccion">Dirección *</label>
-        <input type="text" id="direccion" v-model="formAdhesion.direccion" :class="{'input-error': !formAdhesion.direccion && formSubmittedAdhesion}" required />
+        <input type="text" id="direccion" v-model="formAdhesion.domicilio" :class="{'input-error': !formAdhesion.direccion && formSubmittedAdhesion}" required />
 
         <label for="dni">DNI *</label>
         <input type="number" id="dni" v-model="formAdhesion.dni" :class="{'input-error': !formAdhesion.dni && formSubmittedAdhesion}" required />
@@ -86,8 +89,8 @@ export default {
   data() {
     return {
       formAdhesion: {
-        nombre: '',
-        direccion: '',
+        name: '',
+        domicilio: '',
         dni: '',
         fechaNacimiento: '',
         telefono: '',
@@ -107,11 +110,13 @@ export default {
         estado: ''
       },
       formSubmittedAdhesion: false,
-      mostrarFormularioConsulta: false
+      mostrarFormularioConsulta: false,
+      loading: false
     };
   },
   methods: {
       async enviarConsulta() {
+      this.loading = true;
       this.formSubmittedConsulta = true;
       this.formConsulta.fechaReclamo = new Date().toISOString().split('T')[0];
       this.formConsulta.servicio = "COOPLUS";
@@ -136,6 +141,7 @@ export default {
 
             if (response && response._id) {
             toast.success("Reclamo enviado con éxito");
+            this.loading = false;
             this.resetFormConsulta();
             } else {
             toast.error("Error al enviar el reclamo. Respuesta inesperada.");
@@ -143,41 +149,49 @@ export default {
         } catch (error) {
             console.error("Error al enviar el reclamo:", error);
             toast.error("Error al conectar con el servidor.");
+            this.loading = false;
         }
       },
-      enviarFormulario() {
+      async enviarFormulario() {
       this.loading = true;
       this.formAdhesion.fechapedido = new Date().toISOString().split('T')[0];
 
-      if (this.formAdhesion.nombre === "") {
+      if (this.formAdhesion.name === "") {
         toast.error("Ingrese el nombre completo.");
-      } else if (this.formAdhesion.direccion === "") {
+        return;
+      } else if (this.formAdhesion.domicilio === "") {
         toast.error("Ingrese una direccion valida.");
+        return;
       } else if (this.formAdhesion.dni === "") {
         toast.error("Ingrese un DNI valido.");
+        return;
       } else if (this.formAdhesion.pack === "") {
         toast.error("Seleccione un pack.");
+        return;
       } else if (!this.isValidEmail(this.formAdhesion.email)) {
         toast.error("El correo electrónico no es válido.");
+        return;
       } else if (this.formAdhesion.telefono === "") {
         toast.error("Ingrese el número de teléfono.");
-      } else {
-        apiClient.enviarFormulario(this.formAdhesion)
-          .then(response => {
-            if (response.status === 201) {
-              toast.success("Formulario enviado con éxito");
-              this.resetFormAdhesion();
-            } else {
-              console.log("Error al enviar el formulario");
-            }
-          })
-          .catch(error => {
-            toast.error("Error al enviar el formulario: " + (error.response ? error.response.data : error.message));
-          })
-          .finally(() => {
-            this.loading = false;
-          });
+        return;
       }
+      try {
+            const response = await apiClient.enviarFormulario(this.formAdhesion);
+            console.log("Respuesta de la API:", response);
+
+            if (response && response._id) {
+            toast.success("Formulario enviado con éxito");
+            this.loading = false;
+            this.resetFormAdhesion();
+            } else {
+            toast.error("Error al enviar el formulario. Respuesta inesperada.");
+            this.loading = false;
+            }
+        } catch (error) {
+            console.error("Error al enviar el formulario:", error);
+            toast.error("Error al conectar con el formulario.");
+            this.loading = false;
+        }
     },
     isValidEmail(email) {
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -185,8 +199,8 @@ export default {
     },
     resetFormAdhesion() {
       this.formAdhesion = {
-        nombre: '',
-        direccion: '',
+        name: '',
+        domicilio: '',
         dni: '',
         fechaNacimiento: '',
         telefono: '',
@@ -213,6 +227,32 @@ export default {
 </script>
   
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 6px solid #0e144b;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .form-container {
   display: grid;
   padding: 20px;

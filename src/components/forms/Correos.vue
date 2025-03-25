@@ -115,17 +115,17 @@ export default {
       this.loading = true;
       try {
         const response = await apiClient.deleteUser(this.idEliminar);
-        if (response.success) {
-          this.usuarios = this.usuarios.filter((usuario) => usuario._id !== this.idEliminar);
-          toast.success("Usuario eliminado correctamente.");
+        if (response.success ) {
+          toast.success("Usuario eliminado con éxito.");
+          this.fetchUsuarios();
         } else {
-          toast.error("Error al eliminar el usuario", response.error);
+          toast.error("Error al eliminar el usuario.");
         }
       } catch (error) {
-        toast.error("Error eliminando el usuario", error);
+        toast.error("Error al eliminar el usuario.");
       } finally {
-        this.cerrarModalEliminar();
-        this.loading = false;
+          this.cerrarModalEliminar();
+          this.loading = false;
       }
     },
     async guardarEdicion() {
@@ -133,7 +133,7 @@ export default {
       this.loading = true;
       try {
         const response = await apiClient.updateUser(this.formEdicion._id, this.formEdicion);
-        if (response.success) {
+        if (response.success ) {
           toast.success("Usuario actualizado con éxito.");
           this.fetchUsuarios();
           this.cerrarModal();
@@ -142,23 +142,8 @@ export default {
         }
       } catch (error) {
         toast.error("Error al guardar la edición.");
-        console.error(error);
       } finally {
         this.loading = false; 
-      }
-    },
-    async eliminarUsuario(id) {
-      try {
-        const response = await apiClient.deleteUser(id);
-        if (response.success) {
-          toast.success("Usuario eliminado con éxito.");
-          this.fetchUsuarios();
-        } else {
-          toast.error("Error al eliminar el usuario.");
-        }
-      } catch (error) {
-        toast.error("Error al eliminar el usuario.");
-        console.error(error);
       }
     },
     cerrarModal() {
@@ -189,6 +174,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
 }
 
 .spinner {
