@@ -1,21 +1,21 @@
 <template>
   <h1 class="title">Misión, Visión y Valores</h1>
   <div class="container">
-    <div class="card">
+    <div class="card" data-aos="fade-up">
       <img src="https://cdn-icons-png.flaticon.com/128/4406/4406394.png" alt="Logo Cooperativa" class="logo" />
       <h2>Misión</h2>
       <p class="description">
         Nuestro principal objetivo es cumplir con los requerimientos y necesidades de los asociados y el bienestar general de toda la comunidad, trabajando para mejorar la calidad de vida de los mismos y para el desarrollo y crecimiento de la localidad, distribuyendo energía de calidad que lo posibilite...
       </p>
     </div>
-    <div class="card">
+    <div class="card" data-aos="fade-up">
       <img src="https://cdn-icons-png.flaticon.com/128/5165/5165942.png" alt="Logo Cooperativa" class="logo" />
       <h2>Visión</h2>
       <p class="description">
         Ser capaces de aumentar y elevar la calidad de nuestros servicios convirtiéndonos en una empresa cooperativa que se destaque por el compromiso en la prestación de servicios eficientes y de alta calidad siempre sobre la base de los principios y valores cooperativos...
       </p>
     </div>
-    <div class="card">
+    <div class="card" data-aos="fade-up">
       <img src="https://cdn-icons-png.flaticon.com/128/8131/8131434.png" alt="Logo Cooperativa" class="logo" />
       <h2>Valores</h2>
       <p class="description">
@@ -25,7 +25,7 @@
   </div>
   <h1 class="title">Nuestros Objetivos:</h1>
   <div class="objectives">
-    <div class="objectives-list">
+    <div class="objectives-list" data-aos="fade-right">
       <ul>
         <li><i class="ri-checkbox-circle-line icono-li"></i>Cumplir con los requerimientos y necesidades de los asociados.</li>
         <li><i class="ri-checkbox-circle-line icono-li"></i>Mejorar la calidad de vida de los asociados y la comunidad.</li>
@@ -36,13 +36,21 @@
         <li><i class="ri-checkbox-circle-line icono-li"></i>Promover la pertenencia y los valores cooperativos dentro de la comunidad.</li>
       </ul>
     </div>
-    <div class="objectives-image">
+    <div class="objectives-image" data-aos="fade-left">
       <img src="https://www.coopspportena.com.ar/sites/default/files/styles/noticia_interna/public/field/image/WhatsApp%20Image%202024-06-13%20at%202.24.48%20PM%20%284%29.jpeg?itok=NafRS6aU" alt="objetivos" class="imagen">
       <p>Parque Solar Comunitario: la Ministra Victoria Flores dio su compromiso para la concreción de nuestro proyecto</p>
     </div>
   </div>
 </template>
-
+<script>
+import AOS from "aos";
+import "aos/dist/aos.css";
+export default {
+  mounted() {
+      AOS.init();
+  },
+}
+</script>
 <style scoped>
 .title {
   color: #ffffff;

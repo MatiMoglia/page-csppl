@@ -3,7 +3,7 @@
     <br>
     <div class="aguapotable">
       <br>
-      <div class="agua-container">
+      <div class="agua-container" data-aos="fade-up">
         <button class="guardia-btn" @click="mostrarGuardia = !mostrarGuardia">
           <i class="ri-water-flash-line"></i>
         </button>
@@ -38,7 +38,7 @@
   
       <div class="dropdown-containers">
         <div class="dropdown" @mouseenter="mostrarRecomendaciones = true" @mouseleave="mostrarRecomendaciones = false">
-          <button class="dropdown-btn">
+          <button class="dropdown-btn" data-aos="fade-up">
             Cuidado del tanque del Agua
             <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarRecomendaciones}"></i>
           </button>
@@ -58,7 +58,7 @@
         </div>
   
         <div class="dropdown" @mouseenter="mostrarCuidados = true" @mouseleave="mostrarCuidados = false">
-          <button class="dropdown-btn">
+          <button class="dropdown-btn" data-aos="fade-up">
             Cuidado del Agua Potable
             <i class="ri-arrow-down-s-line dropdown-arrow" :class="{'rotate-arrow': mostrarCuidados}"></i>
           </button>
@@ -78,13 +78,14 @@
         </div>
       </div>
   
-      <formSolicitud servicio="Agua Potable" sugerencia="no" adjuntar="si"/>
+      <formSolicitud servicio="Agua Potable" sugerencia="no" adjuntar="si" data-aos="fade-right"/>
     </div>
 </template>
   
 <script>
-  import formSolicitud from '@/components/FormAltaBaja.vue';
-  
+import formSolicitud from '@/components/FormAltaBaja.vue';
+import AOS from "aos";
+import "aos/dist/aos.css";
   export default {
     data() {
       return {
@@ -122,6 +123,9 @@
           this.cerrarModal();
         }
       }
+    },
+    mounted(){
+      AOS.init();
     }
   }
 </script>
