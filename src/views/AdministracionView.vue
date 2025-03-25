@@ -22,8 +22,11 @@
     <button @click="toggleForm('mostrarNovedades')" class="btn-novedades">
       {{ mostrarNovedades ? 'Ocultar' : 'Mostrar' }} Novedades
     </button>
+    <button @click="toggleForm('mostrarCVs')" class="btn-cvs">
+      {{ mostrarCVs ? 'Ocultar' : 'Mostrar' }} curriculums enviados
+    </button>
   </div>
-  <Graficos v-if="mostrarGraficos"/>
+  <Grafico v-if="mostrarGraficos"/>
   <MVCAltaBaja v-if="mostrarFormulario" />
   <MVCCooplus v-if="mostrarCooplus" />
   <Correos v-if="mostrarCorreos" />
@@ -31,6 +34,7 @@
   <ListaDonantes v-if="mostrarDonantes" />
   <MVCnecrologicos v-if="mostrarNecrologicos" />
   <MVCnovedades v-if="mostrarNovedades"/>
+  <ListaCVs v-if="mostrarCVs"/>
 </template>
 
 <script>
@@ -42,6 +46,7 @@ import ListaDonantes from '@/components/forms/ListaDonantes.vue';
 import MVCnecrologicos from '@/components/forms/MVCnecrologicos.vue';
 import Graficos from '@/components/forms/Graficos.vue';
 import MVCnovedades from '@/components/forms/MVCnovedades.vue';
+import ListaCVs from '@/components/forms/ListaCVs.vue';
 export default {
   components: {
     MVCAltaBaja,
@@ -52,6 +57,7 @@ export default {
     MVCnecrologicos,
     Graficos,
     MVCnovedades,
+    ListaCVs,
   },
   data() {
     return {
@@ -62,7 +68,8 @@ export default {
       mostrarDonantes: false,
       mostrarNecrologicos: false,
       mostrarNovedades: false,
-      mostrarGraficos: false,
+      mostrarGraficos: true,
+      mostrarCVs: false,
     };
   },
   methods: {
@@ -79,6 +86,7 @@ export default {
         this.mostrarNecrologicos = false;
         this.mostrarNovedades = false;
         this.mostrarGraficos = false;
+        this.mostrarCVs = false;
         this[form] = true;
       }
     }
@@ -125,11 +133,18 @@ button:hover {
 
 .btn-novedades {
   background-color: #407af8;
-  grid-column: 2; 
+  grid-column: 1; 
 }
 
 .btn-novedades:hover {
-  background-color: #0b54f1;
+  background-color: #0647d1;
+}
+.btn-cvs {
+  background-color: #407af8;
+  grid-column: 3;
 }
 
+.btn-cvs:hover {
+  background-color: #0647d1;
+}
 </style>
