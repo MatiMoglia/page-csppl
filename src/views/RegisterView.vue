@@ -1,4 +1,7 @@
 <template>
+    <div v-if="loading || loadingRegister" class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
   <div class="back-close" data-aos="fade-right">
     <router-link to="/" class="no-underline">
       <button class="close-btn">&times;</button>
@@ -82,6 +85,8 @@ export default {
       },
       error: null,
       showPasswordMessage: false,
+      loading: false,
+      loadingRegister: false,
     };
   },
   methods: {
@@ -93,16 +98,19 @@ export default {
 
     async submitForm() {
       this.error = null;
+      this.loading = true;
 
       if (!this.validarContraseña(this.form.password)) {
         this.error = "La contraseña debe tener al menos 6 caracteres y un número.";
         toast.error(this.error, { autoClose: false }); 
+        this.loading = false;
         return;
       }
 
       if (this.form.password !== this.form.confirmPassword) {
         this.error = "Las contraseñas no coinciden.";
         toast.error(this.error, { autoClose: false });
+        this.loading = false;
         return;
       }
 
@@ -117,12 +125,14 @@ export default {
         await this.register(user);
         toast.success("Registro exitoso. Ya puedes iniciar sesión.");
         setTimeout(() => {
+          this.loading = false;
           this.$router.push("/login");
         }, 3000); 
       } catch (error) {
         this.error = error.message; 
         toast.error("Ocurrió un error durante el registro.",
         { autoClose: 3000 });
+        this.loading = false;
       }
     },
   },
@@ -133,6 +143,32 @@ export default {
 </script>
 
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .back-close {
   position: absolute;
   top: 20px;

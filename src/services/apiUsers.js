@@ -108,7 +108,7 @@ export default {
   async validarContrasena(id, password) {
     try {
       const response = await apiClient.get(`usuarios?q={"_id": "${id}", "password": "${password}"}`);
-      return response.data.length > 0; 
+      return { success: true, data: response.data };
     } catch (error) {
       console.error("Error al validar la contraseña:", error);
       return false;

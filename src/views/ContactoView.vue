@@ -3,7 +3,7 @@
       <br>
       <div class="header">
             <h1>Información de Contacto:</h1>
-            <div class="header-cv">
+            <div class="header-cv" data-aos="flip-right">
                 <h3>¡Sumate a nuestro equipo!</h3>
                 <button @click="openModal">Enviar CV</button>
             </div>
@@ -31,13 +31,13 @@
       </div>
     
       <div class="form-and-video">
-          <div class="contact-form">
+          <div class="contact-form" data-aos="fade-up">
             <h2>Envianos tu Consulta</h2>
             <p>Completa el siguiente formulario para que nos pueda enviar su consulta o reclamo.</p>
             <form @submit.prevent="handleSubmit">
               <div class="form-group">
                 <label for="name">Nombre:</label>
-                <input type="text" id="name" v-model="form.name" required>
+                <input type="text" id="name" v-model="form.nombre" required>
               </div>
               
               <div class="form-group">
@@ -47,7 +47,7 @@
     
               <div class="form-group">
                 <label>Área:</label>
-                <select v-model="form.area" required>
+                <select v-model="form.servicio" required>
                   <option value="Servicios Sociales">Servicio: Servicios Sociales</option>
                   <option value="Telecomunicaciones">Servicio: Telecomunicaciones</option>
                   <option value="Energía Eléctrica">Servicio: Energía Elécctrica</option>
@@ -61,14 +61,18 @@
               </div>
   
               <div class="form-group">
+                <label for="telefono">Telefono:</label>
+                <input type="telefono" id="telefono" v-model="form.telefono" required>
+              </div>
+              <div class="form-group">
                 <label for="message">Consulta:</label>
-                <textarea id="message" v-model="form.message" required></textarea>
+                <textarea id="message" v-model="form.descripcion" required></textarea>
               </div>
               <button type="submit">Enviar Consulta</button>
             </form>
         </div>
   
-        <div class="video-section">
+        <div class="video-section" data-aos="flip-right">
             <h2>¡Conocé nuestra Cooperativa!</h2>
             <iframe width="100%" height="315" src="https://www.youtube.com/embed/We4cWbC8Ya4?si=tllsKxivdoE6V0uv" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <div class="redes-sociales">
@@ -87,8 +91,8 @@
       <div v-if="isModalOpen" class="modal-overlay" @click.self="closeModal">
             <div class="modal-content">
                 <button class="modal-close-btn" @click="closeModal">×</button> 
-                <h2>Enviar CV</h2>
-                <form @submit.prevent="handleSubmitCV">
+                <h2>Envianos tu Curriculum</h2>
+                <form @submit.prevent="enviarCV">
                     <div class="form-group">
                         <label for="cvName">Nombre: *</label>
                         <input type="text" id="cvName" v-model="cvForm.name" required>
@@ -96,6 +100,10 @@
                     <div class="form-group">
                         <label for="cvEmail">E-mail: *</label>
                         <input type="email" id="cvEmail" v-model="cvForm.email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvTelefono">Telefono: *</label>
+                        <input type="text" id="cvTelefono" v-model="cvForm.telefono" required>
                     </div>
                     <div class="form-group">
                         <label>Área de Trabajo: *</label>
@@ -115,8 +123,8 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="cvFile">Adjuntar CV: *</label>
-                        <input type="file" id="cvFile" @change="handleFileUpload" multiple required>
+                        <label for="cvFile">Ingresar link del Curriculum (Drive): *</label>
+                        <input type="text" id="cvFile" v-model="cvForm.files" required>
                     </div>
                     <button type="submit" class="modal-submit-btn">Enviar</button> 
                 </form>
@@ -126,20 +134,30 @@
 </template>
 
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
+import apiReclamos from "@/services/apiReclamos";
+import apiCVs from "@/services/apiCVs";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
   export default {
     data() {
       return {
         form: {
-            name: '',
-            email: '',
-            message: '',
-            
+          nombre: '',
+          email: '',
+          telefono: '',
+          descripcion: '',
+          fechaReclamo: '',
+          servicio:'',
+          estado: ''
         },
         cvForm: {
             name: '',
             email: '',
-            file: null,
+            files: null,
             area: [],
+            telefono: '',
         },
         areasDisponibles: [
             "Servicios Sociales",
@@ -150,15 +168,81 @@
             "Todas"
         ],
         isModalOpen: false,
+        formSubmittedConsulta: false,
+        formSubmittedCV: false
       };
     },
     methods: {
-    handleSubmit() {
-        console.log(this.form);
-        this.form.name = '';
-        this.form.email = '';
-        this.form.area = '';
-        this.form.message = '';
+     async handleSubmit() {
+      this.formSubmittedConsulta = true;
+      this.form.fechaReclamo = new Date().toISOString().split('T')[0];
+      this.form.estado = "Pendiente";
+
+        if (!this.form.nombre) {
+          toast.error("Ingrese su nombre.");
+          return;
+        } else if (!this.isValidEmail(this.form.email)) {
+          toast.error("Ingrese un correo electrónico válido.");
+          return;
+        } else if (!this.form.telefono) {
+          toast.error("Ingrese su número de teléfono.");
+          return;
+        } else if (!this.form.servicio) {
+          toast.error("Ingrese un area.");
+          return;
+        } else if (!this.form.descripcion) {
+          toast.error("Ingrese su consulta.");
+          return;
+        }
+          try {
+            const response = await apiReclamos.enviarReclamo(this.form);
+            console.log("Respuesta de la API:", response);
+
+            if (response && response._id) {
+            toast.success("Reclamo enviado con éxito");
+            this.resetFormConsulta();
+            } else {
+            toast.error("Error al enviar el reclamo. Respuesta inesperada.");
+            }
+        } catch (error) {
+            console.error("Error al enviar el reclamo:", error);
+            toast.error("Error al conectar con el servidor.");
+        }
+    },
+    async enviarCV() {
+      this.formSubmittedCV = true;
+        if (!this.cvForm.name) {
+          toast.error("Ingrese su nombre.");
+          return;
+        } else if (!this.isValidEmail(this.cvForm.email)) {
+          toast.error("Ingrese un correo electrónico válido.");
+          return;
+        } else if (!this.cvForm.telefono) {
+          toast.error("Ingrese su telefono.");
+          return;
+        } else if (!this.cvForm.area) {
+          toast.error("Ingrese un area.");
+          return;
+        }
+        
+          try {
+            const response = await apiCVs.enviarCV(this.cvForm);
+            console.log("Respuesta de la API:", response);
+
+            if (response && response._id) {
+            toast.success("Curriculum enviado con éxito");
+            this.closeModal();
+            } else {
+            toast.error("Error al enviar el CV. Respuesta inesperada.");
+            }
+        } catch (error) {
+            console.error("Error al enviar el CV:", error);
+            toast.error("Error al conectar con el servidor.");
+        }
+    },
+    isValidEmail(email) {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      return emailRegex.test(email);
     },
     openModal() {
         this.isModalOpen = true;
@@ -166,17 +250,21 @@
     closeModal() {
         this.isModalOpen = false;
     },
-    handleSubmitCV() {
-        console.log(this.cvForm);
-        this.cvForm.name = '';
-        this.cvForm.email = '';
-        this.cvForm.file = null;
-        this.closeModal();
-    },
-    handleFileUpload(event) {
-      const files = event.target.files;
-      this.cvForm.file = Array.from(files); 
-    },
+    resetFormConsulta() {
+      this.form = {
+        nombre: '',
+        email: '',
+        telefono: '',
+        descripcion: '',
+        fechaReclamo: '',
+        servicio:'',
+        estado: ''
+      };
+      this.formSubmittedConsulta = false;
+    }
+  },
+  mounted() {
+    AOS.init();
   },
 };
 </script>
@@ -404,9 +492,14 @@ select {
 }
 
 .modal-content h2 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  margin-top: 0px;
+  background: #0e1850; 
+  color: rgb(255, 255, 255);
+  padding: 15px;
+  margin: -20px -20px 20px -20px; 
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  text-align: left;
+  font-size: 1.4rem;
 }
 
 .modal-content .form-group {
@@ -437,11 +530,11 @@ select {
 }
 .modal-close-btn {
   position: absolute;
-  top: 5px;
+  top: 7px;
   right: 10px;
   padding: 10px;
-  font-size: 24px;
-  color: #333;
+  font-size: 25px;
+  color: #fcfcfc;
   background: none;
   border: none;
   cursor: pointer;

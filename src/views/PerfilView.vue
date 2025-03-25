@@ -1,4 +1,7 @@
 <template>
+    <div v-if="loading" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
     <div class="perfil-container">
         <div class="perfil">
             <div class="header">
@@ -115,31 +118,31 @@
         </div>
     </div>
     <div v-if="mostrarModalContrasena" class="modal-overlay">
-            <div class="modal">
-                <h2>Edición del Perfil</h2>
-                <label for="password">Contraseña Actual:</label>
-                <input
-                type="password"
-                id="password"
-                v-model="password"
-                placeholder="Ingresa tu contraseña"
-                />
-                <div class="form-group">
-                        <label for="name">Nombre:</label>
-                        <input type="text" id="name" v-model="updatedUser.name" placeholder="Nuevo Nombre"/>
+        <div class="modal">
+            <h2>Edición del Perfil</h2>
+            <label for="password">Contraseña Actual:</label>
+           <input
+            type="password"
+            id="password"
+            v-model="password"
+            placeholder="Ingresa tu contraseña"
+            />
+            <div class="form-group">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" v-model="updatedUser.name" placeholder="Nuevo Nombre"/>
 
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" v-model="updatedUser.email" placeholder="Nuevo Email"/>
+                <label for="email">Email:</label>
+                <input type="email" id="email" v-model="updatedUser.email" placeholder="Nuevo Email"/>
 
-                        <label for="phone">Teléfono:</label>
-                        <input type="text" id="phone" v-model="updatedUser.phone" placeholder="Nuevo Teléfono"/>
-                    </div>
-                    <div class="modal-actions">
-                        <button type="submit" class="btn-confirmar" @click="confirmarEdicionPerfil"><i class="ri-save-3-line"></i></button>
-                        <button class="btn-cerrar" @click="mostrarModalContrasena = false"><i class="ri-close-line"></i></button>
-                    </div>
+                <label for="phone">Teléfono:</label>
+                <input type="text" id="phone" v-model="updatedUser.phone" placeholder="Nuevo Teléfono"/>
+            </div>
+            <div class="modal-actions">
+                <button type="submit" class="btn-confirmar" @click="confirmarEdicionPerfil"><i class="ri-save-3-line"></i></button>
+                <button class="btn-cerrar" @click="mostrarModalContrasena = false"><i class="ri-close-line"></i></button>
             </div>
         </div>
+    </div>
   </div>
 </template>
 
@@ -170,6 +173,7 @@ export default {
                 phone: "",
                 nroTitular: "",
             },
+            loading: false,
         };
     },
     computed: {
@@ -184,6 +188,9 @@ export default {
             await this.logout();
             this.$router.push("/login");
         },
+        closeModal() {
+            this.mostrarModal = false;
+        },
         editarPerfil() {
             this.mostrarModal = false; 
             this.updatedUser = { 
@@ -194,6 +201,7 @@ export default {
             this.mostrarModalContrasena = true;
         },
         async confirmarEdicionPerfil() {
+            this.loading = true;
             if (!this.password) {
                 toast.error("Por favor ingresa tu contraseña.");
                 return;
@@ -207,19 +215,25 @@ export default {
                     const updateResponse = await apiUsers.updateUser(this.getUser._id, updatedData);
                     if (updateResponse.success) {
                         toast.success("Perfil actualizado correctamente.");
-                        this.mostrarModalContraseña = false; 
+                        this.getUser.name = updatedData.name;
+                        this.loading = false;
+                        this.mostrarModalContrasena = false; 
                     } else {
                         toast.error(updateResponse.error || "Error al actualizar el perfil.");
                     }
                 } else {
                     toast.error("Contraseña incorrecta.");
+                     this.loading = false;
                 }
             } catch (error) {
                 toast.error("Hubo un error al verificar la contraseña.");
                 console.error(error);
+                this.mostrarModalContrasena = false;
+                this.loading = false;
             }
         },
         async consultarTitular() {
+            this.loading = true;
             if (!this.nroTitular) {
                 this.mensaje = "Debe ingresar un número de titular para la consulta.";
                 toast.error(this.mensaje);
@@ -237,6 +251,7 @@ export default {
                     this.mensaje = "";
                     this.datosTitular = resultado.data[0];
                     this.nroTitularValidado = true;
+                    this.loading = false;
                 } else {
                     this.mensaje = "Titular no encontrado. ¿Desea agregarlo?";
                     toast.info(this.mensaje);
@@ -246,21 +261,26 @@ export default {
             } catch (error) {
                 console.error("Error al obtener los adherentes", error);
                 this.mensaje = "Error al consultar el titular.";
+                this.loading = false;
                 toast.error(this.mensaje);
             }
         },
         async asociarNroTitular() {
+            this.loading = true;
             try {
                 const response = await apiUsers.asociarTitular(this.getUser._id, this.nroTitular);
                 if (response.success) {
                     this.getUser.nroTitular = this.nroTitular; 
                     toast.success("Número de titular asociado correctamente.");
+                    this.loading = false;
+                    this.mostrarModal = false;
                 } else {
                     toast.error("Error al asociar el número de titular.");
                 }
             } catch (error) {
                 toast.error("Error al asociar el número de titular.");
                 console.log(error);
+                this.loading = false;
             }
         },
         async buscarReclamos() {
@@ -295,14 +315,42 @@ export default {
         },
     },
     mounted() {
+        this.loading = true;
         this.buscarReclamos();
         this.buscarFormularios();
+        this.loading = false;
     }
 };
 </script>
 
 
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .modal-actions {
   display: flex;
   justify-content: space-between;
@@ -387,7 +435,7 @@ export default {
     font-size: 2.5rem;
     padding: 30px;
     color: #ffffff;
-    margin: 5px 10px 10px -10px; 
+    margin: -10px 10px 10px -10px; 
 }
 .header p { 
     color: #ffffff !important;
