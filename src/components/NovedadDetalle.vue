@@ -36,7 +36,7 @@ import apiNovs from "@/services/apiNovs";
       const response = await apiNovs.getNovedades();
       
       if (response.success) {
-        return response.data.find((n) => n.id == id) || null; 
+        return response.data.find((n) => n._id == id) || null; 
       } else {
         console.error("Error: la API no devolvió datos correctos.");
         return null;

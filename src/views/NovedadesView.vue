@@ -16,7 +16,7 @@
             <div class="slide-text">
               <h3>{{ novedad.titulo }}</h3>
               <p>{{ novedad.subtitulo }}</p>
-              <button @click="verNovedad(novedad.id)">Leer más</button>
+              <button @click="verNovedad(novedad._id)">Leer más</button>
             </div>
           </div>
         </div>
@@ -34,11 +34,10 @@
                   <p><strong>Fecha de publicación:</strong> {{ formatFecha(novedad.fecha) }}</p>
                   <p>{{ novedad.subtitulo }}</p>
                   <p>{{ novedad.contenido }}</p>
-                  <button @click="verNovedad(novedad.id)">Leer más</button>
+                  <button @click="verNovedad(novedad._id)">Leer más</button>
               </div>
           </div>
       </div>
-      <NovedadesGrid />
       <redes />
       <trabajoInter/>
     </div>
@@ -96,6 +95,7 @@ export default {
         }
       },
       verNovedad(id) {
+        console.log("ID de la novedad:", id);
         this.$router.push({ name: "NovedadDetalle", params: { id } });
       },
       nextSlide() {
@@ -204,8 +204,6 @@ export default {
     font-size: 2.2rem;
     border-left: 5px solid #0e1850;
     border-right: 5px solid #0e1850;
-    margin-left: 100px;
-    margin-right: 100px;
     text-align: left;
     padding: 20px;
     margin-bottom: 20px;

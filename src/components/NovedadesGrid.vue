@@ -16,7 +16,7 @@
         <div class="novedad-text">
           <h4>{{ novedad.titulo }}</h4>
           <p>{{ novedad.subtitulo }}</p>
-          <button @click="verNovedad(novedad.id)">Leer más</button>
+          <button @click="verNovedad(novedad._id)">Leer más</button>
         </div>
       </div>
     </div>
@@ -67,8 +67,8 @@ export default {
       this.startIndex = index * 3;
     },
     verNovedad(id) {
-      this.$router.push({ name: "Novedades", params: { id } });
-    },
+        this.$router.push({ name: "NovedadDetalle", params: { id } });
+      },
   },
   mounted() {
     this.fetchNovedades();
@@ -107,6 +107,14 @@ h2 {
   padding: 15px;
   width: 300px;
   text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.novedad-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
 .novedad-img {
@@ -135,6 +143,7 @@ h2 {
   margin-top: 10px;
   border-radius: 5px;
   font-family: "Montserrat", sans-serif;
+  font-weight: bold;
 }
 
 .novedad-text button:hover {
