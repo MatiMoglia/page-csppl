@@ -126,37 +126,37 @@ export default {
       emailAutocompletado() {
         return this.isAuthenticated && this.getUser ? this.getUser.email : '';
       },
-      enviarFormulario() {
+      async enviarFormulario() {
         this.loading = true;
         this.formSolicitud.fechapedido = new Date().toISOString().split('T')[0];
         
         if (this.formSolicitud.nombre === "") {
           toast.error("Ingrese el nombre completo.");
+          return;
         } else if (this.formSolicitud.email === "") {
           toast.error("Ingrese el correo electrónico.");
+          return;
         } else if (!this.isValidEmail(this.formSolicitud.email)) {
           toast.error("El correo electrónico no es válido.");
+          return;
         } else if (this.formSolicitud.telefono === "") {
           toast.error("Ingrese el número de teléfono.");
-        } else if (this.adjuntar === 'si' && this.formSolicitud.files.length === 0) {
-          toast.error("Por favor, adjunte los documentos necesarios.");
-        } else {
-          apiClient.enviarFormulario(this.formSolicitud)
-            .then(response => {
-              if (response.status === 201) {
-                toast.success("Formulario enviado con éxito");
-                this.resetFormulario();
-              } else {
-                console.log("Error al enviar el formulario");
-              }
-            })
-            .catch(error => {
-              toast.error("Error al enviar el formulario: " + (error.response ? error.response.data : error.message));
-            })
-            .finally(() => {
-              this.loading = false;
-            });
-          }
+          return;
+        }
+          try {
+            const response = await apiClient.enviarFormulario(this.formSolicitud);
+            console.log("Respuesta de la API:", response);
+
+            if (response && response._id) {
+            toast.success("Formulario enviado con éxito");
+            this.resetForm();
+            } else {
+            toast.error("Error al enviar el formulario. Respuesta inesperada.");
+            }
+        } catch (error) {
+            console.error("Error al enviar el formulario:", error);
+            toast.error("Error al conectar con el formulario.");
+        }
       },
     isValidEmail(email) {
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;

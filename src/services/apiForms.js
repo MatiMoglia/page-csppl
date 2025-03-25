@@ -8,8 +8,8 @@ const apiClient = axios.create({
 export default {
     async enviarFormulario(formData) {
       try {
-        const response = await apiClient.post("forminternet", formData);
-        return { success: true, data: response.data };
+        const response = await apiClient.post("forms", formData);
+        return response.data;
       } catch (error) {
         return manejarError(error, "Error al enviar el formulario");
       }
