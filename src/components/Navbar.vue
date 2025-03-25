@@ -74,7 +74,7 @@
                 </div>
                 <li><router-link to="/perfil" class="dropdown__link" @click="closeMenu">Mi Perfil</router-link></li>
                 <li><router-link to="/reclamos" class="dropdown__link" @click="closeMenu">Reclamos</router-link></li>
-                <li><a href="#" class="dropdown__link logout" @click="logout">Cerrar Sesión</a></li>
+                <li><a href="#" class="dropdown__link logout" @click="logoutUser()">Cerrar Sesión</a></li>
               </template>
             </ul>
           </li>
@@ -86,6 +86,8 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
   data() {
@@ -132,6 +134,8 @@ export default {
       this.serviciosSocialesOpen = false;
     },
     async logoutUser() {
+      toast.info("Se ha cerrado sesión correctamente");
+      await new Promise(resolve => setTimeout(resolve, 1500)); 
       await this.logout();
       this.closeMenu();
       this.$router.push("/login");

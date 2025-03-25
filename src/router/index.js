@@ -138,7 +138,6 @@ const routes = [
     path: "/novedad/:id",
     name: "NovedadDetalle",
     component: () => import("@/components/NovedadDetalle.vue"),
-    props: true
   },
   {
     path: '/reclamos',
