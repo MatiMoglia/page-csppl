@@ -1,6 +1,9 @@
 <template>
   <div class="form-container">
-      <div class="header" data-aos="fade-up">
+    <div v-if="loading" class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+      <div class="header">
           <h1 class="title">Factura Digital</h1>
           <p>La factura digital es el <strong>NUEVO</strong> método de envío de las facturas. Las mismas se envían a un correo electrónico
               para luego descargarlas o pagarlas mediante los diferentes medios de pago digitales.
@@ -69,6 +72,7 @@ export default {
               servicios: [],
               nroTitular: '', 
           },
+          loading: false,
       };
   },
   computed: {
@@ -79,6 +83,7 @@ export default {
         return this.isAuthenticated && this.getUser ? this.getUser.email : '';
       },
       async enviarFormulario() {
+        this.loading = true;
 
         if (this.formFactura.nombre === "") {
             toast.error("Ingrese el nombre completo.");
@@ -101,13 +106,16 @@ export default {
             if (response.success && response.data && response.data._id) {
                 toast.success("Solicitud enviada con éxito");
                 this.resetForm();
+                this.loading = false;
             } else {
                 toast.error("Error al enviar la Solicitud. Respuesta inesperada.");
                 console.log("Respuesta de la API:", response);
+                this.loading = false;
             }
         } catch (error) {
             console.error("Error al enviar la Solicitud:", error);
             toast.error("Error al conectar con el servidor.");
+            this.loading = false;
         }
       },
 
@@ -134,6 +142,32 @@ export default {
 };
 </script>
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .img-container {
   display: flex;
   flex-direction: column;
@@ -152,22 +186,18 @@ img {
   border-radius: 10px;
 }
 .form-container {
-  display: grid;
-  padding-left: 160px;
-  padding-right: 160px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .header { 
   color: #ffffff !important;
-  margin-top: 10px;
-  margin-bottom: 10px;
   background-color: #1f2c79;
 }
 
 .header p { 
   color: #ffffff !important;
-  margin: 15px ;
   text-align: center;
+  padding: 15px;
+  font-size: 20px;
 }
 
 .form-section {
@@ -176,12 +206,14 @@ img {
   border-radius: 8px;
   background-color: rgba(235, 235, 235, 0.9);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  margin-left: 160px;
+  margin-right: 160px;
 }
 
 .title {
   color: #ffffff;
   font-size: 2.5rem;
-  padding: 10px;
+  padding: 5px;
   text-align: center;
 }
 

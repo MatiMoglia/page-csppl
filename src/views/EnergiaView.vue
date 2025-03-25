@@ -35,7 +35,7 @@
                 Ver Pilar de Conexión de Energía
             </button>
         </div>
-        <div class="dropdown-containers">
+        <div class="dropdown-containers" data-aos="fade-right">
             <div class="dropdown" @mouseenter="mostrarMonofasica = true" @mouseleave="mostrarMonofasica = false">
                 <button class="dropdown-btn">
                 ¿Qué es una conexión monofásica?
@@ -83,7 +83,7 @@
                 </div>
             </div>
         </div>
-        <div class="alumbrado-container">
+        <div class="alumbrado-container" data-aos="fade-up">
             <h2>Alumbrado Público:</h2>
             <p>
                 Como concesionarios del servicio, nuestra tarea consiste en realizar el mantenimiento de las luminarias y de las líneas en general. 
@@ -97,11 +97,13 @@
             </button>
         </div>
         <br>
-        <formSolicitud servicio="Energía Eléctrica" sugerencia="si" adjuntar="si"/>
+        <formSolicitud servicio="Energía Eléctrica" sugerencia="si" adjuntar="si" data-aos="fade-up"/>
     </div>
 </template>
 
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
 import formSolicitud from '@/components/FormAltaBaja.vue';
 export default {
   data() {
@@ -118,13 +120,16 @@ export default {
         formSolicitud
     },
     methods: {
-    openFile() {
-        window.open('https://drive.google.com/file/d/1Z_CNblHOwevuUTgvbDg5x_uEqPU5kcXs/view?usp=sharing','_blank')
+        openFile() {
+            window.open('https://drive.google.com/file/d/1Z_CNblHOwevuUTgvbDg5x_uEqPU5kcXs/view?usp=sharing','_blank')
+        },
+        openFileConexion() {
+            window.open("https://drive.google.com/file/d/1bIjgvIGfppayBMaIj2m5VDutKkJGqcqE/view?usp=sharing", "_blank");
+        }
     },
-    openFileConexion() {
-        window.open("https://drive.google.com/file/d/1bIjgvIGfppayBMaIj2m5VDutKkJGqcqE/view?usp=sharing", "_blank");
-    }
-  }
+    mounted() {
+        AOS.init();
+    },
 };
 </script>
 

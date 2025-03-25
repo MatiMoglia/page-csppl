@@ -16,7 +16,7 @@
             </p>
 
             <h2 class="section-title">¡Conoce nuestros planes!</h2>
-            <div class="plans-container">
+            <div class="plans-container" data-aos="flip-right">
                 <div class="plan-card highlighted">
                     <span class="most-popular">El más pedido</span>
                     <div class="img-container">
@@ -45,7 +45,7 @@
             </div>
             
             <h3 class="section-title">Ventajas de contratar Fibra Óptica</h3>
-            <CardCarousel/>
+            <CardCarousel data-aos="fade-up"/>
             <h3 class="section-title" style="text-align: left; margin-bottom: 10px; border: none;">Requisitos y Condiciones:</h3>
             <p class="description">La fibra óptica es la última tecnología de banda ancha que ofrece multitud de ventajas sobre las conexiones tradicionales de cobre.
                  Sin embargo, su despliegue demanda una serie de requerimientos con los que debe contar el edificio donde se vaya a instalar.</p>
@@ -109,9 +109,9 @@
                 <a href="mailto:admcsppl@gmail.com" class="contact-link">Contáctanos ahora</a>
             </p>
             <p class="description">Tambien puede contactarse con Administración al siguiente número: <strong>3564331499</strong></p>
-            <div class="plans-container-secondary">
-            <div class="plan-card secondary">
-                <div class="plan-banner">Solo Seeber y Vignaud</div>
+            <div class="plans-container-secondary" data-aos="fade-up">
+                <div class="plan-card secondary">
+                   <div class="plan-banner">Solo Seeber y Vignaud</div>
                     <h4>Plan ADSL</h4>
                     <h3>4 MB de Internet</h3>
                     <p class="price">$12.499</p>
@@ -138,11 +138,13 @@
                 <p>Número de Guardia: <strong>3564-630995</strong></p>
             </div>
         </div>
-        <formSolicitud servicio="Internet" sugerencia="No" mostrarOpcionesInternet="si"  id="formulario" adjuntar="no"></formSolicitud>
+        <formSolicitud data-aos="fade-up" servicio="Internet" sugerencia="No" mostrarOpcionesInternet="si"  id="formulario" adjuntar="no"></formSolicitud>
     </div>
 </template>
 
 <script>
+import AOS from "aos";
+import "aos/dist/aos.css";
 import formSolicitud from "@/components/FormAltaBaja.vue";
 import SliderTelecom from "@/components/SliderTelecom.vue";
 import CardCarousel from "@/components/VentajasFibra.vue";
@@ -170,7 +172,10 @@ export default {
         const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
         window.open(url, "_blank");
       }
-    }
+    },
+    mounted() {
+        AOS.init();
+    },
 };
 </script>
 

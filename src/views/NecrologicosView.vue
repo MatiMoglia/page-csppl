@@ -23,7 +23,9 @@
       </div>
     </div>
 
-    <p v-else class="loading">Cargando datos...</p>
+    <div v-if="loading" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
   </div>
 </template>
 
@@ -36,6 +38,7 @@ export default {
       fallecidos: [],
       currentGroup: 0,
       itemsPerPage: 10,
+      loading: true,
     };
   },
   computed: {
@@ -65,9 +68,11 @@ export default {
       }
   },
   async created() {
+    this.loading = true;
     try {
       const response = await apiAvisos.obtenerDatos();
       if (response.success) {
+        this.loading = false;
         this.fallecidos = response.data
           .map(fallecido => ({
             ...fallecido,
@@ -80,12 +85,38 @@ export default {
       }
     } catch (error) {
       console.error("Error al obtener datos:", error);
+      this.loading = false;
     }
   },
 };
 </script>
 
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 6px solid #0e144b;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .title {
   text-align: center;
   color: #ffffff;

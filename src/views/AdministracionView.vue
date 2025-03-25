@@ -26,7 +26,7 @@
       {{ mostrarCVs ? 'Ocultar' : 'Mostrar' }} curriculums enviados
     </button>
   </div>
-  <Grafico v-if="mostrarGraficos"/>
+  <Graficos v-if="mostrarGraficos"/>
   <MVCAltaBaja v-if="mostrarFormulario" />
   <MVCCooplus v-if="mostrarCooplus" />
   <Correos v-if="mostrarCorreos" />

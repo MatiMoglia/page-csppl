@@ -1,5 +1,8 @@
 <template>
     <div class="ss-container">
+        <div v-if="loading" class="loading-overlay">
+            <div class="spinner"></div>
+        </div>
         <div class="banco">
             <div class="header">
                 <h1>Banco de Sangre</h1>
@@ -135,17 +138,21 @@ export default {
             mostrarFormulario: false,
             mostrarRequisitos: false,
             registros: [],
+            loading: false,
         };
     },
     methods: {
         async guardarDatos() {
+            this.loading = true;
             if (!this.nombre || !this.dni || !this.edad || !this.telefono || !this.grupoSanguineo) {
                 toast.error("Todos los campos son obligatorios.");
+                this.loading = false;
                 return;
             }
 
             if (this.tieneEnfermedad === "si" && !this.nombreEnfermedad) {
                 toast.error("Debe ingresar el nombre de la enfermedad.");
+                this.loading = false;
                 return;
             }
 
@@ -163,8 +170,10 @@ export default {
 
                 await apiDonantes.agregarDonante(nuevoDonante); 
                 toast.success("Datos enviados correctamente.");
+                this.loading = false;
             } catch (error) {
                 toast.error("Hubo un error al enviar los datos.");
+                this.loading = false;
             }
 
             this.nombre = "";
@@ -180,6 +189,32 @@ export default {
 </script>
 
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .form-container {
   margin: 10px;
   padding: 30px;
