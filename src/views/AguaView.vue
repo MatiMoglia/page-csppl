@@ -1,16 +1,16 @@
 <template>
     <h1 class="title">Agua Potable</h1>
     <br>
-    <div class="aguapotable">
-      <br>
-      <div class="agua-container" data-aos="fade-up">
-        <button class="guardia-btn" @click="mostrarGuardia = !mostrarGuardia">
+    <button class="guardia-btn" @click="mostrarGuardia = !mostrarGuardia">
           <i class="ri-water-flash-line"></i>
         </button>
   
         <div v-if="mostrarGuardia" class="guardia-popup">
           <p>Número de Guardia: <strong>3564-593561</strong></p>
         </div>
+    <div class="aguapotable">
+      <br>
+      <div class="agua-container" data-aos="fade-up">
         <p>
           Con una red de 53 kilómetros de longitud y más de 2429 conexiones, brindamos el servicio de agua potable a la localidad de Porteña tras el otorgamiento de la concesión de dicho servicio por parte del municipio local.
           Este recurso primordial para la vida lo obtenemos de acuíferos situados en proximidades a Villa María, entre Yucat y Puente Andino, a través de perforaciones que alcanzan los 120-180 metros de profundidad.
