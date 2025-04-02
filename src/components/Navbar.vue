@@ -87,10 +87,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
-
 export default {
   data() {
     return {
@@ -99,17 +95,16 @@ export default {
       userMenuOpen: false,
       usMenuOpen: false,
       serviciosSocialesOpen: false,
+      isMobile: window.innerWidth <= 768, // Detecta si es un dispositivo móvil
     };
   },
-  computed: {
-    ...mapGetters("auth", ["isAuthenticated", "getUser", "isAdmin"]),
-    userName() {
-      return this.getUser ? this.getUser.name : "Usuario";
-    },
+  mounted() {
+    window.addEventListener("resize", this.checkMobile);
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.checkMobile);
   },
   methods: {
-    ...mapActions("auth", ["logout"]),
-    
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
       if (!this.menuOpen) {
@@ -130,21 +125,21 @@ export default {
     },
     closeMenu() {
       this.menuOpen = false;
-      this.dropdownOpen = false;
       this.userMenuOpen = false;
-      this.usMenuOpen = false;
-      this.serviciosSocialesOpen = false;
+
+      if (!this.isMobile) {
+        this.dropdownOpen = false;
+        this.usMenuOpen = false;
+        this.serviciosSocialesOpen = false;
+      }
     },
-    async logoutUser() {
-      toast.info("Se ha cerrado sesión correctamente");
-      await new Promise(resolve => setTimeout(resolve, 1500)); 
-      await this.logout();
-      this.closeMenu();
-      this.$router.push("/login");
-    }
+    checkMobile() {
+      this.isMobile = window.innerWidth <= 1024;
+    },
   },
-};
+};  
 </script>
+
   
   
 <style scoped>

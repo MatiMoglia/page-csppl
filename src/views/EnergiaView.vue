@@ -327,5 +327,36 @@ li {
         transform: translateY(0);
     }
 }
-
+@media screen and (max-width: 1024px) {
+  .energia {
+    padding: 20px;
+  }
+  .energia-containers {
+    flex-direction: column;
+    align-items: center;
+  }
+  .dropdown {
+    width: 90%;
+  }
+  .dropdown-containers {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 480px)  {
+    .title {
+        font-size: 1.8rem;
+        padding: 10px;
+    }
+    .energia {
+        padding: 10px;
+    }
+    .energia-container p {
+        font-size: 16px;
+    }
+    .dropdown-btn {
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+}
 </style>

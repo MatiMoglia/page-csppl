@@ -365,6 +365,66 @@ li {
         transform: translateY(0);
     }
 }
+@media screen and (max-width: 1024px) {
+  .aguapotable {
+    padding: 20px;
+  }
+  .dropdown-containers {
+    flex-direction: column;
+    align-items: center;
+  }
+  .dropdown {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .agua-container {
+    padding: 10px;
+  }
+  .btn-files {
+    flex-direction: column;
+    align-items: center;
+  }
+  .open-btn {
+    width: 100%;
+  }
+  .modal-content {
+    max-width: 95%;
+    max-height: 75%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+    padding: 10px;
+  }
+  .aguapotable {
+    padding: 10px;
+  }
+  .agua-container p {
+    font-size: 16px;
+  }
+  .dropdown-btn {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+  .dropdown-content img {
+    height: 120px;
+  }
+  .modal-content {
+    padding: 15px;
+  }
+  .close-modal {
+    top: 5px;
+    right: 5px;
+  }
+}
 
 </style>
   

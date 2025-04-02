@@ -381,8 +381,7 @@ li {
     font-size: 18px;
     font-weight: bold;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 300px;
-    height: 400px;
+    width: 320px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -514,5 +513,70 @@ li {
     height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.plan-card img {
+    width: 100px;
+    height: auto;
+}
+
+@media screen and (max-width: 1024px) {
+    .telecomunicaciones {
+        padding: 20px;
+    }
+    .telecom-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .dropdown {
+        width: 90%;
+    }
+    .dropdown-containers {
+        flex-direction: column;
+        align-items: center;
+    }
+    .plan-card {
+        width: 250px;
+        padding: 12px;
+    }
+    .plan-card img {
+         width: 80px;
+    }
+    .most-popular {
+        font-size: 12px;
+    }
+    .plan-banner{
+        height: 45px;
+        font-size: 12px;
+    }
+}
+@media screen and (max-width: 480px)  {
+    .title {
+        font-size: 1.8rem;
+        padding: 10px;
+    }
+    .telecomunicaciones {
+        padding: 10px;
+    }
+    .telecom-container p {
+        font-size: 16px;
+    }
+    .dropdown-btn {
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+    .plan-card {
+        width: 150px;
+        padding: 10px;
+    }
+    .plan-card img {
+        width: 70px;
+    }
+    .most-popular {
+        font-size: 12px;
+    }
+    .plan-banner{
+        height: 45px;
+        font-size: 12px;
+    }
 }
 </style>

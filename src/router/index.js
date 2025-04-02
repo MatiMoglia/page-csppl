@@ -119,6 +119,7 @@ const routes = [
       hideNavbar: true,
       hideFooter: true,
       hideSpam: true,
+      hideBodyStyle: true,
       title: "Registro | Cooperativa de Servicios Públicos de Porteña"
     }
   },
@@ -130,6 +131,7 @@ const routes = [
       hideNavbar: true,
       hideFooter: true,
       hideSpam: true,
+      hideBodyStyle: true, 
       title: "Login | Cooperativa de Servicios Públicos de Porteña"
     }
   },

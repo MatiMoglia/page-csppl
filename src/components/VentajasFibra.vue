@@ -36,42 +36,57 @@ export default {
   };
 </script>
   
-<style scoped>.advantages-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 40px;
+<style scoped>
+.advantages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 100%;
+  padding: 0 10px;
 }
-  
+
 .advantage-row {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 20px;
 }
-  
+
 .advantage-card {
-    background-color: #fff;
-    border: 2px solid #0e1850;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 280px;
-    height: 220px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+  border: 2px solid #0e1850;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 280px;
+  height: 220px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-  
+
 .advantage-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
-  
+
 .advantage-card h4 {
-    color: #1a36d1;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+  color: #1a36d1;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1024px) {
+  .advantage-card {
+      width: 100%;
+      max-width: 200px;
+      padding: 10px;
+  }
+  .advantage-card h4 {
+      font-size: 1rem;
+  }
 }
 </style>
   

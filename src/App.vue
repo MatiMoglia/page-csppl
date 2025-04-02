@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+ <div id="app" :class="{ 'body-padding': !$route.meta.hideBodyStyle }">
     <Navbar v-if="!$route.meta.hideNavbar" />
     <Spamlogin v-if="!$route.meta.hideSpam"/>
     <router-view />
@@ -27,7 +27,7 @@
   };
 </script>
 <style>
-  body {
+ .body-padding {
     padding-top: 80px; 
   }
 </style>
