@@ -24,6 +24,9 @@
                 <p><strong>Teléfono:</strong> {{ getUser?.phone || 'No registrado' }}</p>
                 <p><strong>Fecha de Nacimiento:</strong> {{ getUser?.age }}</p>
                 <p><strong>Número de Titular:</strong> {{ getUser?.nroTitular }}</p>
+                <p v-if="perfilActualizado" class="mensaje-actualizacion">
+                    Vuelve a iniciar sesión para ver los cambios.
+                </p>
                 </div>
 
                 <div class="btn-acciones" data-aos="fade-left">
@@ -174,6 +177,7 @@ export default {
                 nroTitular: "",
             },
             loading: false,
+            perfilActualizado: false, 
         };
     },
     computed: {
@@ -204,32 +208,33 @@ export default {
             this.loading = true;
             if (!this.password) {
                 toast.error("Por favor ingresa tu contraseña.");
+                this.loading = false;
                 return;
             }
 
             try {
                 const response = await apiUsers.validarContrasena(this.getUser._id, this.password);
-                if (response.success) {
-                    const updatedData = { ...this.updatedUser };
-
-                    const updateResponse = await apiUsers.updateUser(this.getUser._id, updatedData);
-                    if (updateResponse.success) {
-                        toast.success("Perfil actualizado correctamente.");
-                        this.getUser.name = updatedData.name;
-                        this.loading = false;
-                        this.mostrarModalContrasena = false; 
-                    } else {
-                        toast.error(updateResponse.error || "Error al actualizar el perfil.");
-                    }
-                } else {
+                if (!response.success) {
                     toast.error("Contraseña incorrecta.");
-                     this.loading = false;
+                    this.loading = false;
+                    return;
+                }
+
+                const updatedData = { ...this.updatedUser };
+                const updateResponse = await apiUsers.updateUser(this.getUser._id, updatedData);
+
+                if (updateResponse.success) {
+                    toast.success("Perfil actualizado correctamente.");
+                    this.perfilActualizado = true;
+                    this.mostrarModalContrasena = false;
+                } else {
+                    toast.error(updateResponse.error || "Error al actualizar el perfil.");
                 }
             } catch (error) {
                 toast.error("Hubo un error al verificar la contraseña.");
                 console.error(error);
-                this.mostrarModalContrasena = false;
-                this.loading = false;
+            } finally {
+                this.loading = false; 
             }
         },
         async consultarTitular() {
@@ -325,6 +330,16 @@ export default {
 
 
 <style scoped>
+.mensaje-actualizacion {
+  background-color: #f8d7da; 
+  color: #721c24;
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  font-size: 8px;
+  text-align: center;
+  border: 1px solid #f5c6cb; 
+}
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -498,9 +513,9 @@ export default {
   margin-left: 20px;
 }
 .user-info {
-  margin: 20px;
+  margin: 10px;
   width: 600px;
-  height: 230px;
+  height: 250px;
 }
 
 .profile-image img {

@@ -121,6 +121,7 @@ body {
 
 .nav__link:hover {
     background-color: var(--black-color-light);
+    border-radius: 10px;
 }
 
 .show-menu {

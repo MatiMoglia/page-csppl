@@ -15,8 +15,8 @@
         <p><strong>Número de WhatsApp:</strong> 3564-331499</p>
         <p><strong>Número de nuestro ChatBot Lily:</strong> 3564-330695</p>
         <p><strong><i class="ri-mail-line"></i> e-mail Administración:</strong> <a href="mailto:admcsppl@gmail.com">admcsppl@gmail.com</a></p>
-        <p><strong><i class="ri-mail-line"></i> e-mail Contabilidad:</strong> <a href="mailto:contabilidad@gmail.com">contabilidad@gmail.com</a></p>
-        <p><strong><i class="ri-mail-line"></i> e-mail Telecomunicaciones:</strong> <a href="mailto:telecomunicaciones@gmail.com">telecomunicaciones@gmail.com</a></p>
+        <p><strong><i class="ri-mail-line"></i> e-mail Contabilidad:</strong> <a href="mailto:contabilidad@gmail.com">contabilidadcsppl@gmail.com</a></p>
+        <p><strong><i class="ri-mail-line"></i> e-mail Telecomunicaciones:</strong> <a href="mailto:telecomunicaciones@gmail.com">telecomunicacionescsppl@gmail.com</a></p>
         <div class="google-map">
           <h3>Ubicación:</h3>
           <iframe 

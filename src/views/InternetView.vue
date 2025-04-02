@@ -115,7 +115,7 @@
                     <h4>Plan ADSL</h4>
                     <h3>4 MB de Internet</h3>
                     <p class="price">$12.499</p>
-                    <button class="btn-solicitar">Solicitar</button>
+                    <button class="btn-solicitar" @click="scrollToFormulario">Solicitar</button>
                     <button class="btn-consultar" @click="redirigirWhatsApp()">
                         <i class="ri-phone-line"></i> Consultar
                     </button>
@@ -125,7 +125,7 @@
                     <h4>Plan Rural</h4>
                     <h3>5 MB de Internet</h3>
                     <p class="price">$23.599</p>
-                    <button class="btn-solicitar">Solicitar</button>
+                    <button class="btn-solicitar" @click="scrollToFormulario">Solicitar</button>
                     <button class="btn-consultar" @click="redirigirWhatsApp()">
                         <i class="ri-phone-line"></i> Consultar
                     </button>
@@ -163,8 +163,10 @@ export default {
     },
     methods: {
         scrollToFormulario() {
-            const formulario = document.getElementById("formulario");
-            formulario.scrollIntoView({ behavior: "smooth" });
+            const formulario = document.querySelector(".form-section");
+            if (formulario) {
+                formulario.scrollIntoView({ behavior: "smooth" });
+            }
         },
         redirigirWhatsApp() {
         const numero = "5493564331499";

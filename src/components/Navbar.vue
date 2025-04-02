@@ -9,11 +9,14 @@
         </router-link>
 
         <div class="nav__toggle" @click="toggleMenu">
-          <i :class="menuOpen ? 'ri-close-line nav__close' : 'ri-menu-line nav__burger'"></i>
+          <i class="ri-menu-line nav__burger"></i>
         </div>
       </div>
 
       <div :class="['nav__menu', { 'show-menu': menuOpen }]">
+        <div class="nav__toggle" @click="toggleMenu">
+          <i class="ri-close-line"></i>
+        </div>
         <ul class="nav__list">
           <li><router-link to="/" class="nav__link" @click="closeMenu">Inicio</router-link></li>
           <li><router-link to="/novedades" class="nav__link" @click="closeMenu">Novedades</router-link></li>
@@ -61,12 +64,11 @@
               {{ isAuthenticated ? `Bienvenido ${userName}` : "Mi Cuenta" }} 
               <i class="ri-arrow-down-s-line dropdown__arrow"></i>
             </div>
-            <p v-if="isAuthenticated" class="user__email">{{ getUser?.email}}</p>
+            <p v-if="isAuthenticated" class="user__email">{{ getUser?.email }}</p>
             <ul v-if="userMenuOpen" class="dropdown__menu">
               <template v-if="!isAuthenticated">
                 <li><router-link to="/login" class="dropdown__link" @click="closeMenu">Iniciar Sesión</router-link></li>
                 <li><router-link to="/registro" class="dropdown__link" @click="closeMenu">Registrarse</router-link></li>
-                <li><router-link to="/reclamos" class="dropdown__link" @click="closeMenu">Reclamos</router-link></li>
               </template>
               <template v-else>
                 <div v-if="isAdmin">
@@ -146,12 +148,31 @@ export default {
   
   
 <style scoped>
-.user__email {
-  font-size: 0.8rem;  
-  color: #b0b0b0;  
-  margin-top: -40px;
-  margin-left: 20px;
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  transition: all 0.3s ease-in-out;
+  z-index: 1000; 
 }
+.header.scrolled {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.9); 
+}
+.user__email {
+  font-size: 0.7rem;
+  color: #b0b0b0;
+  margin-top: -5px;
+  padding-left: 25px;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 200px;
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -198,9 +219,11 @@ export default {
   color: #fff;
   font-size: 1rem;
   cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .nav__link:hover {
+  transform: translateY(-2px);
   color: #7fb6ff;
 }
 
@@ -293,20 +316,37 @@ export default {
 .nav__link.admin li{
   background: none !important; 
 }
-@media (max-width: 768px) {
+.ri-close-line {
+  transition: ease 0.3s;
+}
+.ri-close-line:hover {
+  color: red;
+}
+@media (max-width: 768px) { 
   .nav__toggle {
     display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
   }
 
   .nav__menu {
     display: none;
     flex-direction: column;
-    position: absolute;
-    top: 100%;
+    position: fixed;
+    top: 0;
     left: 0;
-    background: #0d1b2a;
-    width: 100%;
-    padding: 1rem;
+    height: 85vh;
+    width: 250px;
+    padding: 2rem 1rem;
+    background: rgba(13, 27, 42, 0.897);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
   }
 
   .show-menu {
@@ -317,15 +357,22 @@ export default {
     flex-direction: column;
     gap: 1rem;
   }
+
   .dropdown__menu {
     width: 100%;
-    left: 10;
-    top: 10; 
+    position: relative;
+    left: 0;
+    top: 0;
   }
 
   .dropdown__item .nav__link {
     display: flex;
     justify-content: space-between;
+  }
+  .user__email {
+    font-size: 0.75rem;
+    text-align: center;
+    max-width: 150px;
   }
 }
 </style>

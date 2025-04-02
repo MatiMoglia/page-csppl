@@ -26,3 +26,8 @@
     }
   };
 </script>
+<style>
+  body {
+    padding-top: 80px; 
+  }
+</style>

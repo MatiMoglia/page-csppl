@@ -111,8 +111,10 @@
             </div>
           </div>
       </div>
+      <div>
+      <img src="../assets/css/img/sensa-img.jpg" class="channel-sensa" alt="Sensa" data-aos="fade-up">
     </div>
-    <img src="../assets/css/img/sensa-img.jpg" alt="TNT Sports" class="channel-sensa" data-aos="fade-up">
+    </div>
     <div class="container-adhesion" data-aos="fade-up" data-aos-delay="200">
       <h1 class="title">¡Adherite ahora mismo!</h1>
       <p>Completa el siguiente formulario para poder elegir el pack que desees y disfrutar del servicio.</p>
@@ -182,9 +184,11 @@ import "aos/dist/aos.css";
   margin: 10px;
 }
 .channel-sensa {
-  display: inline-block; 
-  vertical-align: middle;
-  overflow: hidden;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  width: 100%; 
 }
 
 .container-cooplus, .container-packs {
