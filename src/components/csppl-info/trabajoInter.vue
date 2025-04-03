@@ -29,7 +29,7 @@
               <p>Cooperativa Escolar del Centro Educativo Nuestra Señora de Lourdes. Trabajamos en conjunto para fortalecer nuestra comunidad.</p>
             </div>
             <div class="cooperativa-card">
-              <img src="https://scontent.fcor3-1.fna.fbcdn.net/v/t39.30808-6/374461020_1418022518764564_1541523727927590556_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHLzEXpD_TC-9lv3gKmIP6zP_K_hvAxCSs_8r-G8DEJKzPLz2sgPYMI4gHX39eftCw14QpcJkpJyIKvoR2lTKHh&_nc_ohc=05fIS3wni7oQ7kNvgHnz3s9&_nc_oc=AdmJdyimY_rjSWzrr234S3bygC8qG4_h9b5nTnhR5zly8YwQprYIauRjB9ZL324HtgQ&_nc_zt=23&_nc_ht=scontent.fcor3-1.fna&_nc_gid=IsGbHxwwtLBtcc1Er4HDeg&oh=00_AYF2VbCeG9TePGfxlXjsbwqPw16lIvcxWyt4rsrtrpdK1w&oe=67E0D907" alt="La Juvenil" class="cooperativa-logo" />
+              <img src="https://www.cadena3.com/admin/playerswf/fotos/ARCHI_46428.jpg" alt="La Juvenil" class="cooperativa-logo" />
               <h3>La Juvenil</h3>
               <p>Cooperativa Escolar del Instituto de Enseñanza Media Bernardino Rivadavia. Contribuimos al desarrollo de nuevas ideas y aprendizajes.</p>
             </div>
@@ -171,5 +171,6 @@ export default {
   width: 80px;
   height: auto;
   margin-bottom: 15px;
+  margin-top: 15px;
 }
 </style>

@@ -169,4 +169,53 @@ h2 {
 .dot.active {
   background: #18599e;
 }
+@media (max-width: 768px) {
+  .novedades-grid {
+    flex-wrap: wrap; 
+    gap: 15px;
+  }
+
+  .novedad-card {
+    width: 90%; 
+    max-width: 350px;
+    margin: auto;
+  }
+
+  .novedad-img {
+    max-height: 180px; 
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .novedades-grid {
+    flex-direction: column; 
+    align-items: center;
+  }
+
+  .novedad-card {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .novedad-img {
+    max-height: 150px;
+  }
+
+  .dots {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
 </style>
