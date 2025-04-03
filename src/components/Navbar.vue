@@ -3,7 +3,7 @@
     <nav class="nav container">
       <div class="nav__data">
         <router-link to="/" class="nav__logo">
-          <img src="../assets/css/img/Cooperativa de Servicios Publicos de Portena Ltda-Photoroom.png" 
+          <img src="../assets/css/img/Cooperativa de Servicios Publicos de Portena Ltda. -Photoroom.png" 
             alt="Coop de Servicios Públicos de Porteña" 
             class="nav__logo-img" />
         </router-link>
@@ -95,7 +95,7 @@ export default {
       userMenuOpen: false,
       usMenuOpen: false,
       serviciosSocialesOpen: false,
-      isMobile: window.innerWidth <= 768, // Detecta si es un dispositivo móvil
+      isMobile: window.innerWidth <= 768, 
     };
   },
   mounted() {
