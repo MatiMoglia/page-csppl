@@ -331,115 +331,115 @@ export default {
 
 <style scoped>
 .mensaje-actualizacion {
-  background-color: #f8d7da; 
-  color: #721c24;
-  padding: 5px;
-  margin-top: 5px;
-  border-radius: 5px;
-  font-size: 8px;
-  text-align: center;
-  border: 1px solid #f5c6cb; 
+    background-color: #f8d7da; 
+    color: #721c24;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+    font-size: 8px;
+    text-align: center;
+    border: 1px solid #f5c6cb; 
 }
 .loading-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.377);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.377);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
 .spinner {
-  border: 6px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 2s linear infinite;
+    border: 6px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 .modal-actions {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
   
 .modal-actions button {
-  background: none;
-  border: none;
-  font-size: 30px;
-  cursor: pointer;
-  color: #18385a;
-  transition: ease 0.3s;
-  padding: 10px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #18385a;
+    transition: ease 0.3s;
+    padding: 10px;
 }
   
 .modal-actions button:hover {
-  color: #3d8bdd;
+    color: #3d8bdd;
 }
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
 .modal {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 500px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .modal h2 { 
-  background: #1a266b; 
-  color: rgb(255, 255, 255);
-  padding: 20px;
-  margin: -20px -20px 20px -20px; 
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+    background: #1a266b; 
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: -20px -20px 20px -20px; 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .modal label {
-  display: block;
-  font-size: 1.2rem;
-  margin-bottom: 5px;
-  font-weight: bold;
-  text-align: left;
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: left;
 }
 
 .modal input {
-  text-align: left;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.2rem;
-  margin-left: 5px;
+    text-align: left;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    margin-left: 5px;
 }
 
 .modal p {
-  text-align: left;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
-  margin-left: 5px;
-  margin-bottom: 5px;
+    text-align: left;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
+    margin-left: 5px;
+    margin-bottom: 5px;
 }
 
 .form-group {
@@ -493,75 +493,75 @@ export default {
     transform: scale(1.05); 
 }
 .user-profile {
-  display: flex;
-  align-items: center;
-  background: rgb(231, 232, 233);
-  padding:30px;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    background: rgb(231, 232, 233);
+    padding:30px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .profile-image {
-  flex-shrink: 0;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 5px solid #243385;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  margin-right: 40px;
-  margin-left: 20px;
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #243385;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-right: 40px;
+    margin-left: 20px;
 }
 .user-info {
-  margin: 10px;
-  width: 600px;
-  height: 250px;
+    margin: 10px;
+    width: 600px;
+    height: 250px;
 }
 
 .profile-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .user-info h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  font-size: 30px;
-  color: #1f2c79;
-  margin: 5px;
-  padding-left: 10px;
-  text-align: left;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #1f2c79;
+    margin: 5px;
+    padding-left: 10px;
+    text-align: left;
 }
 
 .user-info p {
-  font-size: 1.4rem;
-  margin-bottom: 15px;
-  color: #333;
-  gap: 10px;
-  padding-left: 20px;
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #333;
+    gap: 10px;
+    padding-left: 20px;
 }
 
 .btn-acciones {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;  
-  margin-right: 50px; 
+    display: flex;
+    flex-direction: column;
+    gap: 20px;  
+    margin-right: 50px; 
 }
 .btn-editar,
 .btn-consultar {
-  padding: 10px 15px;
-  font-size: 18px;
-  font-weight: bold;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  background-color: #10355c;
-  font-family: "Montserrat", sans-serif;
-  transition: background-color 0.3s, transform 0.3s;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  width: 100%; 
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #10355c;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 100%; 
 }
 
 .btn-editar:hover {
@@ -575,10 +575,10 @@ export default {
 }
 
 .perfil-container {
-  padding: 20px;
-  font-family: "Montserrat", sans-serif;
-  line-height: 1.6;
-  background: rgb(236, 231, 231);
+    padding: 20px;
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.6;
+    background: rgb(236, 231, 231);
 }
 .header {
     display: flex;
