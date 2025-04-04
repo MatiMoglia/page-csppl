@@ -312,6 +312,9 @@ li {
     transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
+.plan-card h4{
+    margin-top: 30px;
+}
 
 .plan-banner {
     background-color: #224ab9;

@@ -66,7 +66,7 @@
         </form>
       </div>
     </div>
-  </template>
+</template>
   
 <script>
 import { toast } from 'vue3-toastify';
@@ -235,99 +235,99 @@ export default {
   100% { transform: rotate(360deg); }
 }
 .form-container {
-    display: grid;
-    padding: 20px;
-    margin-top: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
+  display: grid;
+  padding: 20px;
+  margin-top: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
   
 .form-section {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    background-color: rgba(244, 244, 244, 0.9);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  background-color: rgba(244, 244, 244, 0.9);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
   
 h2 {
-    text-align: left;
-    color: #0e1850;
+  text-align: left;
+  color: #0e1850;
 }
   
 label {
-    font-weight: bold;
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
+  font-weight: bold;
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
   
 input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1em;
-    font-family: "Montserrat", sans-serif;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: "Montserrat", sans-serif;
 }
   
 .input-error {
-    border-color: red;
+  border-color: red;
 }
 
 button {
-    width: 100%;
-    padding: 20px;
-    background-color: #0e1850;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: "Montserrat", sans-serif;
+  width: 100%;
+  padding: 20px;
+  background-color: #0e1850;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Montserrat", sans-serif;
 }
 
 button:hover {
-    background-color: #053e74;
+  background-color: #053e74;
 }
 
 .acciones {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .acciones button {
-    flex: 1;
-    padding: 15px;
-    font-size: 1em;
-    background-color: #053e74;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+  flex: 1;
+  padding: 15px;
+  font-size: 1em;
+  background-color: #053e74;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .acciones .active-alta {
-    background-color: #19ac67;
-    color: white;
+  background-color: #19ac67;
+  color: white;
 }
 
 .acciones .active-baja {
-    background-color: #ff503b;
-    color: white;
+  background-color: #ff503b;
+  color: white;
 }
 
 .archivo-info {
-    margin: 10px;
-    font-size: 0.9em;
-    color: #555;
+  margin: 10px;
+  font-size: 0.9em;
+  color: #555;
 }
 
 @media (max-width: 768px) {
-    .form-container {
-      grid-template-columns: 1fr;
-    }
+  .form-container {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

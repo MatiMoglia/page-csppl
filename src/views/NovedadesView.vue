@@ -199,14 +199,14 @@ export default {
   text-align: center;
 }
 .subtitle {
-    color: #1f2c79;
-    background-color: #ececec38;
-    font-size: 2.2rem;
-    border-left: 5px solid #0e1850;
-    border-right: 5px solid #0e1850;
-    text-align: left;
-    padding: 20px;
-    margin-bottom: 20px;
+  color: #1f2c79;
+  background-color: #ececec38;
+  font-size: 2.2rem;
+  border-left: 5px solid #0e1850;
+  border-right: 5px solid #0e1850;
+  text-align: left;
+  padding: 20px;
+  margin-bottom: 20px;
 }
   
 .portal-noticias {

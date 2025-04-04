@@ -4,11 +4,12 @@
       <div class="footer-section">
         <h3>Servicios</h3>
         <ul>
-          <li>Agua Potable</li>
-          <li>Alumbrado Público</li>
-          <li>Energía Eléctrica</li>
-          <li>Servicios Sociales</li>
-          <li>Telecomunicaciones</li>
+          <li><RouterLink to="/agua" style="color: inherit; text-decoration: none;">Agua Potable</RouterLink></li>
+          <li><RouterLink to="/energia" style="color: inherit; text-decoration: none;">Energía Eléctrica</RouterLink></li>
+          <li><RouterLink to="/servicios-sociales" style="color: inherit; text-decoration: none;">Servicios Sociales</RouterLink></li>
+          <li><RouterLink to="/telecomunicaciones" style="color: inherit; text-decoration: none;">Internet</RouterLink></li>
+          <li><RouterLink to="/telefono" style="color: inherit; text-decoration: none;">Telefonía</RouterLink></li>
+          <li><RouterLink to="/cooplus" style="font-weight: bold; color: inherit; text-decoration: none; color: #d664bd;">COOPLUS+</RouterLink></li>
         </ul>
       </div>
 

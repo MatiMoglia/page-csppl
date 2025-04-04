@@ -69,6 +69,7 @@
               <template v-if="!isAuthenticated">
                 <li><router-link to="/login" class="dropdown__link" @click="closeMenu">Iniciar Sesión</router-link></li>
                 <li><router-link to="/registro" class="dropdown__link" @click="closeMenu">Registrarse</router-link></li>
+                <li><router-link to="/reclamos" class="dropdown__link" @click="closeMenu">Reclamos</router-link></li>
               </template>
               <template v-else>
                 <div v-if="isAdmin">
@@ -87,6 +88,10 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
 export default {
   data() {
     return {
@@ -95,16 +100,17 @@ export default {
       userMenuOpen: false,
       usMenuOpen: false,
       serviciosSocialesOpen: false,
-      isMobile: window.innerWidth <= 768, 
     };
   },
-  mounted() {
-    window.addEventListener("resize", this.checkMobile);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.checkMobile);
+  computed: {
+    ...mapGetters("auth", ["isAuthenticated", "getUser", "isAdmin"]),
+    userName() {
+      return this.getUser ? this.getUser.name : "Usuario";
+    },
   },
   methods: {
+    ...mapActions("auth", ["logout"]),
+    
     toggleMenu() {
       this.menuOpen = !this.menuOpen;
       if (!this.menuOpen) {
@@ -125,19 +131,20 @@ export default {
     },
     closeMenu() {
       this.menuOpen = false;
+      this.dropdownOpen = false;
       this.userMenuOpen = false;
-
-      if (!this.isMobile) {
-        this.dropdownOpen = false;
-        this.usMenuOpen = false;
-        this.serviciosSocialesOpen = false;
-      }
+      this.usMenuOpen = false;
+      this.serviciosSocialesOpen = false;
     },
-    checkMobile() {
-      this.isMobile = window.innerWidth <= 1024;
-    },
+    async logoutUser() {
+      toast.info("Se ha cerrado sesión correctamente");
+      await new Promise(resolve => setTimeout(resolve, 1500)); 
+      await this.logout();
+      this.closeMenu();
+      this.$router.push("/login");
+    }
   },
-};  
+};
 </script>
 
   

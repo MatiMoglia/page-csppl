@@ -151,7 +151,9 @@ export default {
           this.habilitarNuevo = false;
         } else {
           this.mensaje = "Titular no encontrado. ¿Desea agregarlo?";
-          toast.info(this.mensaje);
+          this.nuevoFamiliar.dniTitular = '';
+          this.nuevoFamiliar.titular = '';
+          toast.warning(this.mensaje);
           this.titularEncontrado = false;
           this.habilitarNuevo = true;
         }
@@ -223,8 +225,6 @@ export default {
           this.nuevoFamiliar.titular = response.data.titular;
         } else {
           toast.warning("No se encontraron datos del titular.");
-          this.nuevoFamiliar.dniTitular = "";
-          this.nuevoFamiliar.titular = "";
         }
       } catch (error) {
         console.error("Error al obtener los datos del titular", error);

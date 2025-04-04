@@ -244,9 +244,9 @@ button:hover {
 }
 
 @media (max-width: 768px) {
-    .form-container {
-      grid-template-columns: 1fr; 
-    }
+  .form-container {
+    grid-template-columns: 1fr; 
+  }
 }
 </style>
     
