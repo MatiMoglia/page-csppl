@@ -2,14 +2,13 @@
     <div>
       <PieChart :chart-data="chartData" :chart-options="chartOptions" />
     </div>
-  </template>
+</template>
   
-  <script>
-  import { defineComponent, toRefs } from "vue";
+<script>
+import { defineComponent, toRefs } from "vue";
 import { Pie } from "vue-chart-3";
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, PieController } from "chart.js";
 
-// 🟢 **Registrar los controladores y elementos necesarios para el gráfico**
 ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, PieController);
 
 export default defineComponent({

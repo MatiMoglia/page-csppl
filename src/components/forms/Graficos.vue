@@ -179,7 +179,7 @@
 </script>
   
 <style scoped>
-  .title {
+.title {
   color: #0056b3;
   background-color: #ececec38;
   font-size: 2rem;
@@ -192,33 +192,33 @@
   margin-bottom: 10px;
 }
 .charts-container {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    padding-left: 100px;
-    padding-right: 100px;
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
   
-  .chart-container {
-    width: 350px; 
-    margin: auto;
-    padding: 10px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .chart-container:hover {
-    transform: scale(1.05);
-  }
+.chart-container {
+  width: 350px; 
+  margin: auto;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.chart-container:hover {
+  transform: scale(1.05);
+}
   
-  .subtitle {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  </style>
+.subtitle {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+</style>
   
