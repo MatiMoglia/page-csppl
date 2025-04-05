@@ -152,16 +152,16 @@ export default {
             }
         },
         filtrarFormularios() {
-            const query = this.searchQuery.toLowerCase();
-            this.formulariosFiltrados = this.formularios.filter((form) => {
-                return (
-                    form.nombre.toLowerCase().includes(query) ||
-                    (form.telefono && form.telefono.toString().includes(query)) || 
-                    (form.dni && form.dni.toString().includes(query)) || 
-                    form.domicilio.toLowerCase().includes(query) ||
-                    form.email.toLowerCase().includes(query)
-                );
-            });
+          const query = this.searchQuery?.toLowerCase() || "";
+          this.formulariosFiltrados = this.formularios.filter((form) => {
+              return (
+                  form.nombre?.toLowerCase().includes(query) ||
+                  form.telefono?.toLowerCase().includes(query) ||
+                  form.dni?.toString().includes(query) ||
+                  form.direccion?.toLowerCase().includes(query) ||
+                  form.email?.toLowerCase().includes(query)
+              );
+          });
         },
         editarFormulario(form) {
             this.formEdicion = { ...form };
@@ -194,6 +194,7 @@ export default {
             <p><strong>Nombre:</strong> ${form.nombre}</p>
             <p><strong>Email:</strong> ${form.email}</p>
             <p><strong>Teléfono:</strong> ${form.telefono}</p>
+            <p><strong>Dirección:</strong> ${form.direccion}</p>
             <p><strong>DNI:</strong> ${form.dni}</p>
             <p><strong>Email:</strong> ${form.email}</p>
             <p><strong>Fecha pedido:</strong> ${form.fechapedido}</p>

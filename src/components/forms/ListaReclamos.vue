@@ -143,17 +143,20 @@
         }
       },
       filtrarFormularios() {
-            const query = this.searchQuery.toLowerCase();
-            this.formulariosFiltrados = this.formularios.filter((form) => {
-                return (
-                    form.nombre.toLowerCase().includes(query) ||
-                    (form.telefono && form.telefono.toString().includes(query)) || 
-                    form.servicio.toLowerCase().includes(query) || 
-                    form.direccion.toLowerCase().includes(query) ||
-                    form.email.toLowerCase().includes(query) ||
-                    form.estado.toLowerCase().includes(query)
-                );
-            });
+        const query = this.searchQuery?.toLowerCase() ?? "";
+
+        this.formulariosFiltrados = this.formularios.filter(({ 
+          nombre, telefono, servicio, direccion, email, estado 
+        }) => {
+          return (
+            nombre?.toLowerCase().includes(query) ||
+            telefono?.toString().includes(query) ||
+            servicio?.toLowerCase().includes(query) ||
+            direccion?.toLowerCase().includes(query) ||
+            email?.toLowerCase().includes(query) ||
+            estado?.toLowerCase().includes(query)
+          );
+        });
       },
       editarFormulario(form) {
         this.formEdicion = { ...form };

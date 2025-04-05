@@ -29,7 +29,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="form in formularios" :key="form._id">
+            <tr v-for="form in formulariosFiltrados" :key="form._id">
               <td>{{ form.servicio }}</td>
               <td>{{ form.nombre }}</td>
               <td>{{ form.telefono }}</td>
@@ -144,7 +144,8 @@
                     (form.telefono && form.telefono.toString().includes(query)) || 
                     (form.dni && form.dni.toString().includes(query)) || 
                     form.domicilio.toLowerCase().includes(query) ||
-                    form.email.toLowerCase().includes(query)
+                    form.email.toLowerCase().includes(query) ||
+                    form.servicio.toLowerCase().includes(query)
                 );
             });
       },

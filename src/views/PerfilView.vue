@@ -258,10 +258,11 @@ export default {
                     this.nroTitularValidado = true;
                     this.loading = false;
                 } else {
-                    this.mensaje = "Titular no encontrado. ¿Desea agregarlo?";
-                    toast.info(this.mensaje);
+                    this.mensaje = "Titular no encontrado.";
+                    toast.warning(this.mensaje);
                     this.titularEncontrado = false;
                     this.habilitarNuevo = true;
+                    this.loading = false;
                 }
             } catch (error) {
                 console.error("Error al obtener los adherentes", error);
