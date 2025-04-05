@@ -69,7 +69,7 @@ export default {
         return this.novedades.slice(0, 3);
       },
       ultimasNoticias() {
-        return this.novedades.slice(-3).reverse(); 
+        return this.novedades; 
       },
     },
     methods: {
