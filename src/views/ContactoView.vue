@@ -1,4 +1,7 @@
 <template>
+  <div v-if="loading" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
     <section class="contacto">
       <br>
       <div class="header">
@@ -169,7 +172,8 @@ import 'vue3-toastify/dist/index.css';
         ],
         isModalOpen: false,
         formSubmittedConsulta: false,
-        formSubmittedCV: false
+        formSubmittedCV: false,
+        loading: false,
       };
     },
     methods: {
@@ -210,6 +214,7 @@ import 'vue3-toastify/dist/index.css';
         }
     },
     async enviarCV() {
+      this.loading = true;
       this.formSubmittedCV = true;
         if (!this.cvForm.name) {
           toast.error("Ingrese su nombre.");
@@ -228,16 +233,17 @@ import 'vue3-toastify/dist/index.css';
           try {
             const response = await apiCVs.enviarCV(this.cvForm);
             console.log("Respuesta de la API:", response);
-
             if (response && response._id) {
             toast.success("Curriculum enviado con éxito");
             this.closeModal();
+            this.loading = false;
             } else {
             toast.error("Error al enviar el CV. Respuesta inesperada.");
             }
         } catch (error) {
             console.error("Error al enviar el CV:", error);
             toast.error("Error al conectar con el servidor.");
+            this.loading = false;
         }
     },
     isValidEmail(email) {
@@ -270,6 +276,32 @@ import 'vue3-toastify/dist/index.css';
 </script>
   
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .header {
   display: flex;
   justify-content: space-between; 

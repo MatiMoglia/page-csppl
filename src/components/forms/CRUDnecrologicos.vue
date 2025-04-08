@@ -172,6 +172,7 @@
                 this.formularios = this.formularios.filter((form) => form._id !== this.idEliminar);
                 this.formulariosFiltrados = this.formularios;
                 toast.success("Aviso eliminado correctamente.");
+                this.cargarDatos();
             } else {
                 toast.error("Error al eliminar el aviso", response.error);
             }

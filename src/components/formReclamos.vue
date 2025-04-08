@@ -1,4 +1,7 @@
 <template>
+  <div v-if="loading" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
     <div class="form-container">
       <div class="form-section">
         <h3>Dejanos tu Reclamo o Consulta:</h3>
@@ -58,7 +61,8 @@ export default {
           servicio: '',
           descripcion: '',
           estado:'',
-          fechaReclamo: new Date().toISOString().split('T')[0]
+          fechaReclamo: new Date().toISOString().split('T')[0],
+          loading: false,
         },
       };
     },
@@ -74,7 +78,8 @@ export default {
       },
       async enviarFormulario() {
         this.formReclamo.fechaReclamo = new Date().toISOString().split('T')[0];
-        this.formReclamo.estado = "pendiente";
+        this.formReclamo.estado = "Pendiente";
+        this.loading = true;
 
         if (this.formReclamo.nombre === "") {
           toast.error("Ingrese el nombre completo.");
@@ -101,6 +106,7 @@ export default {
 
             if (response && response._id) {
             toast.success("Reclamo enviado con éxito");
+            this.loading = false;
             this.resetFormReclamos();
             } else {
             toast.error("Error al enviar el reclamo. Respuesta inesperada.");
@@ -108,6 +114,7 @@ export default {
         } catch (error) {
             console.error("Error al enviar el reclamo:", error);
             toast.error("Error al conectar con el servidor.");
+            this.loading = false;
         }
       },
   
@@ -136,111 +143,137 @@ export default {
   };
 </script>  
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .form-container {
-    display: grid;
-    padding: 20px;
-    margin-top: 30px;
-    padding-left: 140px;
-    padding-right: 140px;
-    margin-bottom: 30px;
+  display: grid;
+  padding: 20px;
+  margin-top: 30px;
+  padding-left: 140px;
+  padding-right: 140px;
+  margin-bottom: 30px;
 }
     
 .form-section {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 8px;
-    background-color: rgba(235, 235, 235, 0.9);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  background-color: rgba(235, 235, 235, 0.9);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
     
 h3 {
-    text-align: left;
-    color: #0e1850;
-    font-size: 25px;
+  text-align: left;
+  color: #0e1850;
+  font-size: 25px;
 }
   
 label {
-    font-weight: bold;
-    display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
+  font-weight: bold;
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
     
 input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1em;
-    font-family: "Montserrat", sans-serif;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+  font-family: "Montserrat", sans-serif;
 }
     
 input:focus, select:focus, textarea:focus {
-    border-color: #0e1850;
+  border-color: #0e1850;
 }
     
 .input-error {
-    border-color: red;
+  border-color: red;
 }
     
 button {
-    width: 100%;
-    padding: 20px;
-    background-color: #0e1850;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-family: "Montserrat", sans-serif;
-    font-weight: bold;
+  width: 100%;
+  padding: 20px;
+  background-color: #0e1850;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
 }
     
 button:hover {
-    background-color: #053e74;
+  background-color: #053e74;
 }
     
 .video-consulta-container {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    padding-left: 120px;
-    padding-right: 120px;
-    padding-top: 10px;
-    padding-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 10px;
+  padding-bottom: 20px;
 }
 .video-consulta-container h3 {
-    font-size: 1.1em;
-    margin-bottom: 25px;
+  font-size: 1.1em;
+  margin-bottom: 25px;
 }
   
 .consulta-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    border-radius: 8px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 8px;
 }
   
 .consulta-section textarea {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 10px;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
 }
   
 .btn-enviar {
-    background-color: #0e1850;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
+  background-color: #0e1850;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
 }
   
 .btn-enviar:hover {
-    background-color: #053e74;
+  background-color: #053e74;
 }
 
 @media (max-width: 768px) {

@@ -48,7 +48,31 @@ export default {
         } catch (error) {
           return manejarError(error, "Error al guardar el nuevo titular");
         }
-      },
+    },
+    async eliminarAdherente(id) {
+        try {
+            await apiClient.delete(`servicios/${id}`);
+            return { success: true, message: "Adherente eliminado correctamente" };
+          } catch (error) {
+            return manejarError(error, "Error al eliminar el adherente");
+        }
+    },
+    async obtenerDatos() {
+        try {
+            const response = await apiClient.get("servicios");
+            return { success: true, data: response.data };
+        } catch (error) {
+            return manejarError(error, "Error al obtener el adherente");
+        }
+    },
+    async actualizarAdherente(id, formData) {
+        try {
+            const response = await apiClient.patch(`servicios/${id}`, formData);
+            return { success: true, data: response.data };
+        } catch (error) {
+            return manejarError(error, "Error al actualizar el formulario");
+        }
+    },
 };
 
 function manejarError(error, mensaje) {

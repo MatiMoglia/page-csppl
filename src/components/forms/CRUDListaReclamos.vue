@@ -19,8 +19,8 @@
               <th>Nombre</th>
               <th>Teléfono</th>
               <th>Domicilio</th>
-              <th :style="{ width: '200px' }">Email</th>
-              <th>Servicio</th>
+              <th style='width: 200px;'>Email</th>
+              <th style='width: 140px;'>Servicio</th>
               <th>Descripción</th>
               <th>Fecha Reclamo</th>
               <th>Estado:</th>
@@ -173,6 +173,7 @@
           if (response.success) {
             this.formularios = this.formularios.filter((f) => f._id !== this.idEliminar);
             toast.success("Formulario eliminado correctamente.");
+            this.cargarFormularios();
           } else {
             toast.error("Error al eliminar el formulario", response.error);
           }

@@ -7,57 +7,64 @@
     <button @click="toggleForm('mostrarCooplus')" class="btn-cooplus">
       {{ mostrarCooplus ? 'Ocultar' : 'Mostrar' }} Formularios de Cooplus
     </button>
-    <button @click="toggleForm('mostrarCorreos')" class="btn-correos">
-      {{ mostrarCorreos ? 'Ocultar' : 'Mostrar' }} Datos de usuarios
-    </button>
     <button @click="toggleForm('mostrarReclamos')" class="btn-reclamos">
-      {{ mostrarReclamos ? 'Ocultar' : 'Mostrar' }} Reclamos
+      {{ mostrarReclamos ? 'Ocultar' : 'Mostrar' }} Formularios de Reclamos
     </button>
-    <button @click="toggleForm('mostrarDonantes')" class="btn-donantes">
+    <button @click="toggleForm('mostrarAdherentes')" class="btn-2da">
+      {{ mostrarCVs ? 'Ocultar' : 'Mostrar' }} Adherentes de SS
+    </button>
+    <button @click="toggleForm('mostrarDonantes')" class="btn-2da">
       {{ mostrarDonantes ? 'Ocultar' : 'Mostrar' }} Donantes
     </button>
-    <button @click="toggleForm('mostrarNecrologicos')" class="btn-necrologicos">
+    <button @click="toggleForm('mostrarNecrologicos')" class="btn-2da">
       {{ mostrarNecrologicos ? 'Ocultar' : 'Mostrar' }} Datos de necrología
     </button>
-    <button @click="toggleForm('mostrarNovedades')" class="btn-novedades">
+    <button @click="toggleForm('mostrarNovedades')" class="btn-3era">
       {{ mostrarNovedades ? 'Ocultar' : 'Mostrar' }} Novedades
     </button>
-    <button @click="toggleForm('mostrarCVs')" class="btn-cvs">
+    <button @click="toggleForm('mostrarCVs')" class="btn-3era">
       {{ mostrarCVs ? 'Ocultar' : 'Mostrar' }} curriculums enviados
     </button>
+    <button @click="toggleForm('mostrarCorreos')" class="btn-3era">
+      {{ mostrarCorreos ? 'Ocultar' : 'Mostrar' }} Datos de usuarios
+    </button>
+    
   </div>
   <Graficos v-if="mostrarGraficos"/>
-  <MVCAltaBaja v-if="mostrarFormulario" />
-  <MVCCooplus v-if="mostrarCooplus" />
+  <CRUDAltaBaja v-if="mostrarFormulario" />
+  <CRUDCooplus v-if="mostrarCooplus" />
   <Correos v-if="mostrarCorreos" />
   <ListaReclamos v-if="mostrarReclamos" />
   <ListaDonantes v-if="mostrarDonantes" />
-  <MVCnecrologicos v-if="mostrarNecrologicos" />
-  <MVCnovedades v-if="mostrarNovedades"/>
+  <CRUDnecrologicos v-if="mostrarNecrologicos" />
+  <CRUDnovedades v-if="mostrarNovedades"/>
   <ListaCVs v-if="mostrarCVs"/>
+  <CRUDAdherentes v-if="mostrarAdherentes"/>
 </template>
 
 <script>
-import MVCAltaBaja from '@/components/forms/MVCAlta-Baja.vue';
-import MVCCooplus from '@/components/forms/MVCCooplus.vue';
-import Correos from '@/components/forms/Correos.vue';
-import ListaReclamos from '@/components/forms/ListaReclamos.vue';
-import ListaDonantes from '@/components/forms/ListaDonantes.vue';
-import MVCnecrologicos from '@/components/forms/MVCnecrologicos.vue';
+import CRUDAltaBaja from '@/components/forms/CRUDAlta-Baja.vue';
+import CRUDCooplus from '@/components/forms/CRUDCooplus.vue';
+import Correos from '@/components/forms/CRUDCorreos.vue';
+import ListaReclamos from '@/components/forms/CRUDListaReclamos.vue';
+import ListaDonantes from '@/components/forms/CRUDListaDonantes.vue';
+import CRUDnecrologicos from '@/components/forms/CRUDnecrologicos.vue';
 import Graficos from '@/components/forms/Graficos.vue';
-import MVCnovedades from '@/components/forms/MVCnovedades.vue';
-import ListaCVs from '@/components/forms/ListaCVs.vue';
+import CRUDnovedades from '@/components/forms/CRUDnovedades.vue';
+import ListaCVs from '@/components/forms/CRUDListaCVs.vue';
+import CRUDAdherentes from '@/components/forms/CRUDAdherentes.vue';
 export default {
   components: {
-    MVCAltaBaja,
-    MVCCooplus,
+    CRUDAltaBaja,
+    CRUDCooplus,
     Correos,
     ListaReclamos,
     ListaDonantes,
-    MVCnecrologicos,
+    CRUDnecrologicos,
     Graficos,
-    MVCnovedades,
+    CRUDnovedades,
     ListaCVs,
+    CRUDAdherentes
   },
   data() {
     return {
@@ -70,6 +77,7 @@ export default {
       mostrarNovedades: false,
       mostrarGraficos: true,
       mostrarCVs: false,
+      mostrarAdherentes: false
     };
   },
   methods: {
@@ -87,6 +95,7 @@ export default {
         this.mostrarNovedades = false;
         this.mostrarGraficos = false;
         this.mostrarCVs = false;
+        this.mostrarAdherentes = false;
         this[form] = true;
       }
     }
@@ -131,20 +140,18 @@ button:hover {
   transform: scale(1.05);
 }
 
-.btn-novedades {
+.btn-3era {
   background-color: #407af8;
-  grid-column: 1; 
 }
 
-.btn-novedades:hover {
+.btn-3era:hover {
   background-color: #0647d1;
 }
-.btn-cvs {
-  background-color: #407af8;
-  grid-column: 3;
+.btn-2da {
+  background-color: #2150b6;
 }
 
-.btn-cvs:hover {
-  background-color: #0647d1;
+.btn-2da:hover {
+  background-color: #0051ff;
 }
 </style>

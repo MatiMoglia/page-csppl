@@ -156,6 +156,7 @@
                 this.formularios = this.formularios.filter((form) => form._id !== this.idEliminar);
                 this.formulariosFiltrados = this.formularios;
                 toast.success("Publicacion eliminada correctamente.");
+                this.cargarDatos();
             } else {
                 toast.error("Error al eliminar la publicacion", response.error);
             }

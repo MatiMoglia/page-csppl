@@ -1,4 +1,7 @@
 <template>
+  <div v-if="loading" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
   <div class="form-container">
     <h2 class="subtitle">Gestión del Grupo Familiar</h2>
     <form>
@@ -128,10 +131,12 @@ export default {
         dni: '',
         numero: '',
       },
+      loading: false,
     };
   },
   methods: {
     async consultarTitular() {
+      this.loading = true;
       if (!this.nuevoFamiliar.nroTitular) {
         this.mensaje = "Debe ingresar un número de titular para la consulta.";
         toast.error(this.mensaje);
@@ -147,6 +152,7 @@ export default {
           this.nuevoFamiliar.nroTitular = `${this.nuevoFamiliar.nroTitular}`;
           this.titularEncontrado = true;  
           this.mensaje = "";
+          this.loading = false;
           await this.obtenerDatosTitular(this.nuevoFamiliar.nroTitular);
           this.habilitarNuevo = false;
         } else {
@@ -156,11 +162,13 @@ export default {
           toast.warning(this.mensaje);
           this.titularEncontrado = false;
           this.habilitarNuevo = true;
+          this.loading = false;
         }
       } catch (error) {
         console.error("Error al obtener los adherentes", error);
         this.mensaje = "Error al consultar el titular.";
         toast.error(this.mensaje);
+        this.loading = false;
       }
     },
     toggleServicio(servicio) {
@@ -190,12 +198,13 @@ export default {
         toast.error('Debe seleccionar al menos un servicio social');
         return;
       }
-
+      this.loading = true;
       this.botonDeshabilitado = true;
 
       try {
         const response = await apiSS.agregarFamiliar(this.nuevoFamiliar);
         if (response.success) {
+          this.loading = false;
           toast.success('Familiar agregado exitosamente');
           this.nuevoFamiliar = {
             nroTitular: '',
@@ -209,11 +218,14 @@ export default {
           };
         } else {
           toast.error('Error al agregar familiar');
+          this.loading = false;
         }
       } catch (error) {
         toast.error('Hubo un problema al agregar el familiar');
+        this.loading = false;
       } finally {
         this.botonDeshabilitado = false; 
+        this.loading = false;
       }
     },
     async obtenerDatosTitular(nroTitular) {
@@ -240,6 +252,7 @@ export default {
     },
 
     async guardarTitular() {
+      this.loading = true;
       if (!this.nuevoTitular.nombre || !this.nuevoTitular.dni) {
         toast.error("Debe completar todos los campos del nuevo titular.");
         return;
@@ -250,16 +263,18 @@ export default {
 
         if (response.success) {
           toast.success("Nuevo titular guardado exitosamente.");
-          this.nuevoFamiliar.nroTitular = this.nuevoTitular.nroTitular;
+          this.nuevoFamiliar.nroTitular = this.nuevoTitular.numero;
           this.nuevoFamiliar.dniTitular = this.nuevoTitular.dni;
           this.nuevoFamiliar.titular = this.nuevoTitular.nombre;
           this.cerrarModal(); 
+          this.loading = false;
         } else {
           toast.error("Error al guardar el nuevo titular.");
         }
       } catch (error) {
         console.error("Error al guardar el nuevo titular", error);
         toast.error("Hubo un problema al guardar el titular.");
+        this.loading = false;
       }
     },
   },
@@ -275,6 +290,32 @@ export default {
 </script>
 
 <style scoped>
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.377);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .modal {
   position: fixed;
   top: 0;

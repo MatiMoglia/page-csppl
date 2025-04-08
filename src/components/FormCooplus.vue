@@ -241,8 +241,8 @@ export default {
 }
 
 .spinner {
-  border: 6px solid #0e144b;
-  border-top: 4px solid #3498db;
+  border: 6px solid #b3229f;
+  border-top: 4px solid #9aa1a5;
   border-radius: 50%;
   width: 50px;
   height: 50px;

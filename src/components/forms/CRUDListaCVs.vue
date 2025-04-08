@@ -94,15 +94,15 @@
         }
       },
       filtrarCVs() {
-            const query = this.searchQuery.toLowerCase();
-            this.formulariosFiltrados = this.cvs.filter((form) => {
-                return (
-                    form.name.toLowerCase().includes(query) ||
-                    (form.telefono && form.telefono.toString().includes(query)) || 
-                    form.email.toString().includes(query) || 
-                    form.area.toLowerCase().includes(query) 
-                );
-            });
+        const query = this.searchQuery.toLowerCase();
+        this.formulariosFiltrados = this.cvs.filter((form) => {
+          return (
+            form.name.toLowerCase().includes(query) ||
+            (form.telefono && form.telefono.toString().includes(query)) || 
+            form.email.toString().includes(query) || 
+            form.area.toLowerCase().includes(query) 
+          );
+        });
       },
       confirmarEliminacion(id) {
         this.idEliminar = id;
@@ -112,14 +112,17 @@
         this.loading = true;
         try {
           const response = await apiClient.eliminarCV(this.idEliminar);
+
           if (response.success) {
-            this.donantes = this.donantes.filter((f) => f._id !== this.idEliminar);
+            this.cvs = this.cvs.filter((f) => f._id !== this.idEliminar);
             toast.success("CV eliminado correctamente.");
+            this.cargarcvs();
           } else {
-            toast.error("Error al eliminar el CV", response.error);
+            toast.error(response.error ?? "Error al eliminar el CV");
           }
+
         } catch (error) {
-          toast.error("Error eliminando el CV", error);
+          toast.error("Error eliminando el CV: " + (error?.message || "Error desconocido"));
         } finally {
           this.cerrarModalEliminar();
           this.loading = false;

@@ -93,15 +93,15 @@
         }
       },
       filtrarDonantes() {
-            const query = this.searchQuery.toLowerCase();
-            this.formulariosFiltrados = this.donantes.filter((form) => {
-                return (
-                    form.nombre.toLowerCase().includes(query) ||
-                    (form.telefono && form.telefono.toString().includes(query)) || 
-                    (form.dni && form.dni.toString().includes(query)) || 
-                    form.grupoSanguineo.toLowerCase().includes(query) 
-                );
-            });
+        const query = this.searchQuery.toLowerCase();
+        this.formulariosFiltrados = this.donantes.filter((form) => {
+          return (
+            form.nombre.toLowerCase().includes(query) ||
+            (form.telefono && form.telefono.toString().includes(query)) || 
+            (form.dni && form.dni.toString().includes(query)) || 
+            form.grupoSanguineo.toLowerCase().includes(query) 
+          );
+        });
       },
       confirmarEliminacion(id) {
         this.idEliminar = id;
@@ -135,8 +135,8 @@
       contactarDonante(id) {
         const donante = this.donantes.find(d => d._id === id);
         if (!donante || !donante.telefono) {
-            toast.error("No se encontró el número de teléfono del donante.");
-            return;
+          toast.error("No se encontró el número de teléfono del donante.");
+          return;
         }
         const mensaje = encodeURIComponent(`Hola ${donante.nombre}, nos gustaría contactarte para la proxima donacion de sangre!`);
         const whatsappURL = `https://wa.me/${donante.telefono}?text=${mensaje}`;

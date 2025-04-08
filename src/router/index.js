@@ -184,13 +184,13 @@ const routes = [
     path: '/testVelocidad',
     name: 'testInt',
     component: testInt,
-    meta: { title: "Test de Velocidad | Cooperativa de Servicios Públicos de Porteña" }  //, beforeEnter: (to, from, next) => { if (store.state.auth.user) { next(); } else { next('/login'); } }
+    meta: { title: "Test de Velocidad | Cooperativa de Servicios Públicos de Porteña" }  
   },
   {
     path: '/facturaDigital',
     name: 'FacturaDigital',
     component: facturaDigital,
-    meta: { title: "Factura Digital | Cooperativa de Servicios Públicos de Porteña" }  //, beforeEnter: (to, from, next) => { if (store.state.auth.user) { next(); } else { next('/login'); } }
+    meta: { title: "Factura Digital | Cooperativa de Servicios Públicos de Porteña" }  
   },
   {
     path: '/necrologicos',
