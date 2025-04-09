@@ -23,3 +23,7 @@ export default {
       }
     },
 };
+function manejarError(error, mensaje) {
+  console.error(mensaje, error.response?.data || error.message);
+  return { success: false, error: error.response?.data?.message || mensaje };
+}
