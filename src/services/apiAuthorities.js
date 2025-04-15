@@ -1,14 +1,8 @@
 import axios from "axios";
 
-const apiClient = axios.create({
-  baseURL: "https://csspl-63d5.restdb.io/rest/", 
-  headers: { 'x-apikey': "67c1f29f27500f548f0a4a9f" },
+const api = axios.create({
+  baseURL: process.env.VUE_APP_API_URL,
+  timeout: 5000,
 });
 
-export default {
-  getAuthorities() {
-    return apiClient.get("autoridades");  
-  }
-};
-
-
+export default api;

@@ -11,11 +11,8 @@
       <h3>Nuestro Consejo de Administración 2025</h3>
       <div class="consejo-cards">
         <div v-for="(autoridad, index) in autoridades" :key="index" class="card">
-          <img v-if="autoridad.profile" 
-               :src="autoridad.profile" 
-               alt="Imagen de autoridad" 
-               class="profile-img" />
-          <h4>{{ autoridad.name }}</h4>
+          <img :src="autoridad.image_url" alt="Foto de autoridad" class="profile-img" />
+          <h4>{{ autoridad.title }}</h4>
           <p>{{ autoridad.position }}</p>
         </div>
       </div>
@@ -24,7 +21,7 @@
 </template>
 
 <script>
-import apiAuthorities from "@/services/apiAuthorities";  
+import api from "@/services/apiAuthorities";  
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -42,14 +39,13 @@ export default {
   methods: {
     async fetchAutoridades() {
       try {
-        const response = await apiAuthorities.getAuthorities();
-        this.autoridades = response.data;
+        const { data } = await api.get("/autoridades");
+        this.autoridades = data;
       } catch (error) {
-        console.error("Error al obtener las autoridades:", error);
-      } finally {
-        this.isLoading = false; 
+        console.error("Error:", error);
       }
-    },
+      this.isLoading = false;
+    }
   }
 };
 </script>
