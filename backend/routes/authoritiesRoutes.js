@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../controllers/authoritiesController');
+const upload = require("../middlewares/upload");
+const authoritiesController = require('../controllers/authoritiesController');
 
-router.get('/', controller.getAutoridades);
+router.get("/", authoritiesController.getAutoridades);
+
+router.post("/", upload.single('image'), authoritiesController.createAutoridad);
+router.put("/:id", upload.single('image'), authoritiesController.updateAutoridad);
+
+router.delete("/:id", authoritiesController.deleteAutoridad);
 
 module.exports = router;

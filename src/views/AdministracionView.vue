@@ -28,7 +28,9 @@
     <button @click="toggleForm('mostrarCorreos')" class="btn-3era">
       {{ mostrarCorreos ? 'Ocultar' : 'Mostrar' }} Datos de usuarios
     </button>
-    
+    <button @click="toggleForm('mostrarAuthorities')" class="btn-3era">
+      {{ mostrarAuthorities ? 'Ocultar' : 'Mostrar' }} Datos de autoridades
+    </button>
   </div>
   <Graficos v-if="mostrarGraficos"/>
   <CRUDAltaBaja v-if="mostrarFormulario" />
@@ -40,6 +42,7 @@
   <CRUDnovedades v-if="mostrarNovedades"/>
   <ListaCVs v-if="mostrarCVs"/>
   <CRUDAdherentes v-if="mostrarAdherentes"/>
+  <CRUDAuthorities v-if="mostrarAuthorities"/>
 </template>
 
 <script>
@@ -53,6 +56,7 @@ import Graficos from '@/components/forms/Graficos.vue';
 import CRUDnovedades from '@/components/forms/CRUDnovedades.vue';
 import ListaCVs from '@/components/forms/CRUDListaCVs.vue';
 import CRUDAdherentes from '@/components/forms/CRUDAdherentes.vue';
+import CRUDAuthorities from '@/components/forms/CRUDAuthorities.vue';
 export default {
   components: {
     CRUDAltaBaja,
@@ -64,7 +68,8 @@ export default {
     Graficos,
     CRUDnovedades,
     ListaCVs,
-    CRUDAdherentes
+    CRUDAdherentes,
+    CRUDAuthorities
   },
   data() {
     return {
@@ -77,7 +82,8 @@ export default {
       mostrarNovedades: false,
       mostrarGraficos: true,
       mostrarCVs: false,
-      mostrarAdherentes: false
+      mostrarAdherentes: false,
+      mostrarAuthorities: false
     };
   },
   methods: {
@@ -96,6 +102,7 @@ export default {
         this.mostrarGraficos = false;
         this.mostrarCVs = false;
         this.mostrarAdherentes = false;
+        this.mostrarAuthorities = false;
         this[form] = true;
       }
     }

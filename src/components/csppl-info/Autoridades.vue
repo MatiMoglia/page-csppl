@@ -11,7 +11,7 @@
       <h3>Nuestro Consejo de Administración 2025</h3>
       <div class="consejo-cards">
         <div v-for="(autoridad, index) in autoridades" :key="index" class="card">
-          <img :src="autoridad.image_url" alt="Foto de autoridad" class="profile-img" />
+          <img :src="baseUrl + autoridad.image_url" alt="Foto de autoridad" class="profile-img" />
           <h4>{{ autoridad.title }}</h4>
           <p>{{ autoridad.position }}</p>
         </div>
@@ -29,7 +29,8 @@ export default {
   data() {
     return {
       autoridades: [],
-      isLoading: true  
+      isLoading: true ,
+      baseUrl: process.env.VUE_APP_BASE_URL,
     };
   },
   mounted() {
@@ -65,7 +66,7 @@ export default {
 h1 {
   color: #ffffff;
   background-color: #1f2c79;
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   padding: 15px;
   text-align: center;
   margin-bottom: 20px;
